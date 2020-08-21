@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>SakuyaWars</title>
+<style>
+body {
+	margin:0;
+	padding:0;
+	width:816px;
+	height:624px;
+	overflow: hidden;
+}
+#canvasdiv {
+	position:relative;
+	width:816px;
+	height:624px;
+}
+#mainCanvas {
+	left: 0px;
+	top: 0px;
+}
+#mainCanvas:-webkit-full-screen {
+	height: 100%;
+}
+</style>
+</head>
+<body>
+	<div id="debug"></div>
+	<div id="canvasdiv">
+		<canvas id="mainCanvas" width="816" height="624"></canvas>
+	</div>
+
+	<script type="text/javascript" src="./js/main.js"></script>
+</body>
+</html>
