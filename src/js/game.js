@@ -3,6 +3,7 @@ var Core = require('./hakurei').Core;
 var Util = require('./hakurei').Util;
 
 var SceneLoading = require('./hakurei').Scene.Loading;
+var SceneTitle = require('./scene/title');
 var CONSTANT = require('./constant');
 
 var AssetsPreload = require('./assets');
@@ -11,6 +12,7 @@ var Game = function(canvas) {
 	Core.apply(this, arguments);
 
 	this.scene_manager.addScene("loading", new SceneLoading(this));
+	this.scene_manager.addScene("title", new SceneTitle(this));
 };
 Util.inherit(Game, Core);
 
