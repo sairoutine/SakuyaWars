@@ -40,7 +40,7 @@ Scene.prototype.draw = function(){
 	ctx.font = "25px 'MyFont'";
 	ctx.textAlign = 'center';
 
-	ctx.fillText("Sakuya Wars", this.width/2, this.height/2);
+	ctx.fillText("サクヤ大戦", this.width/2, this.height/2);
 	ctx.fillText("Touch to Start!!", this.width/2, this.height/2 + 200);
 
 	ctx.restore();
