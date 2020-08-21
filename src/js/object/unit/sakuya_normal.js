@@ -19,7 +19,7 @@ SakuyaNormal.prototype.update = function(){
 SakuyaNormal.prototype.draw = function(){
 	BaseObject.prototype.draw.apply(this, arguments);
 
-	var color = 'red';
+	var color = 'blue';
 	var ctx = this.core.ctx;
 	ctx.save();
 	ctx.fillStyle = color;
@@ -37,6 +37,11 @@ SakuyaNormal.prototype.draw = function(){
 // ユニット生成に必要なPの数
 SakuyaNormal.prototype.consumedP = function(){
 	return 60;
+};
+
+// 歩くスピード
+SakuyaNormal.prototype.speed = function(){
+	return 0.5;
 };
 
 SakuyaNormal.prototype.collisionWidth = function(){

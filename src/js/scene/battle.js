@@ -1,12 +1,5 @@
 
 /*
-ユニットは歩く
-
-Pは時間経過で回復する
-
-ボスを表示する
-自陣を表示する
-
 敵が登場する
 敵が歩く
 ユニットと敵が接触すると止まる(or 攻撃するときに止まるだけ)
@@ -89,6 +82,7 @@ var Scene = function(core) {
 	// 召喚した敵一覧
 	this.summoned_enemies = new Container(this);
 
+	this.addObject(this.fort);
 	this.addObjects(this.summoned_units);
 	this.addObjects(this.summoned_enemies);
 };
@@ -99,8 +93,16 @@ Scene.prototype.init = function(stage_num){
 
 	stage_num = stage_num || 0;
 
+	// 自陣
+	this.fort.x(50);
+	this.fort.y(350);
+
 	// ボス
 	this.boss = new BOSS_CLASSES[stage_num](this);
+	this.boss.init();
+	this.boss.x(750);
+	this.boss.y(350);
+	this.addObject(this.boss);
 
 	// P ポイントの数
 	this.p_num = CONSTANT.P_MAX;
@@ -114,7 +116,7 @@ Scene.prototype.init = function(stage_num){
 	// 召喚した敵一覧 初期化
 	this.summoned_enemies.removeAllObject();
 
-	this.core.scene_manager.setFadeIn(60, "white");
+	//this.core.scene_manager.setFadeIn(60, "white");
 
 	this.changeSubScene("main");
 };
@@ -144,6 +146,12 @@ Scene.prototype.generateUnit = function(unit_num){
 Scene.prototype.update = function(){
 	BaseScene.prototype.update.apply(this, arguments);
 
+	// P は時間経過で自動回復する
+	if (this.frame_count % CONSTANT.FRAME_TO_RECOVER_P === 0) {
+		if (this.p_num < CONSTANT.P_MAX) {
+			this.p_num += 1;
+		}
+	}
 	// 左クリック位置を出力
 	if (CONSTANT.DEBUG) {
 		if(this.core.input_manager.isLeftClickPush()) {
@@ -153,17 +161,6 @@ Scene.prototype.update = function(){
 			console.log("x: " + x + ", y: " + y);
 		}
 	}
-
-	for (var i = 0, len1 = this.summoned_units.length; i < len1; i++) {
-		var unit = this.summoned_units[i];
-		unit.update();
-	}
-
-	for (var j = 0, len2 = this.summoned_enemies.length; j < len2; j++) {
-		var enemy = this.summoned_enemies[j];
-		enemy.update();
-	}
-
 };
 
 Scene.prototype.draw = function(){

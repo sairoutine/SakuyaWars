@@ -3,21 +3,43 @@
 var BaseObject = require('./base');
 var Util = require('../../hakurei').Util;
 
-var Fort = function(scene) {
+var ClownPiece = function(scene) {
 	BaseObject.apply(this, arguments);
 };
-Util.inherit(Fort, BaseObject);
+Util.inherit(ClownPiece, BaseObject);
 
-Fort.prototype.init = function(){
+ClownPiece.prototype.init = function(){
 	BaseObject.prototype.init.apply(this, arguments);
 };
 
-Fort.prototype.update = function(){
+ClownPiece.prototype.update = function(){
 	BaseObject.prototype.update.apply(this, arguments);
 };
 
-Fort.prototype.draw = function(){
+ClownPiece.prototype.draw = function(){
 	BaseObject.prototype.draw.apply(this, arguments);
+
+	var color = 'yellow';
+	var ctx = this.core.ctx;
+	ctx.save();
+	ctx.fillStyle = color;
+	ctx.globalAlpha = 0.4;
+	ctx.translate(this.globalCenterX(),this.globalCenterY());
+	ctx.fillRect(
+		-this.collisionWidth()/2,
+		-this.collisionHeight()/2,
+		this.collisionWidth(),
+		this.collisionHeight()
+	);
+	ctx.restore();
+
 };
 
-module.exports = Fort;
+ClownPiece.prototype.collisionWidth = function(){
+	return 180;
+};
+ClownPiece.prototype.collisionHeight = function(){
+	return 180;
+};
+
+module.exports = ClownPiece;

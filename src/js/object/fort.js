@@ -18,6 +18,28 @@ Fort.prototype.update = function(){
 
 Fort.prototype.draw = function(){
 	BaseObject.prototype.draw.apply(this, arguments);
+
+	var color = 'green';
+	var ctx = this.core.ctx;
+	ctx.save();
+	ctx.fillStyle = color;
+	ctx.globalAlpha = 0.4;
+	ctx.translate(this.globalCenterX(),this.globalCenterY());
+	ctx.fillRect(
+		-this.collisionWidth()/2,
+		-this.collisionHeight()/2,
+		this.collisionWidth(),
+		this.collisionHeight()
+	);
+	ctx.restore();
+
+};
+
+Fort.prototype.collisionWidth = function(){
+	return 180;
+};
+Fort.prototype.collisionHeight = function(){
+	return 180;
 };
 
 module.exports = Fort;

@@ -30,10 +30,19 @@ Base.prototype.init = function(){
 
 Base.prototype.update = function(){
 	BaseObject.prototype.update.apply(this, arguments);
+
+	// TODO: 画面端で止まるようにする
+	// キャラが移動する
+	this.x(this.x() + this.speed());
 };
 
 Base.prototype.draw = function(){
 	BaseObject.prototype.draw.apply(this, arguments);
+};
+
+// 歩くスピード
+Base.prototype.speed = function(){
+	return 0;
 };
 
 // ユニット生成に必要なPの数
