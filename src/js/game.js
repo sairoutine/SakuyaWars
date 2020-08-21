@@ -47,16 +47,6 @@ Game.prototype.setupDebug = function (dom) {
 		game.debug_manager.setShowingFpsOff();
 	});
 
-	// 金額増加
-	this.debug_manager.addMenuButton("所持金を2倍にする", function (game) {
-		if(game.scene_manager.currentScene() instanceof SceneDuel) {
-			game.scene_manager.currentScene().rule_manager.twiceMoney();
-		}
-		else {
-			window.alert("ゲームが始まってから押してください");
-		}
-	});
-
 };
 
 module.exports = Game;
