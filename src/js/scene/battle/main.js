@@ -7,6 +7,9 @@ var UIParts = require('../../hakurei').Object.UIParts;
 var SceneBattleMain = function(core) {
 	BaseScene.apply(this, arguments);
 
+	// ユニット一覧のページング位置
+	this.current_paging_position = 0;
+
 	// ユニットボタン一覧
 	this._unit_buttons = [
 		new UIParts(this,  400, 550, 180 * 0.5, 30 * 1.5, _buttonDrawer("咲夜1")),
@@ -15,7 +18,6 @@ var SceneBattleMain = function(core) {
 		new UIParts(this,  625, 550, 180 * 0.5, 30 * 1.5, _buttonDrawer("咲夜4")),
 		new UIParts(this,  700, 550, 180 * 0.5, 30 * 1.5, _buttonDrawer("咲夜5")),
 	];
-
 
 	this._unit_paging_left_button  = new UIParts(this,  325, 550, 180 * 0.5, 30 * 1.5, _buttonDrawer("←"));
 	this._unit_paging_right_button = new UIParts(this,  775, 550, 180 * 0.5, 30 * 1.5, _buttonDrawer("→"));
@@ -30,49 +32,31 @@ Util.inherit(SceneBattleMain, BaseScene);
 
 SceneBattleMain.prototype.init = function(){
 	BaseScene.prototype.init.apply(this, arguments);
+
+	// ユニット一覧のページング位置
+	this.current_paging_position = 0;
 };
 
 
 SceneBattleMain.prototype.update = function(){
 	BaseScene.prototype.update.apply(this, arguments);
 
-	/*
 	var x = this.core.input_manager.mousePositionX();
 	var y = this.core.input_manager.mousePositionY();
 
 	if(this.core.input_manager.isLeftClickPush()) {
-		if(this._pass_button.checkCollisionWithPosition(x, y)) {
-			this.parent.showSerif("Pass!");
-			this.parent.rule_manager.pass();
+		for (var i = 0, len = this._unit_buttons.length; i < len; i++) {
+			var unit_button = this._unit_buttons[i];
 
-			this._pass_button.setVariable("isclick", true);
-		}
-		else if(this._high_button.checkCollisionWithPosition(x, y)) {
-			this.parent.showSerif("High!");
-			this.parent.rule_manager.chooseHigh();
+			if(unit_button.checkCollisionWithPosition(x, y)) {
+				this.parent.generateUnit(i);
 
-			this._high_button.setVariable("isclick", true);
-		}
-		else if(this._low_button.checkCollisionWithPosition(x, y)) {
-			this.parent.showSerif("Low!");
-			this.parent.rule_manager.chooseLow();
-
-			this._low_button.setVariable("isclick", true);
-		}
-		else if(this._same_button.checkCollisionWithPosition(x, y)) {
-			this.parent.showSerif("Same!");
-			this.parent.rule_manager.chooseSame();
-
-			this._same_button.setVariable("isclick", true);
-		}
-		else if(!this._restart_button.is_not_show && this._restart_button.checkCollisionWithPosition(x, y)) {
-			// 即殺
-			this.parent.changeSubScene("dead");
-
-			this._restart_button.setVariable("isclick", true);
+				//this._pass_button.setVariable("isclick", true);
+			}
 		}
 
 	}
+	/*
 	else {
 		var buttons = [this._high_button, this._low_button, this._same_button, this._pass_button, this._restart_button];
 		for (var i = 0, len = buttons.length; i < len; i++) {

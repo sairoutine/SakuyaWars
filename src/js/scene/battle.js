@@ -1,26 +1,17 @@
 
 /*
-3.2.1 Start って入れる
-
-接触判定はある
-Bはスペルカードに使える。→時止め。
-ユニットはアニメーションする
-敵はアニメーションする
-
----
-Pを消費してユニットを生成する
 ユニットは歩く
 
 Pは時間経過で回復する
+
+ボスを表示する
+自陣を表示する
 
 敵が登場する
 敵が歩く
 ユニットと敵が接触すると止まる(or 攻撃するときに止まるだけ)
 敵は攻撃する
 ユニットは攻撃する
-
-ボスを表示する
-自陣を表示する
 
 ボスは攻撃する
 ボスは攻撃されてダメージを受ける
@@ -33,6 +24,14 @@ Pは時間経過で回復する
 
 スペルカードを使うと時が止まる
 スペルカードを使うと全体攻撃となる
+
+3.2.1 Start って入れる
+
+接触判定はある
+Bはスペルカードに使える。→時止め。
+ユニットはアニメーションする
+敵はアニメーションする
+
 */
 
 'use strict';
@@ -45,11 +44,22 @@ var Fort = require('../object/fort');
 
 var Clownpiece = require('../object/boss/clownpiece');
 
+var SakuyaNormal = require('../object/unit/sakuya_normal');
+
+var Container = require('../hakurei').Object.Container;
 var Util = require('../hakurei').Util;
 var CONSTANT = require('../constant');
 
 var BOSS_CLASSES = [
 	Clownpiece,
+];
+
+var UNIT_CLASSES = [
+	SakuyaNormal,
+	SakuyaNormal,
+	SakuyaNormal,
+	SakuyaNormal,
+	SakuyaNormal,
 ];
 
 var Scene = function(core) {
@@ -73,14 +83,14 @@ var Scene = function(core) {
 	// ボムの数
 	this.b_num = 0;
 
-	// ユニット一覧のページング位置
-	this.current_paging_position = 0;
-
 	// 召喚したユニット一覧
-	this.summoned_units = [];
+	this.summoned_units = new Container(this);
 
 	// 召喚した敵一覧
-	this.summoned_enemies = [];
+	this.summoned_enemies = new Container(this);
+
+	this.addObjects(this.summoned_units);
+	this.addObjects(this.summoned_enemies);
 };
 Util.inherit(Scene, BaseScene);
 
@@ -98,20 +108,39 @@ Scene.prototype.init = function(stage_num){
 	// ボムの数
 	this.b_num = 0;
 
-	// ユニット一覧のページング位置
-	this.current_paging_position = 0;
+	// 召喚したユニット一覧 初期化
+	this.summoned_units.removeAllObject();
 
-	// 召喚したユニット一覧
-	this.summoned_units = [];
-
-	// 召喚した敵一覧
-	this.summoned_enemies = [];
+	// 召喚した敵一覧 初期化
+	this.summoned_enemies.removeAllObject();
 
 	this.core.scene_manager.setFadeIn(60, "white");
 
 	this.changeSubScene("main");
 };
 
+
+Scene.prototype.generateUnit = function(unit_num){
+	var unit = new UNIT_CLASSES[unit_num](this);
+
+	// P消費できるかチェック
+	if (this.p_num < unit.consumedP()) {
+		return;
+	}
+
+	// P消費
+	this.p_num -= unit.consumedP();
+
+	// ユニット追加
+	var x = Util.getRandomInt(CONSTANT.UNIT_GENERATED_AREA_LEFT_X, CONSTANT.UNIT_GENERATED_AREA_RIGHT_X);
+	var y = Util.getRandomInt(CONSTANT.UNIT_GENERATED_AREA_UP_Y, CONSTANT.UNIT_GENERATED_AREA_DOWN_Y);
+
+	unit.init();
+	unit.x(x);
+	unit.y(y);
+
+	this.summoned_units.addObject(unit);
+};
 Scene.prototype.update = function(){
 	BaseScene.prototype.update.apply(this, arguments);
 
