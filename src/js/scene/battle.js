@@ -1,30 +1,26 @@
 
 /*
-敵が登場する
-敵が歩く
-ユニットと敵が接触すると止まる(or 攻撃するときに止まるだけ)
-敵は攻撃する
-ユニットは攻撃する
-
 ボスは攻撃する
 ボスは攻撃されてダメージを受ける
 ボスはHPが0になるとクリア
 
 自陣と敵が接触するとゲームオーバー
 
-敵のHPが0になると死ぬ
-ユニットのHPが0になると死ぬ
-
 スペルカードを使うと時が止まる
 スペルカードを使うと全体攻撃となる
 
+敵を倒すとアイテムをドロップする
+
 3.2.1 Start って入れる
 
-接触判定はある
-Bはスペルカードに使える。→時止め。
 ユニットはアニメーションする
 敵はアニメーションする
 
+咲夜は選択して生成するんじゃなくて、ランダム生成(ストックされる咲夜は列に並んで表示される)の方がいいかも
+→ 咲夜毎にAPは異なる
+→ ストックされた咲夜は並び替えることができる
+
+デバッグ用にユニットや敵のHPを表示したい
 */
 
 'use strict';
@@ -33,11 +29,14 @@ var BaseScene = require('../hakurei').Scene.Base;
 var SceneBattleMain = require('./battle/main');
 var SceneBattleReady = require('./battle/ready');
 
+var OpponentManager = require('../logic/opponent_manager');
 var Fort = require('../object/fort');
 
 var Clownpiece = require('../object/boss/clownpiece');
 
-var SakuyaNormal = require('../object/unit/sakuya_normal');
+var UnitSakuyaNormal = require('../object/unit/sakuya_normal');
+
+var EnemyNormal = require('../object/enemy/normal');
 
 var Container = require('../hakurei').Object.Container;
 var Util = require('../hakurei').Util;
@@ -48,18 +47,26 @@ var BOSS_CLASSES = [
 ];
 
 var UNIT_CLASSES = [
-	SakuyaNormal,
-	SakuyaNormal,
-	SakuyaNormal,
-	SakuyaNormal,
-	SakuyaNormal,
+	UnitSakuyaNormal,
+	UnitSakuyaNormal,
+	UnitSakuyaNormal,
+	UnitSakuyaNormal,
+	UnitSakuyaNormal,
 ];
+
+var ENEMY_CLASSES = [
+	EnemyNormal,
+];
+
 
 var Scene = function(core) {
 	BaseScene.apply(this, arguments);
 
 	// 自陣
 	this.fort = new Fort(this);
+
+	// 敵AI
+	this.opponent_manager = new OpponentManager(this);
 
 	// サブシーン
 	this.addSubScene("ready", new SceneBattleReady(core));
@@ -77,14 +84,15 @@ var Scene = function(core) {
 	this.b_num = 0;
 
 	// 召喚したユニット一覧
-	this.summoned_units = new Container(this);
+	this.units = new Container(this);
 
 	// 召喚した敵一覧
-	this.summoned_enemies = new Container(this);
+	this.enemies = new Container(this);
 
 	this.addObject(this.fort);
-	this.addObjects(this.summoned_units);
-	this.addObjects(this.summoned_enemies);
+	this.addObject(this.opponent_manager);
+	this.addObjects(this.units);
+	this.addObjects(this.enemies);
 };
 Util.inherit(Scene, BaseScene);
 
@@ -111,10 +119,10 @@ Scene.prototype.init = function(stage_num){
 	this.b_num = 0;
 
 	// 召喚したユニット一覧 初期化
-	this.summoned_units.removeAllObject();
+	this.units.removeAllObject();
 
 	// 召喚した敵一覧 初期化
-	this.summoned_enemies.removeAllObject();
+	this.enemies.removeAllObject();
 
 	//this.core.scene_manager.setFadeIn(60, "white");
 
@@ -141,8 +149,23 @@ Scene.prototype.generateUnit = function(unit_num){
 	unit.x(x);
 	unit.y(y);
 
-	this.summoned_units.addObject(unit);
+	this.units.addObject(unit);
 };
+
+Scene.prototype.generateEnemy = function(enemy_num){
+	var enemy = new ENEMY_CLASSES[enemy_num](this);
+
+	// ユニット追加
+	var x = Util.getRandomInt(CONSTANT.ENEMY_GENERATED_AREA_LEFT_X, CONSTANT.ENEMY_GENERATED_AREA_RIGHT_X);
+	var y = Util.getRandomInt(CONSTANT.ENEMY_GENERATED_AREA_UP_Y, CONSTANT.ENEMY_GENERATED_AREA_DOWN_Y);
+
+	enemy.init();
+	enemy.x(x);
+	enemy.y(y);
+
+	this.enemies.addObject(enemy);
+};
+
 Scene.prototype.update = function(){
 	BaseScene.prototype.update.apply(this, arguments);
 
@@ -152,6 +175,7 @@ Scene.prototype.update = function(){
 			this.p_num += 1;
 		}
 	}
+
 	// 左クリック位置を出力
 	if (CONSTANT.DEBUG) {
 		if(this.core.input_manager.isLeftClickPush()) {
@@ -179,16 +203,6 @@ Scene.prototype.draw = function(){
 	ctx.fillText(this.p_num + " / " + CONSTANT.P_MAX + " P", 700, 30);
 
 	ctx.restore();
-
-	for (var i = 0, len = this.summoned_units.length; i < len; i++) {
-		var unit = this.summoned_units[i];
-		unit.draw();
-	}
-
-	for (var j = 0, len2 = this.summoned_enemies.length; j < len2; j++) {
-		var enemy = this.summoned_enemies[j];
-		enemy.draw();
-	}
 
 	BaseScene.prototype.draw.apply(this, arguments);
 };

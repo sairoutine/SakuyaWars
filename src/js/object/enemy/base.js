@@ -14,3 +14,83 @@
 
 
 */
+'use strict';
+
+var BaseObject = require('../../hakurei').Object.Base;
+var Util = require('../../hakurei').Util;
+
+var Base = function(scene) {
+	BaseObject.apply(this, arguments);
+};
+Util.inherit(Base, BaseObject);
+
+// HP
+Util.defineProperty(Base, "hp");
+
+Base.prototype.init = function(){
+	BaseObject.prototype.init.apply(this, arguments);
+
+	this.hp(this.maxHP());
+};
+
+Base.prototype.update = function(){
+	BaseObject.prototype.update.apply(this, arguments);
+
+	var is_move = true;
+
+	var enemy = this;
+	this.scene.units.forEach(function(unit) {
+		if(enemy.intersect(unit)) {
+
+			// 攻撃する
+			enemy.attack(unit);
+
+			// 攻撃するときは止まる
+			is_move = false;
+		}
+	});
+
+	if (is_move) {
+		// TODO: 画面端で止まるようにする
+		// キャラが移動する
+		this.x(this.x() - this.speed());
+	}
+};
+
+Base.prototype.draw = function(){
+	BaseObject.prototype.draw.apply(this, arguments);
+};
+
+// 攻撃
+Base.prototype.attack = function(unit){
+	var damage = this.damage();
+
+	unit.hp(unit.hp() - damage);
+
+	if (unit.hp() <= 0) {
+		// 死亡
+		unit.die();
+	}
+};
+
+// 死亡
+Base.prototype.die = function(){
+	this.scene.enemies.removeObject(this);
+};
+
+// 最大HP
+Base.prototype.maxHP = function(){
+	return 100;
+};
+
+// ダメージ力
+Base.prototype.damage = function(){
+	return 1;
+};
+
+// 歩くスピード
+Base.prototype.speed = function(){
+	return 0;
+};
+
+module.exports = Base;
