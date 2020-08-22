@@ -41,7 +41,7 @@ SakuyaNormal.prototype.consumedP = function(){
 
 // 歩くスピード
 SakuyaNormal.prototype.speed = function(){
-	return 0.5;
+	return 100.5;
 };
 
 SakuyaNormal.prototype.collisionWidth = function(){

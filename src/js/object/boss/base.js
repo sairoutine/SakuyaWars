@@ -5,34 +5,48 @@ var Util = require('../../hakurei').Util;
 var OFFSET_Y_MAX = 8;
 var OFFSET_Y_SPAN = 6;
 
-var Base = function(scene) {
+// ダメージを受けたときに仰け反る場合の区間
+var DAMAGE_SHOWING_TIME = 10;
+
+var BossBase = function(scene) {
 	BaseObject.apply(this, arguments);
 
 	// 妖精なので上下に少し動いて浮遊する
 	this._offset_y = 0;
 	this._is_reverse = false;
+
+	// ダメージを受けたときの画像を表示している残り時間
+	this._damage_showing_time = 0;
 };
-Util.inherit(Base, BaseObject);
+Util.inherit(BossBase, BaseObject);
 
 // HP
-Util.defineProperty(Base, "hp");
+Util.defineProperty(BossBase, "hp");
 
-Base.prototype.init = function(){
+BossBase.prototype.init = function(){
 	BaseObject.prototype.init.apply(this, arguments);
 
 	// 妖精なので上下に少し動いて浮遊する
 	this._offset_y = 0;
 	this._is_reverse = false;
 
+	// ダメージを受けたときの画像を表示している残り時間
+	this._damage_showing_time = 0;
+
 	this.hp(this.maxHP());
 };
 
-Base.prototype.update = function(){
+BossBase.prototype.update = function(){
 	BaseObject.prototype.update.apply(this, arguments);
 
 	// 時が止まってる最中は何も行動できない
 	if(this.scene.isTimeStop()) {
 		return;
+	}
+
+	// ダメージを受けたときの画像を表示している残り時間をへらす
+	if (this._damage_showing_time > 0) {
+		this._damage_showing_time--;
 	}
 
 	// 妖精なので上下に少し動いて浮遊する
@@ -65,11 +79,20 @@ Base.prototype.update = function(){
 
 };
 
-Base.prototype.draw = function(){
+BossBase.prototype.draw = function(){
 	BaseObject.prototype.draw.apply(this, arguments);
 	var ctx = this.core.ctx;
 
-	var image = this.core.image_loader.getImage(this.normalImage());
+	var image;
+	if (this._damage_showing_time > 0) {
+		// ダメージを受けている時の画像
+		image = this.core.image_loader.getImage(this.damageImage());
+	}
+	else {
+		// 通常時の画像
+		image = this.core.image_loader.getImage(this.normalImage());
+	}
+
 	ctx.save();
 	ctx.translate(this.x(), this.y() + this._offset_y);
 	ctx.drawImage(image, -image.width/2, -image.height/2);
@@ -78,10 +101,13 @@ Base.prototype.draw = function(){
 };
 
 // 攻撃
-Base.prototype.attack = function(unit){
+BossBase.prototype.attack = function(unit){
 	var damage = this.damage();
 
 	unit.hp(unit.hp() - damage);
+
+	// ダメージを受けた
+	unit.onDamaged();
 
 	if (unit.hp() <= 0) {
 		// 死亡
@@ -89,24 +115,37 @@ Base.prototype.attack = function(unit){
 	}
 };
 
+// ダメージを受けたときの処理
+BossBase.prototype.onDamaged = function(){
+	if (this._damage_showing_time <= 0) {
+		this._damage_showing_time = DAMAGE_SHOWING_TIME;
+	}
+};
+
 // 死亡
-Base.prototype.die = function(){
+BossBase.prototype.die = function(){
 	this.scene.notifyStageClear();
 };
 
 // 最大HP
-Base.prototype.maxHP = function(){
+BossBase.prototype.maxHP = function(){
 	return 0;
 };
 
 // ダメージ力
-Base.prototype.damage = function(){
+BossBase.prototype.damage = function(){
 	return 0;
 };
 
 // 通常時の画像
-Base.prototype.normalImage = function(){
+BossBase.prototype.normalImage = function(){
 	return "";
 };
 
-module.exports = Base;
+// ダメージを受けた時の画像
+BossBase.prototype.damageImage = function(){
+	return "";
+};
+
+
+module.exports = BossBase;

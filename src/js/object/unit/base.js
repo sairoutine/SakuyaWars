@@ -21,21 +21,21 @@ MMDの咲夜さん
 var BaseObject = require('../../hakurei').Object.Base;
 var Util = require('../../hakurei').Util;
 
-var Base = function(scene) {
+var UnitBase = function(scene) {
 	BaseObject.apply(this, arguments);
 };
-Util.inherit(Base, BaseObject);
+Util.inherit(UnitBase, BaseObject);
 
 // HP
-Util.defineProperty(Base, "hp");
+Util.defineProperty(UnitBase, "hp");
 
-Base.prototype.init = function(){
+UnitBase.prototype.init = function(){
 	BaseObject.prototype.init.apply(this, arguments);
 
 	this.hp(this.maxHP());
 };
 
-Base.prototype.update = function(){
+UnitBase.prototype.update = function(){
 	BaseObject.prototype.update.apply(this, arguments);
 
 	var is_move = true;
@@ -71,15 +71,18 @@ Base.prototype.update = function(){
 	}
 };
 
-Base.prototype.draw = function(){
+UnitBase.prototype.draw = function(){
 	BaseObject.prototype.draw.apply(this, arguments);
 };
 
 // 攻撃
-Base.prototype.attack = function(enemy_or_boss){
+UnitBase.prototype.attack = function(enemy_or_boss){
 	var damage = this.damage();
 
 	enemy_or_boss.hp(enemy_or_boss.hp() - damage);
+
+	// ダメージを受けた
+	enemy_or_boss.onDamaged();
 
 	if (enemy_or_boss.hp() <= 0) {
 		// 死亡
@@ -87,29 +90,34 @@ Base.prototype.attack = function(enemy_or_boss){
 	}
 };
 
+// ダメージを受けたときの処理
+UnitBase.prototype.onDamaged = function(){
+
+};
+
 // 死亡
-Base.prototype.die = function(){
+UnitBase.prototype.die = function(){
 	this.scene.units.removeObject(this);
 };
 
 // 最大HP
-Base.prototype.maxHP = function(){
+UnitBase.prototype.maxHP = function(){
 	return 100;
 };
 
 // ダメージ力
-Base.prototype.damage = function(){
+UnitBase.prototype.damage = function(){
 	return 1;
 };
 
 // 歩くスピード
-Base.prototype.speed = function(){
+UnitBase.prototype.speed = function(){
 	return 0;
 };
 
 // ユニット生成に必要なPの数
-Base.prototype.consumedP = function(){
+UnitBase.prototype.consumedP = function(){
 	return 0;
 };
 
-module.exports = Base;
+module.exports = UnitBase;

@@ -42,6 +42,11 @@ ClownPiece.prototype.normalImage = function(){
 	return "boss_clownpiece_normal";
 };
 
+// ダメージを受けた時の画像
+ClownPiece.prototype.damageImage = function(){
+	return "boss_clownpiece_damage";
+};
+
 
 
 module.exports = ClownPiece;

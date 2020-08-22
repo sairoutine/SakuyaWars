@@ -19,21 +19,21 @@
 var BaseObject = require('../../hakurei').Object.Base;
 var Util = require('../../hakurei').Util;
 
-var Base = function(scene) {
+var EnemyBase = function(scene) {
 	BaseObject.apply(this, arguments);
 };
-Util.inherit(Base, BaseObject);
+Util.inherit(EnemyBase, BaseObject);
 
 // HP
-Util.defineProperty(Base, "hp");
+Util.defineProperty(EnemyBase, "hp");
 
-Base.prototype.init = function(){
+EnemyBase.prototype.init = function(){
 	BaseObject.prototype.init.apply(this, arguments);
 
 	this.hp(this.maxHP());
 };
 
-Base.prototype.update = function(){
+EnemyBase.prototype.update = function(){
 	BaseObject.prototype.update.apply(this, arguments);
 
 	// 時が止まってる最中は何も行動できない
@@ -70,15 +70,18 @@ Base.prototype.update = function(){
 	}
 };
 
-Base.prototype.draw = function(){
+EnemyBase.prototype.draw = function(){
 	BaseObject.prototype.draw.apply(this, arguments);
 };
 
 // 攻撃
-Base.prototype.attack = function(unit){
+EnemyBase.prototype.attack = function(unit){
 	var damage = this.damage();
 
 	unit.hp(unit.hp() - damage);
+
+	// ダメージを受けた
+	unit.onDamaged();
 
 	if (unit.hp() <= 0) {
 		// 死亡
@@ -86,24 +89,29 @@ Base.prototype.attack = function(unit){
 	}
 };
 
+// ダメージを受けたときの処理
+EnemyBase.prototype.onDamaged = function(){
+
+};
+
 // 死亡
-Base.prototype.die = function(){
+EnemyBase.prototype.die = function(){
 	this.scene.enemies.removeObject(this);
 };
 
 // 最大HP
-Base.prototype.maxHP = function(){
+EnemyBase.prototype.maxHP = function(){
 	return 100;
 };
 
 // ダメージ力
-Base.prototype.damage = function(){
+EnemyBase.prototype.damage = function(){
 	return 1;
 };
 
 // 歩くスピード
-Base.prototype.speed = function(){
+EnemyBase.prototype.speed = function(){
 	return 0;
 };
 
-module.exports = Base;
+module.exports = EnemyBase;

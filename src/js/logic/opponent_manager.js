@@ -25,7 +25,6 @@ OpponentManager.prototype.update = function(){
 	if (this.frame_count % 300 === 0) {
 		this.scene.generateEnemy(0);
 	}
-
 };
 
 OpponentManager.prototype.draw = function(){
