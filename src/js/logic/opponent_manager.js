@@ -16,6 +16,11 @@ OpponentManager.prototype.init = function(serif_idx){
 OpponentManager.prototype.update = function(){
 	BaseObject.prototype.update.apply(this, arguments);
 
+	// 時が止まってる最中は何も行動できない
+	if(this.scene.isTimeStop()) {
+		return;
+	}
+
 	// とりあえず仮で時間経過で敵を生成する
 	if (this.frame_count % 300 === 0) {
 		this.scene.generateEnemy(0);

@@ -44,7 +44,9 @@ SceneBattleMain.prototype.update = function(){
 	var x = this.core.input_manager.mousePositionX();
 	var y = this.core.input_manager.mousePositionY();
 
+	// ユーザーの押下処理 判定
 	if(this.core.input_manager.isLeftClickPush()) {
+		// ユニット生成
 		for (var i = 0, len = this._unit_buttons.length; i < len; i++) {
 			var unit_button = this._unit_buttons[i];
 
@@ -55,6 +57,12 @@ SceneBattleMain.prototype.update = function(){
 			}
 		}
 
+		// スペルカード発動
+		if(this._spellcard_button.checkCollisionWithPosition(x, y)) {
+			this.parent.useSpellCard();
+
+			//this._pass_button.setVariable("isclick", true);
+		}
 	}
 	/*
 	else {

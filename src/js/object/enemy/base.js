@@ -36,6 +36,11 @@ Base.prototype.init = function(){
 Base.prototype.update = function(){
 	BaseObject.prototype.update.apply(this, arguments);
 
+	// 時が止まってる最中は何も行動できない
+	if(this.scene.isTimeStop()) {
+		return;
+	}
+
 	var is_move = true;
 
 	var enemy = this;

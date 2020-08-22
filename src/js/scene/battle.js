@@ -1,7 +1,5 @@
 
 /*
-スペルカードを使うと時が止まる
-スペルカードを使うと全体攻撃となる
 
 3.2.1 Start って入れる
 
@@ -20,6 +18,7 @@
 
 ◆ TODO:
 敵を倒すとアイテムをドロップする
+スペルカードを使うと全体攻撃となる
 
 デバッグ用にユニットや敵のHPを表示したい
 デバッグ用にPやBを回復したい
@@ -93,6 +92,9 @@ var Scene = function(core) {
 	// 召喚した敵一覧
 	this.enemies = new Container(this);
 
+	// 時を止めてる際の残り時間(frame)
+	this._remaining_timestop_frame = 0;
+
 	this.addObject(this.fort);
 	this.addObject(this.opponent_manager);
 	this.addObjects(this.units);
@@ -127,6 +129,9 @@ Scene.prototype.init = function(stage_num){
 
 	// 召喚した敵一覧 初期化
 	this.enemies.removeAllObject();
+
+	// 時を止めてる際の残り時間(frame)
+	this._remaining_timestop_frame = 0;
 
 	//this.core.scene_manager.setFadeIn(60, "white");
 
@@ -170,6 +175,21 @@ Scene.prototype.generateEnemy = function(enemy_num){
 	this.enemies.addObject(enemy);
 };
 
+
+
+// スペルカード使用
+Scene.prototype.useSpellCard = function() {
+	// TODO: 時を止めるアニメ
+	// アニメのいい感じのところで、全体にダメージ
+
+	this._remaining_timestop_frame = CONSTANT.TIMESTOP_FRAME;
+};
+
+// 時を止めてる最中か否か
+Scene.prototype.isTimeStop = function() {
+	return this._remaining_timestop_frame > 0;
+};
+
 // ゲームクリアになった
 Scene.prototype.notifyStageClear = function(){
 	// TODO: スコアのデータを渡す
@@ -191,6 +211,11 @@ Scene.prototype.update = function(){
 		if (this.p_num < CONSTANT.P_MAX) {
 			this.p_num += 1;
 		}
+	}
+
+	// 時を止めてる時間を経過させる
+	if (this._remaining_timestop_frame > 0) {
+		this._remaining_timestop_frame--;
 	}
 
 	// 左クリック位置を出力

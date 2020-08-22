@@ -19,6 +19,12 @@ Base.prototype.init = function(){
 Base.prototype.update = function(){
 	BaseObject.prototype.update.apply(this, arguments);
 
+	// 時が止まってる最中は何も行動できない
+	if(this.scene.isTimeStop()) {
+		return;
+	}
+
+	// ユニットへ攻撃
 	var boss = this;
 	this.scene.units.forEach(function(unit) {
 		if(boss.intersect(unit)) {

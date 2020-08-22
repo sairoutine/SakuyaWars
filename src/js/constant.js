@@ -4,7 +4,8 @@ var CONSTANT = {
 	DEBUG_MUTE: false,
 	DEBUG_SCENE: "battle",
 
-
+	// 時を止める時間
+	TIMESTOP_FRAME: 300,
 	// Pポイントの最大数
 	P_MAX: 600,
 
