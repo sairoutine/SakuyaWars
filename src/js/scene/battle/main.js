@@ -3,9 +3,13 @@
 var BaseScene = require('./base');
 var Util = require('../../hakurei').Util;
 var UIParts = require('../../hakurei').Object.UIParts;
+var OpponentManager = require('../../logic/opponent_manager');
 
 var SceneBattleMain = function(core) {
 	BaseScene.apply(this, arguments);
+
+	// 敵AI
+	this.opponent_manager = new OpponentManager(this);
 
 	// ユニット一覧のページング位置
 	this.current_paging_position = 0;
@@ -30,6 +34,7 @@ var SceneBattleMain = function(core) {
 	// スペルカード ボタン
 	this._spellcard_button = new UIParts(this,  86, 573.5, 180, 107, _buttonSpellCardDrawer("btn_spell_on", "btn_spell_off"));
 
+	this.addObject(this.opponent_manager);
 	this.addObjects(this._unit_buttons);
 	this.addObjects([this._unit_paging_left_button, this._unit_paging_right_button, this._spellcard_button]);
 };

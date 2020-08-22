@@ -1,20 +1,19 @@
 
 /*
-敵画像を組み込む
-
 ユニット実装を修正
 ユニット画像を組み込む
 ユニットはアニメーションする
 
 ボス実装を修正
+咲夜さん量産
+SE・BGM組み込み
 
+ビルドして提出
+
+--
 AP表示量を表示する→ユニット
 ユニットをスライドできるようにする
 
-咲夜さん量産
-ステージごとに敵のAI調整
-
-SE・BGM組み込み
 ゲームオーバー改善
 
 ◆ TODO:
@@ -25,6 +24,8 @@ SE・BGM組み込み
 セリフスキップを入れたい
 リザルト画面
 称号の組み込み
+遠距離攻撃の敵、紅魔館にすぐたどり着く。。。
+→ よって、一旦遠距離攻撃を削除したので、復活させる
 */
 
 'use strict';
@@ -35,7 +36,6 @@ var SceneBattleReady = require('./battle/ready');
 var SceneBattleGameover = require('./battle/gameover');
 var SceneBattleResult = require('./battle/result');
 
-var OpponentManager = require('../logic/opponent_manager');
 var Fort = require('../object/fort');
 var SpellCardAnime = require('../object/anime/spellcard');
 
@@ -46,12 +46,12 @@ var Sunnymilk = require('../object/boss/sunnymilk');
 
 var UnitSakuyaNormal = require('../object/unit/sakuya_normal');
 
-var EnemyBlueLong = require('../object/enemy/blue_long');
-var EnemyBlueShort = require('../object/enemy/blue_short');
+//var EnemyBlueLong = require('../object/enemy/blue_long');
+//var EnemyBlueShort = require('../object/enemy/blue_short');
 var EnemyPinkLong = require('../object/enemy/pink_long');
 var EnemyPinkShort = require('../object/enemy/pink_short');
-var EnemyRedLong = require('../object/enemy/red_long');
-var EnemyRedShort = require('../object/enemy/red_short');
+//var EnemyRedLong = require('../object/enemy/red_long');
+//var EnemyRedShort = require('../object/enemy/red_short');
 var EnemyWhiteLong = require('../object/enemy/white_long');
 var EnemyWhiteShort = require('../object/enemy/white_short');
 
@@ -82,12 +82,12 @@ var UNIT_CLASSES = [
 ];
 
 var ENEMY_CLASSES = [
-	EnemyBlueLong,
-	EnemyBlueShort,
+	//EnemyBlueLong,
+	//EnemyBlueShort,
 	EnemyPinkLong,
 	EnemyPinkShort,
-	EnemyRedLong,
-	EnemyRedShort,
+	//EnemyRedLong,
+	//EnemyRedShort,
 	EnemyWhiteLong,
 	EnemyWhiteShort,
 ];
@@ -97,9 +97,6 @@ var Scene = function(core) {
 
 	// 自陣
 	this.fort = new Fort(this);
-
-	// 敵AI
-	this.opponent_manager = new OpponentManager(this);
 
 	// スペルカード演出
 	this.spellcard_anime = new SpellCardAnime(this);
@@ -140,7 +137,6 @@ var Scene = function(core) {
 	this._is_show_spellcard_anime = false;
 
 	this.addObject(this.fort);
-	this.addObject(this.opponent_manager);
 	this.addObjects(this.units);
 	this.addObjects(this.enemies);
 };
