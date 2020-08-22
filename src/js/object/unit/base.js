@@ -13,6 +13,8 @@
 MMDの咲夜さん
 
 めーさくとさくめいで能力が違うとか。
+
+キャラによっては止まりっぱなし
 */
 'use strict';
 
@@ -38,17 +40,29 @@ Base.prototype.update = function(){
 
 	var is_move = true;
 
-	var unit = this;
+	var self = this;
+
+	// 敵への攻撃
 	this.scene.enemies.forEach(function(enemy) {
-		if(unit.intersect(enemy)) {
+		if(self.intersect(enemy)) {
 
 			// 攻撃する
-			unit.attack(enemy);
+			self.attack(enemy);
 
 			// 攻撃するときは止まる
 			is_move = false;
 		}
 	});
+
+	// ボスへの攻撃
+	var boss = this.scene.boss;
+	if (self.intersect(boss)) {
+		// 攻撃する
+		self.attack(boss);
+
+		// 攻撃するときは止まる
+		is_move = false;
+	}
 
 	if (is_move) {
 		// TODO: 画面端で止まるようにする
@@ -62,14 +76,14 @@ Base.prototype.draw = function(){
 };
 
 // 攻撃
-Base.prototype.attack = function(enemy){
+Base.prototype.attack = function(enemy_or_boss){
 	var damage = this.damage();
 
-	enemy.hp(enemy.hp() - damage);
+	enemy_or_boss.hp(enemy_or_boss.hp() - damage);
 
-	if (enemy.hp() <= 0) {
+	if (enemy_or_boss.hp() <= 0) {
 		// 死亡
-		enemy.die();
+		enemy_or_boss.die();
 	}
 };
 

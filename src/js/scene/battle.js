@@ -166,6 +166,12 @@ Scene.prototype.generateEnemy = function(enemy_num){
 	this.enemies.addObject(enemy);
 };
 
+// ゲームクリアになった
+Scene.prototype.notifyStageClear = function(){
+	// TODO: スコアのデータを渡す
+	this.core.scene_manager.changeScene("result");
+};
+
 Scene.prototype.update = function(){
 	BaseScene.prototype.update.apply(this, arguments);
 

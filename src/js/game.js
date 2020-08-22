@@ -5,6 +5,7 @@ var Util = require('./hakurei').Util;
 var SceneLoading = require('./hakurei').Scene.Loading;
 var SceneTitle = require('./scene/title');
 var SceneBattle = require('./scene/battle');
+var SceneResult = require('./scene/result');
 var CONSTANT = require('./constant');
 
 var AssetsPreload = require('./assets');
@@ -15,6 +16,7 @@ var Game = function(canvas) {
 	this.scene_manager.addScene("loading", new SceneLoading(this));
 	this.scene_manager.addScene("title", new SceneTitle(this));
 	this.scene_manager.addScene("battle", new SceneBattle(this));
+	this.scene_manager.addScene("result", new SceneResult(this));
 };
 Util.inherit(Game, Core);
 
