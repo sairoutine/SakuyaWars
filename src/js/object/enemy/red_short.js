@@ -49,7 +49,7 @@ EnemyBlueLong.prototype.collisionHeight = function(){
 
 // 最大HP
 EnemyBlueLong.prototype.maxHP = function(){
-	return 50;
+	return 100;
 };
 
 // ダメージ力

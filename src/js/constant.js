@@ -1,6 +1,6 @@
 'use strict';
 var CONSTANT = {
-	DEBUG: true,
+	DEBUG: false,
 	DEBUG_MUTE: false,
 	DEBUG_SCENE: "battle",
 	DEBUG_STAGE_NO: 0,

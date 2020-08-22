@@ -145,22 +145,27 @@ UnitBase.prototype.update = function(){
 			this._remaining_stopping_frame = STOPPING_FRAME;
 		}
 		else { // 攻撃時間がまだあれば
-			// 近くにいるユニットにダメージを与える
-			// NOTE: 複数のユニットがいる場合、全員にダメージを与える
-			this.scene.enemies.forEach(function(enemy) {
-				if(self.intersect(enemy)) {
-					var damage = self.damage();
+			var target_enemy;
 
-					enemy.reduceHP(damage);
-				}
-			});
-			// ボスへの攻撃
+			// 近くにいるボスにダメージを与える
 			var boss = this.scene.boss;
 			if (self.intersect(boss)) {
+				target_enemy = boss;
+			}
+
+			// 近くにいるユニットにダメージを与える
+			this.scene.enemies.forEach(function(enemy) {
+				if(self.intersect(enemy)) {
+					target_enemy = enemy;
+				}
+			});
+
+			if (target_enemy) {
 				var damage = self.damage();
 
-				boss.reduceHP(damage);
+				target_enemy.reduceHP(damage);
 			}
+
 
 		}
 	}

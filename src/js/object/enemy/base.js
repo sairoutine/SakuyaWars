@@ -74,8 +74,6 @@ EnemyBase.prototype.update = function(){
 		// 自陣に到達したらゲームオーバー
 		var fort = this.scene.fort;
 		if (this.intersect(fort)) {
-			// TODO: battle シーンでなければGameOver判定しないようにする
-			// そうしないと毎フレーム GameOverシーンへ遷移しつづけてしまう
 			this.scene.notifyGameover();
 		}
 
@@ -132,14 +130,18 @@ EnemyBase.prototype.update = function(){
 		}
 		else { // 攻撃時間がまだあれば
 			// 近くにいるユニットにダメージを与える
-			// NOTE: 複数のユニットがいる場合、全員にダメージを与える
+			var target_unit;
 			this.scene.units.forEach(function(unit) {
 				if(self.intersect(unit)) {
-					var damage = self.damage();
-
-					unit.reduceHP(damage);
+					target_unit = unit;
 				}
 			});
+
+			if (target_unit) {
+				var damage = self.damage();
+
+				target_unit.reduceHP(damage);
+			}
 		}
 	}
 	else if (this.isDead()) {

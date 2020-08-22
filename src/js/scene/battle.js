@@ -1,7 +1,6 @@
 
 /*
 SE・BGM組み込み
-
 ビルドして提出
 
 --
@@ -276,7 +275,9 @@ Scene.prototype.notifyStageClear = function(){
 
 // ゲームオーバーになった
 Scene.prototype.notifyGameover = function(){
-	this.changeSubScene("gameover");
+	if (this.currentSubScene() instanceof SceneBattleMain) {
+		this.changeSubScene("gameover");
+	}
 };
 
 // 次のステージが存在するか否か
