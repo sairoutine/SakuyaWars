@@ -25,16 +25,16 @@ OpponentManager.prototype.update = function(){
 
 	var interval = 0;
 	if (scene.stage_no === 0) {
-		interval = 240;
+		interval = 120;
 	}
 	else if (scene.stage_no === 1) {
-		interval = 200;
+		interval = 90;
 	}
 	else if (scene.stage_no === 2) {
-		interval = 160;
+		interval = 60;
 	}
 	else if (scene.stage_no === 3) {
-		interval = 120;
+		interval = 30;
 	}
 
 	// とりあえず仮で時間経過でランダムに敵を生成する
