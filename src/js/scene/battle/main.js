@@ -5,6 +5,8 @@ var Util = require('../../hakurei').Util;
 var UIParts = require('../../hakurei').Object.UIParts;
 var OpponentManager = require('../../logic/opponent_manager');
 
+var UNITS_PER_PAGE = 5;
+
 var SceneBattleMain = function(core) {
 	BaseScene.apply(this, arguments);
 
@@ -25,6 +27,11 @@ var SceneBattleMain = function(core) {
 		new UIParts(this,  506, 574, 100, 80, _buttonDrawer("btn_icon_sakuya_tea")),
 		new UIParts(this,  616, 574, 100, 80, _buttonDrawer("btn_icon_sakuya_meisaku")),
 		new UIParts(this,  726, 574, 100, 80, _buttonDrawer("btn_icon_sakuya_bazooka")),
+		new UIParts(this,  286, 574, 100, 80, _buttonDrawer("btn_icon_sakuya_mmd")),
+		new UIParts(this,  396, 574, 100, 80, _buttonDrawer("btn_icon_sakuya_magic")),
+		new UIParts(this,  506, 574, 100, 80, _buttonDrawer("btn_icon_sakuya_mandoragora")),
+		new UIParts(this,  616, 574, 100, 80, _buttonDrawer("btn_icon_sakuya_tupai")),
+		new UIParts(this,  726, 574, 100, 80, _buttonDrawer("btn_icon_sakuya_yoyomu")),
 	];
 
 	// ユニットボタンのページング位置
@@ -48,6 +55,8 @@ SceneBattleMain.prototype.init = function(){
 
 	// 経過時間
 	this._elapsed_seconds = 0;
+
+	this._show0();
 };
 
 
@@ -82,7 +91,7 @@ SceneBattleMain.prototype.update = function(){
 		for (var i = 0, len = this._unit_buttons.length; i < len; i++) {
 			var unit_button = this._unit_buttons[i];
 
-			if(unit_button.checkCollisionWithPosition(x, y)) {
+			if(!unit_button.is_not_show && unit_button.checkCollisionWithPosition(x, y)) {
 				this.parent.generateUnit(i);
 
 				//this._pass_button.setVariable("isclick", true);
@@ -96,6 +105,21 @@ SceneBattleMain.prototype.update = function(){
 			}
 			//this._pass_button.setVariable("isclick", true);
 		}
+
+		// 右あるいは左を押下
+		if(this._unit_paging_right_button.checkCollisionWithPosition(x, y) || this._unit_paging_left_button.checkCollisionWithPosition(x, y)) {
+			if (this.current_paging_position === 0) {
+				this._show0();
+				this.current_paging_position = 1;
+			}
+			else if (this.current_paging_position === 1) {
+				this._show1();
+				this.current_paging_position = 0;
+			}
+
+			//this._pass_button.setVariable("isclick", true);
+		}
+
 	}
 	/*
 	else {
@@ -114,6 +138,30 @@ SceneBattleMain.prototype.update = function(){
 
 	}
 	*/
+};
+SceneBattleMain.prototype._show0 = function(){
+	for (var i = 0, len = this._unit_buttons.length; i < len; i++) {
+		var unit_btn = this._unit_buttons[i];
+
+		if (i < UNITS_PER_PAGE) {
+			unit_btn.is_not_show = false;
+		}
+		else {
+			unit_btn.is_not_show = true;
+		}
+	}
+};
+SceneBattleMain.prototype._show1 = function(){
+	for (var i = 0, len = this._unit_buttons.length; i < len; i++) {
+		var unit_btn = this._unit_buttons[i];
+
+		if (i >= UNITS_PER_PAGE) {
+			unit_btn.is_not_show = false;
+		}
+		else {
+			unit_btn.is_not_show = true;
+		}
+	}
 };
 
 SceneBattleMain.prototype.draw = function(){
@@ -139,6 +187,9 @@ SceneBattleMain.prototype.draw = function(){
 function _buttonDrawer (image_name) {
 	return function() {
 		var ctx = this.core.ctx;
+		if (this.is_not_show) {
+			return;
+		}
 
 		var offset_x = 0;
 		var offset_y = 0;

@@ -34,6 +34,11 @@ AssetsConfig.images = {
 	"btn_icon_sakuya_normalenkyori": "./image/UI_Battle_icon_Sakuya_normalenkyori.png",
 	"btn_icon_sakuya_normalkinkyori": "./image/UI_Battle_icon_Sakuya_normalkinkyori.png",
 	"btn_icon_sakuya_tea": "./image/UI_Battle_icon_Sakuya_tea.png",
+	"btn_icon_sakuya_mmd": "./image/UI_Battle_icon_Sakuya_MMD.png",
+	"btn_icon_sakuya_magic": "./image/UI_Battle_icon_Sakuya_magic.png",
+	"btn_icon_sakuya_mandoragora": "./image/UI_Battle_icon_Sakuya_mandoragora.png",
+	"btn_icon_sakuya_tupai": "./image/UI_Battle_icon_Sakuya_tupai.png",
+	"btn_icon_sakuya_yoyomu": "./image/UI_Battle_icon_Sakuya_yoyomu.png",
 
 	// --- ユニット
 

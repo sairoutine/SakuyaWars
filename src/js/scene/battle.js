@@ -14,8 +14,6 @@ SE・BGM組み込み
 AP表示量を表示する→ユニット
 ユニットをスライドできるようにする
 
-ゲームオーバー改善
-
 ◆ TODO:
 スペルカードを使うと全体攻撃となる
 
@@ -26,6 +24,7 @@ AP表示量を表示する→ユニット
 称号の組み込み
 遠距離攻撃の敵、紅魔館にすぐたどり着く。。。
 → よって、一旦遠距離攻撃を削除したので、復活させる
+ダメージを与えたときのエフェクトを表示する
 */
 
 'use strict';
@@ -74,6 +73,11 @@ var BACKGROUND_IMAGES = [
 ];
 
 var UNIT_CLASSES = [
+	UnitSakuyaNormal,
+	UnitSakuyaNormal,
+	UnitSakuyaNormal,
+	UnitSakuyaNormal,
+	UnitSakuyaNormal,
 	UnitSakuyaNormal,
 	UnitSakuyaNormal,
 	UnitSakuyaNormal,
