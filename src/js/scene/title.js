@@ -37,6 +37,18 @@ Scene.prototype.draw = function(){
 	ctx.drawImage(title, -title.width/2, -title.height/2);
 	ctx.restore();
 
+	ctx.save();
+	ctx.fillStyle = 'rgb( 0, 0, 0 )';
+	ctx.globalAlpha = 0.8;
+	ctx.translate(this.width/2, this.height/2);
+	ctx.fillRect(
+		-this.width/2,
+		-this.height/2,
+		this.width,
+		this.height
+	);
+	ctx.restore();
+
 	// Touch to Start
 	ctx.save();
 	ctx.fillStyle = "white";
