@@ -39,12 +39,12 @@ ClownPiece.prototype.damage = function(){
 
 // 通常時の画像
 ClownPiece.prototype.normalImage = function(){
-	return "boss_clownpiece_normal";
+	return "boss_starsapphire_normal";
 };
 
 // ダメージを受けた時の画像
 ClownPiece.prototype.damageImage = function(){
-	return "boss_clownpiece_damage";
+	return "boss_starsapphire_damage";
 };
 
 

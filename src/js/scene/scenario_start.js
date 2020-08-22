@@ -2,7 +2,7 @@
 
 var serif_script = require("../serif/start");
 
-var util = require('../hakurei').util;
+var util = require('../hakurei').Util;
 var base_scene = require('./scenario_base');
 
 var SceneScenarioStart = function(game) {

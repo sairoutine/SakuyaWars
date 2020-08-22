@@ -6,7 +6,6 @@ var SceneLoading = require('./hakurei').Scene.Loading;
 var SceneTitle = require('./scene/title');
 var SceneScenarioStart = require('./scene/scenario_start');
 var SceneBattle = require('./scene/battle');
-var SceneResult = require('./scene/result');
 var SceneScenarioEnd = require('./scene/scenario_end');
 var CONSTANT = require('./constant');
 
@@ -20,7 +19,6 @@ var Game = function(canvas) {
 	this.scene_manager.addScene("title", new SceneTitle(this));
 	this.scene_manager.addScene("battle", new SceneBattle(this));
 	this.scene_manager.addScene("scenario_end", new SceneScenarioEnd(this));
-	this.scene_manager.addScene("result", new SceneResult(this));
 };
 Util.inherit(Game, Core);
 
@@ -29,7 +27,6 @@ Game.prototype.init = function () {
 
 	// ローディング画面へ
 	if (CONSTANT.DEBUG) {
-		// デバッグ用画面遷移
 		this.scene_manager.changeScene("loading", AssetsPreload, CONSTANT.DEBUG_SCENE);
 	}
 	else {

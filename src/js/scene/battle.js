@@ -1,10 +1,11 @@
 
 /*
-ユニット画像を組み込む
-ユニットはアニメーションする
-
+ボスの攻撃やめる
 敵画像を組み込む
 敵はアニメーションする
+
+ユニット画像を組み込む
+ユニットはアニメーションする
 
 AP表示量を表示する→ユニット
 
@@ -12,21 +13,19 @@ AP表示量を表示する→ユニット
 
 攻撃頻度をつける
 
-複数ステージ対応
-SE・BGM組み込み
-リザルト画面
-称号の組み込み
+
+
+
 咲夜さん量産
 ステージごとに敵のAI調整
-
-ゲームオーバー時
-→紅魔館が爆発して、画面暗くなって、リトライ？くらいで良い
 
 ↓にPの使用量を調整
 1画面20体くらい。
 → 安めのやつだと30体くらい。
 1ステージで累計で咲夜の予想量50体くらい
 
+SE・BGM組み込み
+爆発
 
 ◆ TODO:
 スペルカードを使うと全体攻撃となる
@@ -34,6 +33,8 @@ SE・BGM組み込み
 デバッグ用にユニットや敵のHPを表示したい
 デバッグ用にPやBを回復したい
 セリフスキップを入れたい
+リザルト画面
+称号の組み込み
 */
 
 'use strict';
@@ -42,12 +43,16 @@ var BaseScene = require('../hakurei').Scene.Base;
 var SceneBattleMain = require('./battle/main');
 var SceneBattleReady = require('./battle/ready');
 var SceneBattleGameover = require('./battle/gameover');
+var SceneBattleResult = require('./battle/result');
 
 var OpponentManager = require('../logic/opponent_manager');
 var Fort = require('../object/fort');
 var SpellCardAnime = require('../object/anime/spellcard');
 
 var Clownpiece = require('../object/boss/clownpiece');
+var Lunachild = require('../object/boss/lunachild');
+var Starsapphire = require('../object/boss/starsapphire');
+var Sunnymilk = require('../object/boss/sunnymilk');
 
 var UnitSakuyaNormal = require('../object/unit/sakuya_normal');
 
@@ -58,6 +63,9 @@ var Util = require('../hakurei').Util;
 var CONSTANT = require('../constant');
 
 var BOSS_CLASSES = [
+	Lunachild,
+	Starsapphire,
+	Sunnymilk,
 	Clownpiece,
 ];
 
@@ -67,8 +75,6 @@ var BACKGROUND_IMAGES = [
 	"battle_bg3",
 	"battle_bg4",
 ];
-
-
 
 var UNIT_CLASSES = [
 	UnitSakuyaNormal,
@@ -98,6 +104,7 @@ var Scene = function(core) {
 	this.addSubScene("ready", new SceneBattleReady(core));
 	this.addSubScene("main", new SceneBattleMain(core));
 	this.addSubScene("gameover", new SceneBattleGameover(core));
+	this.addSubScene("result", new SceneBattleResult(core));
 
 	// ---
 
@@ -140,6 +147,11 @@ Scene.prototype.init = function(stage_no){
 
 	this.stage_no = stage_no || 0;
 
+	// デバッグ用 stage No
+	if (CONSTANT.DEBUG) {
+		this.stage_no = CONSTANT.DEBUG_STAGE_NO;
+	}
+
 	// 自陣
 	this.fort.x(90);
 	this.fort.y(416);
@@ -151,6 +163,9 @@ Scene.prototype.init = function(stage_no){
 
 	// ボス
 	// TODO: コンストラクタですべてのボスを初期化して、ここでは初期化しないようにしたい
+	if (this.boss !== null) { // stage 2 以降は前のステージのボスを削除する
+		this.removeObject(this.boss);
+	}
 	this.boss = new BOSS_CLASSES[this.stage_no](this);
 	this.boss.init();
 	this.boss.x(726);
@@ -250,13 +265,22 @@ Scene.prototype.isTimeStop = function() {
 
 // ゲームクリアになった
 Scene.prototype.notifyStageClear = function(){
-	// TODO: スコアのデータを渡す
-	this.core.scene_manager.changeScene("scenario_end");
+	this.changeSubScene("result");
 };
 
 // ゲームオーバーになった
 Scene.prototype.notifyGameover = function(){
 	this.changeSubScene("gameover");
+};
+
+// 次のステージが存在するか否か
+Scene.prototype.hasNextStage = function(){
+	return(BACKGROUND_IMAGES[this.stage_no + 1] ? true : false);
+};
+
+// 次のステージへ遷移
+Scene.prototype.changeNextStage = function(){
+	this.core.scene_manager.changeScene("battle", this.stage_no + 1);
 };
 
 // 現在のステージをやり直す

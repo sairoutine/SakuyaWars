@@ -37,6 +37,18 @@ AssetsConfig.images = {
 	// クラウンピース
 	"boss_clownpiece_normal": "./image/boss/BOSS_clownpiece_normal_01.png",
 	"boss_clownpiece_damage": "./image/boss/BOSS_clownpiece_damage_01.png",
+
+	// ルナチャイルド
+	"boss_lunachild_normal": "./image/boss/BOSS_luna_normal_01.png",
+	"boss_lunachild_damage": "./image/boss/BOSS_luna_damage_01.png",
+
+	// スターサファイア
+	"boss_starsapphire_normal": "./image/boss/BOSS_star_normal_01.png",
+	"boss_starsapphire_damage": "./image/boss/BOSS_star_damage_01.png",
+
+	// スターサファイア
+	"boss_sunnymilk_normal": "./image/boss/BOSS_sunny_normal_01.png",
+	"boss_sunnymilk_damage": "./image/boss/BOSS_sunny_damage_01.png",
 };
 
 AssetsConfig.sounds = {

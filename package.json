@@ -4,9 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+	"start": "electron ./public/electron.js",
     "build": "MODE=production webpack --progress --colors",
     "zip": "MODE=production webpack --progress --colors && zip -r ./releases/game.zip ./public/",
-    "watch": "webpack-dev-server"
+    "watch": "webpack-dev-server",
+	"build:win": "cd public && electron-packager ./ SakuyaWars --overwrite --platform=win32  --arch=x64 --electron-version=1.6.0 --icon=icon.ico --out ../releases --ignore '(.m4a)'",
+    "build:mac": "cd public && electron-packager ./ SakuyaWars --overwrite --platform=darwin --arch=x64 --electron-version=1.6.0 --icon=icon.icns --out ../releases --ignore '(.m4a)'"
+
   },
   "author": "sairoutine",
   "license": "Unlicense",

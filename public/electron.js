@@ -26,8 +26,8 @@ function createWindow () {
 	// not fullscreen
 	else {
 		mainWindow = new BrowserWindow({
-			"width":          640,
-			"height":         480,
+			"width":          816,
+			"height":         624,
 			"useContentSize": true,  // フレームのサイズをサイズに含まない
 			"resizable":      false, // ウィンドウのリサイズを禁止
 			"alwaysOnTop":    true,  // 常に最前面

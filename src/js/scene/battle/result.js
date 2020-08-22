@@ -1,5 +1,4 @@
 
-
 /*
 
 体力1000あって、体力が残ってるほどスコアが高い。→減点法。
@@ -12,9 +11,9 @@
 */
 'use strict';
 
-var BaseScene = require('../hakurei').Scene.Base;
+var BaseScene = require('../../hakurei').Scene.Base;
 
-var Util = require('../hakurei').Util;
+var Util = require('../../hakurei').Util;
 
 var Scene = function(core) {
 	BaseScene.apply(this, arguments);
@@ -29,9 +28,12 @@ Scene.prototype.update = function(){
 	BaseScene.prototype.update.apply(this, arguments);
 
 	if (this.core.input_manager.isLeftClickPush()) {
-		// タイトルへ戻る
-		// TODO: 最終スコア画面へ or 最終シナリオ画面へ
-		this.core.scene_manager.changeScene("title");
+		if (this.parent.hasNextStage()) {
+			this.parent.changeNextStage();
+		}
+		else {
+			this.core.scene_manager.changeScene("scenario_end");
+		}
 	}
 };
 
@@ -40,16 +42,11 @@ Scene.prototype.draw = function(){
 	var ctx = this.core.ctx;
 
 	ctx.save();
-	ctx.fillStyle = "white";
-	ctx.fillRect(0, 0, this.width, this.height);
-	ctx.restore();
-
-	ctx.save();
 	ctx.fillStyle = "black";
-	ctx.font = "25px 'MyFont'";
+	ctx.font = "48px 'MyFont'";
 	ctx.textAlign = 'center';
 
-	ctx.fillText("ゲームクリア！", this.width/2, this.height/2);
+	ctx.fillText("ステージ クリア！", this.width/2, this.height/2);
 
 	ctx.restore();
 };

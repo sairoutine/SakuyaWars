@@ -67,6 +67,8 @@ BossBase.prototype.update = function(){
 		}
 	}
 
+	// ユニットへ攻撃はしない
+	/*
 	// ユニットへ攻撃
 	var boss = this;
 	this.scene.units.forEach(function(unit) {
@@ -76,7 +78,7 @@ BossBase.prototype.update = function(){
 			boss.attack(unit);
 		}
 	});
-
+	*/
 };
 
 BossBase.prototype.draw = function(){
@@ -98,21 +100,6 @@ BossBase.prototype.draw = function(){
 	ctx.drawImage(image, -image.width/2, -image.height/2);
 	ctx.restore();
 
-};
-
-// 攻撃
-BossBase.prototype.attack = function(unit){
-	var damage = this.damage();
-
-	unit.hp(unit.hp() - damage);
-
-	// ダメージを受けた
-	unit.onDamaged();
-
-	if (unit.hp() <= 0) {
-		// 死亡
-		unit.die();
-	}
 };
 
 // ダメージを受けたときの処理

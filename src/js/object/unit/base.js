@@ -76,17 +76,17 @@ UnitBase.prototype.draw = function(){
 };
 
 // 攻撃
-UnitBase.prototype.attack = function(enemy_or_boss){
+UnitBase.prototype.attack = function(enemy){
 	var damage = this.damage();
 
-	enemy_or_boss.hp(enemy_or_boss.hp() - damage);
+	enemy.hp(enemy.hp() - damage);
 
 	// ダメージを受けた
-	enemy_or_boss.onDamaged();
+	enemy.onDamaged();
 
-	if (enemy_or_boss.hp() <= 0) {
+	if (enemy.hp() <= 0) {
 		// 死亡
-		enemy_or_boss.die();
+		enemy.die();
 	}
 };
 
