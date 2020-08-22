@@ -48,6 +48,43 @@ AssetsConfig.images = {
 	"unit_kinkyori_walk1": "./image/units/kinkyori/Sakuya_normalkinkyori_walk_01.png",
 	"unit_kinkyori_walk2": "./image/units/kinkyori/Sakuya_normalkinkyori_walk_02.png",
 
+	"unit_enkyori_attack1": "./image/units/enkyori/Sakuya_normalenkyori_attack_01.png",
+	"unit_enkyori_attack2": "./image/units/enkyori/Sakuya_normalenkyori_attack_02.png",
+	"unit_enkyori_damage": "./image/units/enkyori/Sakuya_normalenkyori_damage_01.png",
+	"unit_enkyori_stand": "./image/units/enkyori/Sakuya_normalenkyori_stand_01.png",
+	"unit_enkyori_walk1": "./image/units/enkyori/Sakuya_normalenkyori_walk_01.png",
+	"unit_enkyori_walk2": "./image/units/enkyori/Sakuya_normalenkyori_walk_02.png",
+
+	"unit_mmd_stand": "./image/units/mmd/Sakuya_MMD_walk_01.png",
+	"unit_mmd_attack": "./image/units/mmd/Sakuya_MMD_attack_01.png",
+
+	"unit_magician_attack1": "./image/units/magician/Sakuya_magic_attack_01.png",
+	"unit_magician_attack2": "./image/units/magician/Sakuya_magic_attack_02.png",
+	"unit_magician_damage": "./image/units/magician/Sakuya_magic_damage_01.png",
+	"unit_magician_walk1": "./image/units/magician/Sakuya_magic_walk_01.png",
+	"unit_magician_walk2": "./image/units/magician/Sakuya_magic_walk_02.png",
+
+	"unit_mandoragora_attack1": "./image/units/mandoragora/Sakuya_mandoragora_attack_01.png",
+	"unit_mandoragora_attack2": "./image/units/mandoragora/Sakuya_mandoragora_attack_02.png",
+	"unit_mandoragora_attack3": "./image/units/mandoragora/Sakuya_mandoragora_attack_03.png",
+	"unit_mandoragora_damage": "./image/units/mandoragora/Sakuya_mandoragora_damage_01.png",
+	"unit_mandoragora_walk1": "./image/units/mandoragora/Sakuya_mandoragora_walk_01.png",
+	"unit_mandoragora_walk2": "./image/units/mandoragora/Sakuya_mandoragora_walk_02.png",
+
+	"unit_tupai_attack1": "./image/units/tupai/Sakuya_tupai_attack_01.png",
+	"unit_tupai_attack2": "./image/units/tupai/Sakuya_tupai_attack_02.png",
+	"unit_tupai_attack3": "./image/units/tupai/Sakuya_tupai_attack_03.png",
+	"unit_tupai_damage": "./image/units/tupai/Sakuya_tupai_damage_01.png",
+	"unit_tupai_walk1": "./image/units/tupai/Sakuya_tupai_walk_01.png",
+	"unit_tupai_walk2": "./image/units/tupai/Sakuya_tupai_walk_02.png",
+
+	"unit_yoyomu_attack1": "./image/units/yoyomu/Sakuya_yoyomu_attack_01.png",
+	"unit_yoyomu_attack2": "./image/units/yoyomu/Sakuya_yoyomu_attack_02.png",
+	"unit_yoyomu_damage": "./image/units/yoyomu/Sakuya_yoyomu_damage_01.png",
+	"unit_yoyomu_walk1": "./image/units/yoyomu/Sakuya_yoyomu_walk_01.png",
+	"unit_yoyomu_walk2": "./image/units/yoyomu/Sakuya_yoyomu_walk_02.png",
+
+
 	// --- 敵
 	"enemy_blue_long_attack": "./image/enemy/blue_long/Enemy_blul_attack_01.png",
 	"enemy_blue_long_damage": "./image/enemy/blue_long/Enemy_blul_damage_01.png",

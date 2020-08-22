@@ -22,39 +22,44 @@ SakuyaNormal.prototype.draw = function(){
 
 // 立ち画像
 SakuyaNormal.prototype.stoppingImage = function(){
-	return "unit_kinkyori_stand";
+	return "unit_tupai_walk1";
 };
 
 // 攻撃する時の画像1
 SakuyaNormal.prototype.attackImage1 = function(){
-	return "unit_kinkyori_attack1";
+	return "unit_tupai_attack1";
 };
 
 // 攻撃する時の画像2
 SakuyaNormal.prototype.attackImage2 = function(){
-	return "unit_kinkyori_attack2";
+	return "unit_tupai_attack2";
+};
+
+// 攻撃する時の画像3
+SakuyaNormal.prototype.attackImage3 = function(){
+	return "unit_tupai_attack3";
 };
 
 // 死んだ時の画像
 SakuyaNormal.prototype.deadImage = function(){
-	return "unit_kinkyori_damage";
+	return "unit_tupai_damage";
 };
 
 // 歩くアニメの画像1
 SakuyaNormal.prototype.walkImage1 = function(){
-	return "unit_kinkyori_walk1";
+	return "unit_tupai_walk1";
 };
 
 // 歩くアニメの画像2
 SakuyaNormal.prototype.walkImage2 = function(){
-	return "unit_kinkyori_walk2";
+	return "unit_tupai_walk2";
 };
 
 SakuyaNormal.prototype.collisionWidth = function(){
 	return 100;
 };
 SakuyaNormal.prototype.collisionHeight = function(){
-	return 100;
+	return 200;
 };
 
 // ユニット生成に必要なPの数

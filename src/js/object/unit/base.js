@@ -201,11 +201,27 @@ UnitBase.prototype.draw = function(){
 		image = this.core.image_loader.getImage(this.deadImage());
 	}
 	else if (this.isAttacking()) {
-		if (((this.scene.frame_count / 20)|0) % 2 === 0) {
-			image = this.core.image_loader.getImage(this.attackImage1());
+		// 攻撃画像が3枚ある場合
+		if (this.attackImage1() && this.attackImage2() && this.attackImage3()) {
+			var t = ((this.scene.frame_count / 20)|0) % 3;
+			if (t === 0) {
+				image = this.core.image_loader.getImage(this.attackImage1());
+			}
+			else if (t === 1) {
+				image = this.core.image_loader.getImage(this.attackImage2());
+			}
+			else {
+				image = this.core.image_loader.getImage(this.attackImage3());
+			}
 		}
+		// 攻撃画像が2枚ある場合
 		else {
-			image = this.core.image_loader.getImage(this.attackImage2());
+			if (((this.scene.frame_count / 20)|0) % 2 === 0) {
+				image = this.core.image_loader.getImage(this.attackImage1());
+			}
+			else {
+				image = this.core.image_loader.getImage(this.attackImage2());
+			}
 		}
 	}
 	else {
@@ -258,6 +274,11 @@ UnitBase.prototype.attackImage1 = function(){
 
 // 攻撃する時の画像2
 UnitBase.prototype.attackImage2 = function(){
+	return "";
+};
+
+// 攻撃する時の画像3
+UnitBase.prototype.attackImage3 = function(){
 	return "";
 };
 

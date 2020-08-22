@@ -1,11 +1,9 @@
 
 /*
-ユニット実装を修正
-ユニット画像を組み込む
-ユニットはアニメーションする
+咲夜さん量産
+咲夜さんパラメ調整
 
 ボス実装を修正
-咲夜さん量産
 SE・BGM組み込み
 
 ビルドして提出
@@ -42,7 +40,16 @@ var Lunachild = require('../object/boss/lunachild');
 var Starsapphire = require('../object/boss/starsapphire');
 var Sunnymilk = require('../object/boss/sunnymilk');
 
-var UnitSakuyaNormal = require('../object/unit/sakuya_normal');
+var UnitSakuyaNormal1 = require('../object/unit/sakuya_normal1');
+var UnitSakuyaNormal2 = require('../object/unit/sakuya_normal2');
+var UnitSakuyaTea = require('../object/unit/sakuya_normal2'); // TODO:
+var UnitSakuyaMeisaku = require('../object/unit/sakuya_normal2'); // TODO:
+var UnitSakuyaBazooka = require('../object/unit/sakuya_normal2'); // TODO:
+var UnitSakuyaMMD = require('../object/unit/sakuya_mmd');
+var UnitSakuyaMagician = require('../object/unit/sakuya_magician');
+var UnitSakuyaMandoragora = require('../object/unit/sakuya_mandoragora');
+var UnitSakuyaTupai = require('../object/unit/sakuya_tupai');
+var UnitSakuyaYoyomu = require('../object/unit/sakuya_yoyomu');
 
 //var EnemyBlueLong = require('../object/enemy/blue_long');
 //var EnemyBlueShort = require('../object/enemy/blue_short');
@@ -72,16 +79,16 @@ var BACKGROUND_IMAGES = [
 ];
 
 var UNIT_CLASSES = [
-	UnitSakuyaNormal,
-	UnitSakuyaNormal,
-	UnitSakuyaNormal,
-	UnitSakuyaNormal,
-	UnitSakuyaNormal,
-	UnitSakuyaNormal,
-	UnitSakuyaNormal,
-	UnitSakuyaNormal,
-	UnitSakuyaNormal,
-	UnitSakuyaNormal,
+	UnitSakuyaNormal1,
+	UnitSakuyaNormal2,
+	UnitSakuyaTea,
+	UnitSakuyaMeisaku,
+	UnitSakuyaBazooka,
+	UnitSakuyaMMD,
+	UnitSakuyaMagician,
+	UnitSakuyaMandoragora,
+	UnitSakuyaTupai,
+	UnitSakuyaYoyomu,
 ];
 
 var ENEMY_CLASSES = [
