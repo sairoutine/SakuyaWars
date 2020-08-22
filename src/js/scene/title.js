@@ -52,7 +52,7 @@ Scene.prototype.draw = function(){
 	// Touch to Start
 	ctx.save();
 	ctx.fillStyle = "white";
-	ctx.font = "25px 'MyFont'";
+	ctx.font = "32px 'MyFont'";
 	ctx.textAlign = 'center';
 
 	ctx.fillText("Touch to Start!!", this.width/2, this.height/2 + 200);

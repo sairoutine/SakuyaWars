@@ -3,15 +3,12 @@
 ユニット画像を組み込む
 ユニットはアニメーションする
 
-
-エンディングは
-→ イラストも複数枚用意する
-
+敵画像を組み込む
+敵はアニメーションする
 
 AP表示量を表示する→ユニット
 
-敵画像を組み込む
-敵はアニメーションする
+ユニットをスライドできるようにする
 
 攻撃頻度をつける
 
@@ -20,6 +17,7 @@ SE・BGM組み込み
 リザルト画面
 称号の組み込み
 咲夜さん量産
+ステージごとに敵のAI調整
 
 ゲームオーバー時
 →紅魔館が爆発して、画面暗くなって、リトライ？くらいで良い
@@ -31,7 +29,6 @@ SE・BGM組み込み
 
 
 ◆ TODO:
-敵を倒すとアイテムをドロップする
 スペルカードを使うと全体攻撃となる
 
 デバッグ用にユニットや敵のHPを表示したい
@@ -260,6 +257,11 @@ Scene.prototype.notifyStageClear = function(){
 // ゲームオーバーになった
 Scene.prototype.notifyGameover = function(){
 	this.changeSubScene("gameover");
+};
+
+// 現在のステージをやり直す
+Scene.prototype.restart = function(){
+	this.core.scene_manager.changeScene("battle", this.stage_no);
 };
 
 

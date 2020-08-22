@@ -17,6 +17,8 @@ AssetsConfig.images = {
 	"ed_illust3": "./image/ed/ED3.png",
 	"ed_illust4": "./image/ed/ED4.png",
 
+	// http://commons.nicovideo.jp/material/nc215570
+	"explosion": "./image/explosion.jpg",
 
 	"fort": "./image/koumakan_01.png",
 	"SS_Battle_spell1": "./image/SS_Battle_spell1.png",
