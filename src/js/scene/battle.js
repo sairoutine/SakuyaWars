@@ -1,13 +1,13 @@
 
 /*
 スペルカード使用時のエフェクト
-スペルカードのオン・オフ判定
 
 ユニット画像を組み込む
 ユニットはアニメーションする
 
 
-
+エンディングは
+→ イラストも複数枚用意する
 
 
 AP表示量を表示する→ユニット
@@ -20,11 +20,17 @@ AP表示量を表示する→ユニット
 複数ステージ対応
 SE・BGM組み込み
 リザルト画面
+称号の組み込み
+咲夜さん量産
 
-◆ アイデア
-咲夜は選択して生成するんじゃなくて、ランダム生成(ストックされる咲夜は列に並んで表示される)の方がいいかも
-→ 咲夜毎にAPは異なる
-→ ストックされた咲夜は並び替えることができる
+ゲームオーバー時
+→紅魔館が爆発して、画面暗くなって、リトライ？くらいで良い
+
+↓にPの使用量を調整
+1画面20体くらい。
+→ 安めのやつだと30体くらい。
+1ステージで累計で咲夜の予想量50体くらい
+
 
 ◆ TODO:
 敵を倒すとアイテムをドロップする
@@ -114,6 +120,9 @@ var Scene = function(core) {
 	// 召喚した敵一覧
 	this.enemies = new Container(this);
 
+	// 時を止めるスペカが使えるようになるまでの残り時間(frame)
+	this._remaining_time_to_use_timestop_frame = 0;
+
 	// 時を止めてる際の残り時間(frame)
 	this._remaining_timestop_frame = 0;
 
@@ -155,6 +164,9 @@ Scene.prototype.init = function(stage_no){
 
 	// 時を止めてる際の残り時間(frame)
 	this._remaining_timestop_frame = 0;
+
+	// 時を止めるスペカが使えるようになるまでの残り時間(frame)
+	this._remaining_time_to_use_timestop_frame = 0;
 
 	//this.core.scene_manager.setFadeIn(60, "white");
 
@@ -199,11 +211,18 @@ Scene.prototype.generateEnemy = function(enemy_num){
 };
 
 
+// スペルカードを使用できるか否か
+Scene.prototype.canSpellCard = function() {
+	return this._remaining_time_to_use_timestop_frame === 0;
+};
 
 // スペルカード使用
 Scene.prototype.useSpellCard = function() {
-	// TODO: 時を止めるアニメ
-	// アニメのいい感じのところで、全体にダメージ
+	// TODO: アニメのいい感じのところで、全体にダメージ
+
+	// 時を止めるスペカが使えるようになるまでの残り時間を戻す(frame)
+	this._remaining_time_to_use_timestop_frame = CONSTANT.TIME_TO_USE_TIMESTOP_FRAME;
+
 
 	this._remaining_timestop_frame = CONSTANT.TIMESTOP_FRAME;
 };
@@ -239,6 +258,13 @@ Scene.prototype.update = function(){
 	// 時を止めてる時間を経過させる
 	if (this._remaining_timestop_frame > 0) {
 		this._remaining_timestop_frame--;
+	}
+
+
+
+	// 時を止めるスペカが使えるようになるまでの残り時間をへらす
+	if (!this.isTimeStop() && this._remaining_time_to_use_timestop_frame > 0) {
+		this._remaining_time_to_use_timestop_frame--;
 	}
 
 	// 左クリック位置を出力

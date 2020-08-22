@@ -6,6 +6,9 @@ var CONSTANT = {
 
 	// 時を止める時間
 	TIMESTOP_FRAME: 300,
+	// 時を止めるスペカを使えるようになるまでの時間
+	TIME_TO_USE_TIMESTOP_FRAME: 20 * 60,
+
 	// Pポイントの最大数
 	P_MAX: 600,
 

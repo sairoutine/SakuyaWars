@@ -60,6 +60,14 @@ SceneBattleMain.prototype.update = function(){
 		}
 	}
 
+	// スペルカードが使えれば、スペルカードボタンを有効にする
+	if(this.parent.canSpellCard()) {
+		this._spellcard_button.canspellcard = true;
+	}
+	else {
+		this._spellcard_button.canspellcard = false;
+	}
+
 	var x = this.core.input_manager.mousePositionX();
 	var y = this.core.input_manager.mousePositionY();
 
@@ -78,8 +86,9 @@ SceneBattleMain.prototype.update = function(){
 
 		// スペルカード発動
 		if(this._spellcard_button.checkCollisionWithPosition(x, y)) {
-			this.parent.useSpellCard();
-
+			if (this.parent.canSpellCard()) {
+				this.parent.useSpellCard();
+			}
 			//this._pass_button.setVariable("isclick", true);
 		}
 	}
