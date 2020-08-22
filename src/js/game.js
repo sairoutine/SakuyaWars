@@ -4,8 +4,10 @@ var Util = require('./hakurei').Util;
 
 var SceneLoading = require('./hakurei').Scene.Loading;
 var SceneTitle = require('./scene/title');
+var SceneScenarioStart = require('./scene/scenario_start');
 var SceneBattle = require('./scene/battle');
 var SceneResult = require('./scene/result');
+var SceneScenarioEnd = require('./scene/scenario_end');
 var CONSTANT = require('./constant');
 
 var AssetsPreload = require('./assets');
@@ -14,8 +16,10 @@ var Game = function(canvas) {
 	Core.apply(this, arguments);
 
 	this.scene_manager.addScene("loading", new SceneLoading(this));
+	this.scene_manager.addScene("scenario_start", new SceneScenarioStart(this));
 	this.scene_manager.addScene("title", new SceneTitle(this));
 	this.scene_manager.addScene("battle", new SceneBattle(this));
+	this.scene_manager.addScene("scenario_end", new SceneScenarioEnd(this));
 	this.scene_manager.addScene("result", new SceneResult(this));
 };
 Util.inherit(Game, Core);

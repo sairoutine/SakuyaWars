@@ -19,10 +19,10 @@ Scene.prototype.update = function(){
 
 	if (this.core.input_manager.isLeftClickPush()) {
 		// フェードアウトする
-		this.core.scene_manager.setFadeOut(60, "white");
+		//this.core.scene_manager.setFadeOut(60, "white");
 
 		// 次のシーンへ
-		this.core.scene_manager.changeScene("battle");
+		this.core.scene_manager.changeScene("scenario_start");
 	}
 };
 
@@ -30,28 +30,29 @@ Scene.prototype.draw = function(){
 	BaseScene.prototype.draw.apply(this, arguments);
 	var ctx = this.core.ctx;
 
+	// 背景
+	var title = this.core.image_loader.getImage("title");
 	ctx.save();
-	ctx.fillStyle = "white";
-	ctx.fillRect(0, 0, this.width, this.height);
+	ctx.translate(this.width/2, this.height/2);
+	ctx.drawImage(title, -title.width/2, -title.height/2);
 	ctx.restore();
 
+	// Touch to Start
 	ctx.save();
-	ctx.fillStyle = "black";
+	ctx.fillStyle = "white";
 	ctx.font = "25px 'MyFont'";
 	ctx.textAlign = 'center';
 
-	ctx.fillText("サクヤ大戦", this.width/2, this.height/2);
 	ctx.fillText("Touch to Start!!", this.width/2, this.height/2 + 200);
 
 	ctx.restore();
 
-	/*
-	var bg = this.core.image_loader.getImage("title");
+	// タイトルロゴ
+	var logo = this.core.image_loader.getImage("logo");
 	ctx.save();
-	ctx.translate(this.width/2 - 250, this.height/2 + 100);
-	ctx.drawImage(bg, -bg.width/2, -bg.height/2);
+	ctx.translate(408, 312);
+	ctx.drawImage(logo, -logo.width/2, -logo.height/2);
 	ctx.restore();
-	*/
 };
 
 module.exports = Scene;

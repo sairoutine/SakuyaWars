@@ -1,10 +1,6 @@
 
 /*
 
-3.2.1 Start って入れる
-
-他のシーンを実装
-
 ◆ イラスト組み込み
 画像を組み込む
 ユニットはアニメーションする
@@ -22,6 +18,7 @@
 
 デバッグ用にユニットや敵のHPを表示したい
 デバッグ用にPやBを回復したい
+セリフスキップを入れたい
 */
 
 'use strict';
@@ -193,7 +190,7 @@ Scene.prototype.isTimeStop = function() {
 // ゲームクリアになった
 Scene.prototype.notifyStageClear = function(){
 	// TODO: スコアのデータを渡す
-	this.core.scene_manager.changeScene("result");
+	this.core.scene_manager.changeScene("scenario_end");
 };
 
 // ゲームオーバーになった
