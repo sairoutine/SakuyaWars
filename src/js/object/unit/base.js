@@ -84,9 +84,11 @@ UnitBase.prototype.update = function(){
 	}
 
 	if (this.isWalking()) {
-		// キャラが移動する
-		// TODO: 画面端で止まるようにする
-		this.x(this.x() + this.speed());
+		if (!this.isStandType()) {
+			// キャラが移動する
+			// TODO: 画面端で止まるようにする
+			this.x(this.x() + this.speed());
+		}
 
 		// 近くに敵がいないか走査
 		is_any_unit_near_here = false;
@@ -187,11 +189,16 @@ UnitBase.prototype.draw = function(){
 
 	var image;
 	if (this.isWalking()) {
-		if (((this.scene.frame_count / 20)|0) % 2 === 0) {
-			image = this.core.image_loader.getImage(this.walkImage1());
+		if (this.isStandType()) {
+			image = this.core.image_loader.getImage(this.stoppingImage());
 		}
 		else {
-			image = this.core.image_loader.getImage(this.walkImage2());
+			if (((this.scene.frame_count / 20)|0) % 2 === 0) {
+				image = this.core.image_loader.getImage(this.walkImage1());
+			}
+			else {
+				image = this.core.image_loader.getImage(this.walkImage2());
+			}
 		}
 	}
 	else if (this.isStopping()) {
@@ -215,13 +222,20 @@ UnitBase.prototype.draw = function(){
 			}
 		}
 		// 攻撃画像が2枚ある場合
-		else {
+		else if (this.attackImage1() && this.attackImage2()) {
 			if (((this.scene.frame_count / 20)|0) % 2 === 0) {
 				image = this.core.image_loader.getImage(this.attackImage1());
 			}
 			else {
 				image = this.core.image_loader.getImage(this.attackImage2());
 			}
+		}
+		// 攻撃画像が1枚ある場合
+		else if (this.attackImage1()) {
+			image = this.core.image_loader.getImage(this.attackImage1());
+		}
+		else {
+			// ここにはこないはず
 		}
 	}
 	else {
@@ -236,6 +250,11 @@ UnitBase.prototype.draw = function(){
 
 UnitBase.prototype.reduceHP = function(damage){
 	this.hp(this.hp() - damage);
+};
+
+// 歩行しないタイプか否か
+UnitBase.prototype.isStandType = function(){
+	return !this.walkImage1() && !this.walkImage2();
 };
 
 // 歩行中か否か

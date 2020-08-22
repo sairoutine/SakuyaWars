@@ -2,6 +2,7 @@
 /*
 咲夜さん量産
 咲夜さんパラメ調整
+咲夜さんの登場位置
 
 ボス実装を修正
 SE・BGM組み込み
@@ -42,9 +43,9 @@ var Sunnymilk = require('../object/boss/sunnymilk');
 
 var UnitSakuyaNormal1 = require('../object/unit/sakuya_normal1');
 var UnitSakuyaNormal2 = require('../object/unit/sakuya_normal2');
-var UnitSakuyaTea = require('../object/unit/sakuya_normal2'); // TODO:
-var UnitSakuyaMeisaku = require('../object/unit/sakuya_normal2'); // TODO:
-var UnitSakuyaBazooka = require('../object/unit/sakuya_normal2'); // TODO:
+var UnitSakuyaTea = require('../object/unit/sakuya_tea');
+var UnitSakuyaMeisaku = require('../object/unit/sakuya_meisaku');
+var UnitSakuyaBazooka = require('../object/unit/sakuya_bazooka');
 var UnitSakuyaMMD = require('../object/unit/sakuya_mmd');
 var UnitSakuyaMagician = require('../object/unit/sakuya_magician');
 var UnitSakuyaMandoragora = require('../object/unit/sakuya_mandoragora');

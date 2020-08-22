@@ -22,17 +22,22 @@ SakuyaNormal.prototype.draw = function(){
 
 // 立ち画像
 SakuyaNormal.prototype.stoppingImage = function(){
-	return "unit_tea_stand";
+	return "unit_bazooka_stand";
 };
 
 // 攻撃する時の画像1
 SakuyaNormal.prototype.attackImage1 = function(){
-	return "unit_tea_attack";
+	return "unit_bazooka_attack1";
+};
+
+// 攻撃する時の画像2
+SakuyaNormal.prototype.attackImage2 = function(){
+	return "unit_bazooka_attack2";
 };
 
 // 死んだ時の画像
 SakuyaNormal.prototype.deadImage = function(){
-	return "unit_tea_damage";
+	return "unit_bazooka_damage";
 };
 
 SakuyaNormal.prototype.collisionWidth = function(){

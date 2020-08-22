@@ -84,6 +84,21 @@ AssetsConfig.images = {
 	"unit_yoyomu_walk1": "./image/units/yoyomu/Sakuya_yoyomu_walk_01.png",
 	"unit_yoyomu_walk2": "./image/units/yoyomu/Sakuya_yoyomu_walk_02.png",
 
+	"unit_tea_attack": "./image/units/tea/Sakuya_tea_attack_01.png",
+	"unit_tea_damage": "./image/units/tea/Sakuya_tea_damage_01.png",
+	"unit_tea_stand": "./image/units/tea/Sakuya_tea_walk_01.png",
+
+	"unit_bazooka_attack1": "./image/units/bazooka/Sakuya_bazooka_attack_01.png",
+	"unit_bazooka_attack2": "./image/units/bazooka/Sakuya_bazooka_attack_02.png",
+	"unit_bazooka_damage": "./image/units/bazooka/Sakuya_bazooka_damage_01.png",
+	"unit_bazooka_stand": "./image/units/bazooka/Sakuya_bazooka_walk_01.png",
+
+	"unit_meisaku_attack1": "./image/units/meisaku/Sakuya_meisaku_attack_01.png",
+	"unit_meisaku_attack2": "./image/units/meisaku/Sakuya_meisaku_attack_02.png",
+	"unit_meisaku_attack3": "./image/units/meisaku/Sakuya_meisaku_attack_03.png",
+	"unit_meisaku_damage": "./image/units/meisaku/Sakuya_meisaku_damage_01.png",
+	"unit_meisaku_stand": "./image/units/meisaku/Sakuya_meisaku_walk_01.png",
+
 
 	// --- 敵
 	"enemy_blue_long_attack": "./image/enemy/blue_long/Enemy_blul_attack_01.png",
