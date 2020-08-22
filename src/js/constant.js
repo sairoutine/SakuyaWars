@@ -2,7 +2,7 @@
 var CONSTANT = {
 	DEBUG: true,
 	DEBUG_MUTE: false,
-	DEBUG_SCENE: "title",
+	DEBUG_SCENE: "battle",
 
 	// 時を止める時間
 	TIMESTOP_FRAME: 300,

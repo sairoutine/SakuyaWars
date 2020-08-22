@@ -1,11 +1,20 @@
 
 /*
+ボス画像を組み込む
+ユニットの出てくる位置を調整
 
-◆ イラスト組み込み
-画像を組み込む
-ユニットはアニメーションする
-敵はアニメーションする
 スペルカード使用時のエフェクト
+スペルカードのオン・オフ判定
+
+ユニット画像を組み込む
+ユニットはアニメーションする
+
+敵画像を組み込む
+敵はアニメーションする
+
+複数ステージ対応
+SE・BGM組み込み
+リザルト画面
 
 ◆ アイデア
 咲夜は選択して生成するんじゃなくて、ランダム生成(ストックされる咲夜は列に並んで表示される)の方がいいかも
@@ -45,6 +54,15 @@ var BOSS_CLASSES = [
 	Clownpiece,
 ];
 
+var BACKGROUND_IMAGES = [
+	"battle_bg1",
+	"battle_bg2",
+	"battle_bg3",
+	"battle_bg4",
+];
+
+
+
 var UNIT_CLASSES = [
 	UnitSakuyaNormal,
 	UnitSakuyaNormal,
@@ -56,7 +74,6 @@ var UNIT_CLASSES = [
 var ENEMY_CLASSES = [
 	EnemyNormal,
 ];
-
 
 var Scene = function(core) {
 	BaseScene.apply(this, arguments);
@@ -73,6 +90,9 @@ var Scene = function(core) {
 	this.addSubScene("gameover", new SceneBattleGameover(core));
 
 	// ---
+
+	// ステージNo
+	this.stage_no = 0;
 
 	// ボス
 	this.boss = null;
@@ -99,20 +119,21 @@ var Scene = function(core) {
 };
 Util.inherit(Scene, BaseScene);
 
-Scene.prototype.init = function(stage_num){
+Scene.prototype.init = function(stage_no){
 	BaseScene.prototype.init.apply(this, arguments);
 
-	stage_num = stage_num || 0;
+	this.stage_no = stage_no || 0;
 
 	// 自陣
-	this.fort.x(50);
-	this.fort.y(350);
+	this.fort.x(90);
+	this.fort.y(416);
 
 	// ボス
-	this.boss = new BOSS_CLASSES[stage_num](this);
+	// TODO: コンストラクタですべてのボスを初期化して、ここでは初期化しないようにしたい
+	this.boss = new BOSS_CLASSES[this.stage_no](this);
 	this.boss.init();
-	this.boss.x(750);
-	this.boss.y(350);
+	this.boss.x(726);
+	this.boss.y(410);
 	this.addObject(this.boss);
 
 	// P ポイントの数
@@ -229,17 +250,37 @@ Scene.prototype.update = function(){
 Scene.prototype.draw = function(){
 	var ctx = this.core.ctx;
 
+	// 背景
+	var bg_name = BACKGROUND_IMAGES[this.stage_no];
+	var bg_image = this.core.image_loader.getImage(bg_name);
 	ctx.save();
-	ctx.fillStyle = "gray";
-	ctx.fillRect(0, 0, this.width, this.height);
+	ctx.translate(this.width/2, this.height/2);
+	ctx.drawImage(bg_image, -bg_image.width/2, -bg_image.height/2);
 	ctx.restore();
 
+	// Pの表示 現在
 	ctx.save();
-	ctx.fillStyle = "black";
-	ctx.font = "25px 'MyFont'";
-	ctx.textAlign = 'center';
+	ctx.font = "36px 'MyFont'";
+	ctx.textAlign = "center";
+	ctx.textBaseline = "middle";
 
-	ctx.fillText(this.p_num + " / " + CONSTANT.P_MAX + " P", 700, 30);
+	ctx.strokeStyle = Util.hexToRGBString("#FFFFFF");
+	ctx.lineWidth = 4.0;
+	ctx.strokeText(this.p_num, 639, 36);
+
+	ctx.fillStyle = Util.hexToRGBString("#945ae8");
+	ctx.fillText(this.p_num, 639, 36);
+
+	ctx.restore();
+
+	// Pの表示 最大
+	ctx.save();
+	ctx.font = "36px 'MyFont'";
+	ctx.textAlign = "center";
+	ctx.textBaseline = "middle";
+
+	ctx.fillStyle = Util.hexToRGBString("#141e46");
+	ctx.fillText("/" + CONSTANT.P_MAX + "P", 740, 35);
 
 	ctx.restore();
 

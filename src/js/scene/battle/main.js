@@ -10,20 +10,25 @@ var SceneBattleMain = function(core) {
 	// ユニット一覧のページング位置
 	this.current_paging_position = 0;
 
+	// 経過時間
+	this._elapsed_seconds = 0;
+
+
 	// ユニットボタン一覧
 	this._unit_buttons = [
-		new UIParts(this,  400, 550, 180 * 0.5, 30 * 1.5, _buttonDrawer("咲夜1")),
-		new UIParts(this,  475, 550, 180 * 0.5, 30 * 1.5, _buttonDrawer("咲夜2")),
-		new UIParts(this,  550, 550, 180 * 0.5, 30 * 1.5, _buttonDrawer("咲夜3")),
-		new UIParts(this,  625, 550, 180 * 0.5, 30 * 1.5, _buttonDrawer("咲夜4")),
-		new UIParts(this,  700, 550, 180 * 0.5, 30 * 1.5, _buttonDrawer("咲夜5")),
+		new UIParts(this,  286, 574, 100, 80, _buttonDrawer("btn_icon_sakuya_normalkinkyori")),
+		new UIParts(this,  396, 574, 100, 80, _buttonDrawer("btn_icon_sakuya_normalenkyori")),
+		new UIParts(this,  506, 574, 100, 80, _buttonDrawer("btn_icon_sakuya_tea")),
+		new UIParts(this,  616, 574, 100, 80, _buttonDrawer("btn_icon_sakuya_meisaku")),
+		new UIParts(this,  726, 574, 100, 80, _buttonDrawer("btn_icon_sakuya_bazooka")),
 	];
 
-	this._unit_paging_left_button  = new UIParts(this,  325, 550, 180 * 0.5, 30 * 1.5, _buttonDrawer("←"));
-	this._unit_paging_right_button = new UIParts(this,  775, 550, 180 * 0.5, 30 * 1.5, _buttonDrawer("→"));
+	// ユニットボタンのページング位置
+	this._unit_paging_left_button  = new UIParts(this,  211, 574, 30, 80, _buttonDrawer("btn_arrow_l"));
+	this._unit_paging_right_button = new UIParts(this,  801, 574, 30, 80, _buttonDrawer("btn_arrow_r"));
 
 	// スペルカード ボタン
-	this._spellcard_button = new UIParts(this,  75, 550, 180 * 0.5, 30 * 1.5, _buttonDrawer("SPELLCARD"));
+	this._spellcard_button = new UIParts(this,  86, 573.5, 180, 107, _buttonSpellCardDrawer("btn_spell_on", "btn_spell_off"));
 
 	this.addObjects(this._unit_buttons);
 	this.addObjects([this._unit_paging_left_button, this._unit_paging_right_button, this._spellcard_button]);
@@ -35,11 +40,25 @@ SceneBattleMain.prototype.init = function(){
 
 	// ユニット一覧のページング位置
 	this.current_paging_position = 0;
+
+	// 経過時間
+	this._elapsed_seconds = 0;
 };
 
 
 SceneBattleMain.prototype.update = function(){
 	BaseScene.prototype.update.apply(this, arguments);
+
+	// 時が止まってなければ時間を経過させる
+	if (!this.parent.isTimeStop()) {
+		// 1秒経過したら1秒カウントアップする
+		if (this.frame_count % 60 === 0) {
+			// MM:NN という表記なので、MMが3桁になる場合、桁あふれしないように時刻を止める
+			if (this._elapsed_seconds < 6000) {
+				this._elapsed_seconds++;
+			}
+		}
+	}
 
 	var x = this.core.input_manager.mousePositionX();
 	var y = this.core.input_manager.mousePositionY();
@@ -84,24 +103,28 @@ SceneBattleMain.prototype.update = function(){
 };
 
 SceneBattleMain.prototype.draw = function(){
+	var ctx = this.core.ctx;
 	BaseScene.prototype.draw.apply(this, arguments);
+
+	var minutes = (this._elapsed_seconds / 60) | 0;
+	minutes = ('00' + minutes ).slice(-2);
+	var seconds = this._elapsed_seconds % 60;
+	seconds = ('00' + seconds ).slice(-2);
+
+	// 時間経過秒数を表示
+	ctx.save();
+	ctx.font = "36px 'MyFont'";
+	ctx.textAlign = "center";
+	ctx.textBaseline = "middle";
+	ctx.fillStyle = Util.hexToRGBString("#141e46");
+	ctx.fillText(minutes.toString() + ":" + seconds.toString(), 73, 32);
+
+	ctx.restore();
 };
 
-function _buttonDrawer (text) {
+function _buttonDrawer (image_name) {
 	return function() {
 		var ctx = this.core.ctx;
-
-		if (this.is_not_show) return;
-
-		/*
-		var logo;
-		if (this.onmouse) {
-			logo = this.core.image_loader.getImage("button_gray");
-		}
-		else {
-			logo = this.core.image_loader.getImage("button_white");
-		}
-		*/
 
 		var offset_x = 0;
 		var offset_y = 0;
@@ -110,24 +133,47 @@ function _buttonDrawer (text) {
 			offset_y = 3;
 		}
 
+		var image = this.core.image_loader.getImage(image_name);
 		ctx.save();
-		/*
-		ctx.drawImage(logo,
+		ctx.drawImage(image,
 			this.getCollisionLeftX() + offset_x,
 			this.getCollisionUpY() + offset_y,
 			this.collisionWidth(),
 			this.collisionHeight()
 		);
-		*/
-		ctx.textAlign = 'center';
-		ctx.textBaseline = 'middle';
-		ctx.font = "24px 'MyFont'";
-		ctx.fillStyle = "black";
-
-		ctx.fillText(text, this.x() + offset_x, this.y() + offset_y);
-
 		ctx.restore();
 	};
+}
+
+function _buttonSpellCardDrawer (on_name, off_name) {
+	return function() {
+		var ctx = this.core.ctx;
+
+		var offset_x = 0;
+		var offset_y = 0;
+		if (this.isclick) {
+			offset_x = 3;
+			offset_y = 3;
+		}
+
+		var image;
+		if (this.canspellcard) {
+			image = this.core.image_loader.getImage(on_name);
+		}
+		else {
+			image = this.core.image_loader.getImage(off_name);
+		}
+
+		ctx.save();
+		ctx.drawImage(image,
+			this.getCollisionLeftX() + offset_x,
+			this.getCollisionUpY() + offset_y,
+			this.collisionWidth(),
+			this.collisionHeight()
+		);
+		ctx.restore();
+	};
+
 }
 
 module.exports = SceneBattleMain;
