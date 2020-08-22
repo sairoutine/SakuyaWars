@@ -18,19 +18,12 @@ Fort.prototype.update = function(){
 
 Fort.prototype.draw = function(){
 	BaseObject.prototype.draw.apply(this, arguments);
-
-	var color = 'green';
 	var ctx = this.core.ctx;
+
+	var image = this.core.image_loader.getImage("fort");
 	ctx.save();
-	ctx.fillStyle = color;
-	ctx.globalAlpha = 0.4;
-	ctx.translate(this.globalCenterX(),this.globalCenterY());
-	ctx.fillRect(
-		-this.collisionWidth()/2,
-		-this.collisionHeight()/2,
-		this.collisionWidth(),
-		this.collisionHeight()
-	);
+	ctx.translate(this.x(), this.y());
+	ctx.drawImage(image, -image.width/2, -image.height/2);
 	ctx.restore();
 
 };

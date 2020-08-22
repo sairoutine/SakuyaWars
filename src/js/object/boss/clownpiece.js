@@ -18,21 +18,6 @@ ClownPiece.prototype.update = function(){
 
 ClownPiece.prototype.draw = function(){
 	BaseObject.prototype.draw.apply(this, arguments);
-
-	var color = 'yellow';
-	var ctx = this.core.ctx;
-	ctx.save();
-	ctx.fillStyle = color;
-	ctx.globalAlpha = 0.4;
-	ctx.translate(this.globalCenterX(),this.globalCenterY());
-	ctx.fillRect(
-		-this.collisionWidth()/2,
-		-this.collisionHeight()/2,
-		this.collisionWidth(),
-		this.collisionHeight()
-	);
-	ctx.restore();
-
 };
 
 ClownPiece.prototype.collisionWidth = function(){
@@ -50,6 +35,11 @@ ClownPiece.prototype.maxHP = function(){
 // ダメージ力
 ClownPiece.prototype.damage = function(){
 	return 1;
+};
+
+// 通常時の画像
+ClownPiece.prototype.normalImage = function(){
+	return "boss_clownpiece_normal";
 };
 
 

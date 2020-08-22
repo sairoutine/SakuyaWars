@@ -14,6 +14,8 @@ AssetsConfig.images = {
 	"battle_bg3": "./image/UI_Battle_bg3.jpg",
 	"battle_bg4": "./image/UI_Battle_bg4.jpg",
 
+	"fort": "./image/koumakan_01.png",
+
 	"btn_arrow_l": "./image/UI_Battle_btn_arrow_l.png",
 	"btn_arrow_r": "./image/UI_Battle_btn_arrow_r.png",
 	"btn_spell_on": "./image/UI_Battle_btn_spell_on.png",
@@ -24,6 +26,10 @@ AssetsConfig.images = {
 	"btn_icon_sakuya_normalenkyori": "./image/UI_Battle_icon_Sakuya_normalenkyori.png",
 	"btn_icon_sakuya_normalkinkyori": "./image/UI_Battle_icon_Sakuya_normalkinkyori.png",
 	"btn_icon_sakuya_tea": "./image/UI_Battle_icon_Sakuya_tea.png",
+
+	// クラウンピース
+	"boss_clownpiece_normal": "./image/boss/BOSS_clownpiece_normal_01.png",
+	"boss_clownpiece_damage": "./image/boss/BOSS_clownpiece_damage_01.png",
 };
 
 AssetsConfig.sounds = {
