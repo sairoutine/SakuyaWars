@@ -1,2 +1,4 @@
 public/js/main.js
 public/js/main.min.js
+src/js/vendor/SsaPlayer.js
+

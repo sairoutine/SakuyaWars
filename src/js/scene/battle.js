@@ -50,6 +50,7 @@ var SceneBattleGameover = require('./battle/gameover');
 
 var OpponentManager = require('../logic/opponent_manager');
 var Fort = require('../object/fort');
+var SpellCardAnime = require('../object/anime/spellcard');
 
 var Clownpiece = require('../object/boss/clownpiece');
 
@@ -95,6 +96,9 @@ var Scene = function(core) {
 	// 敵AI
 	this.opponent_manager = new OpponentManager(this);
 
+	// スペルカード演出
+	this.spellcard_anime = new SpellCardAnime(this);
+
 	// サブシーン
 	this.addSubScene("ready", new SceneBattleReady(core));
 	this.addSubScene("main", new SceneBattleMain(core));
@@ -126,6 +130,9 @@ var Scene = function(core) {
 	// 時を止めてる際の残り時間(frame)
 	this._remaining_timestop_frame = 0;
 
+	// スペカ演出を表示するか否か
+	this._is_show_spellcard_anime = false;
+
 	this.addObject(this.fort);
 	this.addObject(this.opponent_manager);
 	this.addObjects(this.units);
@@ -141,6 +148,11 @@ Scene.prototype.init = function(stage_no){
 	// 自陣
 	this.fort.x(90);
 	this.fort.y(416);
+
+	// スペルカード演出
+	this.spellcard_anime.init();
+	this.spellcard_anime.x(this.width/2);
+	this.spellcard_anime.y(this.height/2);
 
 	// ボス
 	// TODO: コンストラクタですべてのボスを初期化して、ここでは初期化しないようにしたい
@@ -167,6 +179,9 @@ Scene.prototype.init = function(stage_no){
 
 	// 時を止めるスペカが使えるようになるまでの残り時間(frame)
 	this._remaining_time_to_use_timestop_frame = 0;
+
+	// スペカ演出を表示するか否か
+	this._is_show_spellcard_anime = false;
 
 	//this.core.scene_manager.setFadeIn(60, "white");
 
@@ -223,6 +238,12 @@ Scene.prototype.useSpellCard = function() {
 	// 時を止めるスペカが使えるようになるまでの残り時間を戻す(frame)
 	this._remaining_time_to_use_timestop_frame = CONSTANT.TIME_TO_USE_TIMESTOP_FRAME;
 
+	// スペルカード演出を再生
+	this._is_show_spellcard_anime = true;
+	var self = this;
+	this.spellcard_anime.playAnimationOnce(function () {
+		self._is_show_spellcard_anime = false;
+	});
 
 	this._remaining_timestop_frame = CONSTANT.TIMESTOP_FRAME;
 };
@@ -247,6 +268,8 @@ Scene.prototype.notifyGameover = function(){
 
 Scene.prototype.update = function(){
 	BaseScene.prototype.update.apply(this, arguments);
+
+	this.spellcard_anime.update();
 
 	// P は時間経過で自動回復する
 	if (this.frame_count % CONSTANT.FRAME_TO_RECOVER_P === 0) {
@@ -315,7 +338,13 @@ Scene.prototype.draw = function(){
 
 	ctx.restore();
 
+	// 各種オブジェクトやサブシーンの描画
 	BaseScene.prototype.draw.apply(this, arguments);
+
+	// スペルカード演出
+	if (this._is_show_spellcard_anime) {
+		this.spellcard_anime.draw();
+	}
 };
 
 module.exports = Scene;

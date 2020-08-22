@@ -15,6 +15,7 @@ AssetsConfig.images = {
 	"battle_bg4": "./image/UI_Battle_bg4.jpg",
 
 	"fort": "./image/koumakan_01.png",
+	"SS_Battle_spell1": "./image/SS_Battle_spell1.png",
 
 	"btn_arrow_l": "./image/UI_Battle_btn_arrow_l.png",
 	"btn_arrow_r": "./image/UI_Battle_btn_arrow_r.png",
