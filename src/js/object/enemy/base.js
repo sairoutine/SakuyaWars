@@ -50,6 +50,14 @@ Base.prototype.update = function(){
 		}
 	});
 
+	// 自陣に到達したらゲームオーバー
+	var fort = this.scene.fort;
+	if (this.intersect(fort)) {
+		// TODO: battle シーンでなければGameOver判定しないようにする
+		// そうしないと毎フレーム GameOverシーンへ遷移しつづけてしまう
+		this.scene.notifyGameover();
+	}
+
 	if (is_move) {
 		// TODO: 画面端で止まるようにする
 		// キャラが移動する

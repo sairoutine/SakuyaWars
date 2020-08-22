@@ -1,26 +1,28 @@
 
 /*
-ボスは攻撃する
-ボスは攻撃されてダメージを受ける
-ボスはHPが0になるとクリア
-
-自陣と敵が接触するとゲームオーバー
-
 スペルカードを使うと時が止まる
 スペルカードを使うと全体攻撃となる
 
-敵を倒すとアイテムをドロップする
-
 3.2.1 Start って入れる
 
+他のシーンを実装
+
+◆ イラスト組み込み
+画像を組み込む
 ユニットはアニメーションする
 敵はアニメーションする
+スペルカード使用時のエフェクト
 
+◆ アイデア
 咲夜は選択して生成するんじゃなくて、ランダム生成(ストックされる咲夜は列に並んで表示される)の方がいいかも
 → 咲夜毎にAPは異なる
 → ストックされた咲夜は並び替えることができる
 
+◆ TODO:
+敵を倒すとアイテムをドロップする
+
 デバッグ用にユニットや敵のHPを表示したい
+デバッグ用にPやBを回復したい
 */
 
 'use strict';
@@ -28,6 +30,7 @@
 var BaseScene = require('../hakurei').Scene.Base;
 var SceneBattleMain = require('./battle/main');
 var SceneBattleReady = require('./battle/ready');
+var SceneBattleGameover = require('./battle/gameover');
 
 var OpponentManager = require('../logic/opponent_manager');
 var Fort = require('../object/fort');
@@ -71,6 +74,7 @@ var Scene = function(core) {
 	// サブシーン
 	this.addSubScene("ready", new SceneBattleReady(core));
 	this.addSubScene("main", new SceneBattleMain(core));
+	this.addSubScene("gameover", new SceneBattleGameover(core));
 
 	// ---
 
@@ -171,6 +175,13 @@ Scene.prototype.notifyStageClear = function(){
 	// TODO: スコアのデータを渡す
 	this.core.scene_manager.changeScene("result");
 };
+
+// ゲームオーバーになった
+Scene.prototype.notifyGameover = function(){
+	this.changeSubScene("gameover");
+};
+
+
 
 Scene.prototype.update = function(){
 	BaseScene.prototype.update.apply(this, arguments);
