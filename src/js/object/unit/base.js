@@ -70,11 +70,6 @@ UnitBase.prototype.update = function(){
 
 	var is_any_unit_near_here;
 
-	// 時が止まってる最中は何も行動できない
-	if(this.scene.isTimeStop()) {
-		return;
-	}
-
 	// 死亡判定
 	// 死亡判定は死亡中以外の全ステータス共通で行う
 	if (!this.isDead() && this.hp() <= 0) {

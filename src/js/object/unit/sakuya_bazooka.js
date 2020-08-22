@@ -41,7 +41,7 @@ SakuyaNormal.prototype.deadImage = function(){
 };
 
 SakuyaNormal.prototype.collisionWidth = function(){
-	return 100;
+	return 400;
 };
 SakuyaNormal.prototype.collisionHeight = function(){
 	return 200;
@@ -60,12 +60,12 @@ SakuyaNormal.prototype.maxHP = function(){
 
 // ダメージ力
 SakuyaNormal.prototype.damage = function(){
-	return 1;
+	return 10;
 };
 
 // 歩くスピード
 SakuyaNormal.prototype.speed = function(){
-	return 0.5;
+	return 0.0;
 };
 
 module.exports = SakuyaNormal;

@@ -67,23 +67,15 @@ BossBase.prototype.update = function(){
 		}
 	}
 
-	// ユニットへ攻撃はしない
-	/*
-	// ユニットへ攻撃
-	var boss = this;
-	this.scene.units.forEach(function(unit) {
-		if(boss.intersect(unit)) {
-
-			// 攻撃する
-			boss.attack(unit);
-		}
-	});
-	*/
 };
 
 BossBase.prototype.draw = function(){
 	BaseObject.prototype.draw.apply(this, arguments);
 	var ctx = this.core.ctx;
+
+	if (!this.isCollision()) {
+		return;
+	}
 
 	var image;
 	if (this._damage_showing_time > 0) {
@@ -102,30 +94,24 @@ BossBase.prototype.draw = function(){
 
 };
 
-// ダメージを受けたときの処理
-BossBase.prototype.onDamaged = function(){
+BossBase.prototype.reduceHP = function(damage){
+	this.hp(this.hp() - damage);
+
 	if (this._damage_showing_time <= 0) {
 		this._damage_showing_time = DAMAGE_SHOWING_TIME;
 	}
+
+	if (this.hp() <= 0) {
+		this.scene.notifyStageClear();
+	}
 };
 
-// 死亡
-BossBase.prototype.die = function(){
-	this.scene.notifyStageClear();
+BossBase.prototype.isCollision = function(obj) {
+	return this.hp() > 0;
 };
-
-BossBase.prototype.reduceHP = function(damage){
-	this.hp(this.hp() - damage);
-};
-
 
 // 最大HP
 BossBase.prototype.maxHP = function(){
-	return 0;
-};
-
-// ダメージ力
-BossBase.prototype.damage = function(){
 	return 0;
 };
 

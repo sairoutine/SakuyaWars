@@ -75,12 +75,12 @@ SakuyaNormal.prototype.maxHP = function(){
 
 // ダメージ力
 SakuyaNormal.prototype.damage = function(){
-	return 1;
+	return 20;
 };
 
 // 歩くスピード
 SakuyaNormal.prototype.speed = function(){
-	return 0.5;
+	return 0.25;
 };
 
 module.exports = SakuyaNormal;

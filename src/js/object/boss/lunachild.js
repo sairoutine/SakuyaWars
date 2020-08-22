@@ -29,12 +29,7 @@ ClownPiece.prototype.collisionHeight = function(){
 
 // 最大HP
 ClownPiece.prototype.maxHP = function(){
-	return 1;
-};
-
-// ダメージ力
-ClownPiece.prototype.damage = function(){
-	return 1;
+	return 300;
 };
 
 // 通常時の画像

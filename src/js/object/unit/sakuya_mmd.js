@@ -51,7 +51,7 @@ SakuyaNormal.prototype.walkImage2 = function(){
 };
 
 SakuyaNormal.prototype.collisionWidth = function(){
-	return 100;
+	return 200;
 };
 SakuyaNormal.prototype.collisionHeight = function(){
 	return 200;
@@ -67,15 +67,14 @@ SakuyaNormal.prototype.maxHP = function(){
 	return 100;
 };
 
-
 // ダメージ力
 SakuyaNormal.prototype.damage = function(){
-	return 1;
+	return 50;
 };
 
 // 歩くスピード
 SakuyaNormal.prototype.speed = function(){
-	return 0.5;
+	return 0.125;
 };
 
 module.exports = SakuyaNormal;
