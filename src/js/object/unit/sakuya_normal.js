@@ -36,7 +36,7 @@ SakuyaNormal.prototype.draw = function(){
 
 // ユニット生成に必要なPの数
 SakuyaNormal.prototype.consumedP = function(){
-	return 60;
+	return 20;
 };
 
 // 歩くスピード

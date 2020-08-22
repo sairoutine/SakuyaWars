@@ -14,7 +14,7 @@ var CONSTANT = {
 	P_MAX: 600,
 
 	// 何フレームごとにPが回復するか
-	FRAME_TO_RECOVER_P: 60,
+	FRAME_TO_RECOVER_P: 30,
 
 	// ユニットの生成位置
 	UNIT_GENERATED_AREA_LEFT_X:  50,

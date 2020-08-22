@@ -81,13 +81,9 @@ UnitBase.prototype.attack = function(enemy){
 
 	enemy.hp(enemy.hp() - damage);
 
-	// ダメージを受けた
-	enemy.onDamaged();
-
-	if (enemy.hp() <= 0) {
-		// 死亡
-		enemy.die();
-	}
+};
+UnitBase.prototype.reduceHP = function(damage){
+	this.hp(this.hp() - damage);
 };
 
 // ダメージを受けたときの処理

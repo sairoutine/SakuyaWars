@@ -21,9 +21,10 @@ OpponentManager.prototype.update = function(){
 		return;
 	}
 
-	// とりあえず仮で時間経過で敵を生成する
+	// とりあえず仮で時間経過でランダムに敵を生成する
 	if (this.frame_count % 300 === 0) {
-		this.scene.generateEnemy(0);
+		var no = Util.getRandomInt(0,7);
+		this.scene.generateEnemy(no);
 	}
 };
 

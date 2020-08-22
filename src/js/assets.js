@@ -34,6 +34,51 @@ AssetsConfig.images = {
 	"btn_icon_sakuya_normalkinkyori": "./image/UI_Battle_icon_Sakuya_normalkinkyori.png",
 	"btn_icon_sakuya_tea": "./image/UI_Battle_icon_Sakuya_tea.png",
 
+	// --- ユニット
+
+	// --- 敵
+	"enemy_blue_long_attack": "./image/enemy/blue_long/Enemy_blul_attack_01.png",
+	"enemy_blue_long_damage": "./image/enemy/blue_long/Enemy_blul_damage_01.png",
+	"enemy_blue_long_walk01": "./image/enemy/blue_long/Enemy_blul_walk_01.png",
+	"enemy_blue_long_walk02": "./image/enemy/blue_long/Enemy_blul_walk_02.png",
+
+	"enemy_blue_short_attack": "./image/enemy/blue_short/Enemy_blus_attack_01.png",
+	"enemy_blue_short_damage": "./image/enemy/blue_short/Enemy_blus_damage_01.png",
+	"enemy_blue_short_walk01": "./image/enemy/blue_short/Enemy_blus_walk_01.png",
+	"enemy_blue_short_walk02": "./image/enemy/blue_short/Enemy_blus_walk_02.png",
+
+	"enemy_pink_long_attack": "./image/enemy/pink_long/Enemy_pnkl_attack_01.png",
+	"enemy_pink_long_damage": "./image/enemy/pink_long/Enemy_pnkl_damage_01.png",
+	"enemy_pink_long_walk01": "./image/enemy/pink_long/Enemy_pnkl_walk_01.png",
+	"enemy_pink_long_walk02": "./image/enemy/pink_long/Enemy_pnkl_walk_02.png",
+
+	"enemy_pink_short_attack": "./image/enemy/pink_short/Enemy_blus_attack_01.png",
+	"enemy_pink_short_damage": "./image/enemy/pink_short/Enemy_blus_damage_01.png",
+	"enemy_pink_short_walk01": "./image/enemy/pink_short/Enemy_blus_walk_01.png",
+	"enemy_pink_short_walk02": "./image/enemy/pink_short/Enemy_blus_walk_02.png",
+
+	"enemy_red_long_attack": "./image/enemy/red_long/Enemy_redl_attack_01.png",
+	"enemy_red_long_damage": "./image/enemy/red_long/Enemy_redl_damage_01.png",
+	"enemy_red_long_walk01": "./image/enemy/red_long/Enemy_redl_walk_01.png",
+	"enemy_red_long_walk02": "./image/enemy/red_long/Enemy_redl_walk_02.png",
+
+	"enemy_red_short_attack": "./image/enemy/red_short/Enemy_reds_attack_01.png",
+	"enemy_red_short_damage": "./image/enemy/red_short/Enemy_reds_damage_01.png",
+	"enemy_red_short_walk01": "./image/enemy/red_short/Enemy_reds_walk_01.png",
+	"enemy_red_short_walk02": "./image/enemy/red_short/Enemy_reds_walk_02.png",
+
+	"enemy_white_long_attack": "./image/enemy/white_long/Enemy_whtl_attack_01.png",
+	"enemy_white_long_damage": "./image/enemy/white_long/Enemy_whtl_damage_01.png",
+	"enemy_white_long_walk01": "./image/enemy/white_long/Enemy_whtl_walk_01.png",
+	"enemy_white_long_walk02": "./image/enemy/white_long/Enemy_whtl_walk_02.png",
+
+	"enemy_white_short_attack": "./image/enemy/white_short/Enemy_whts_attack_01.png",
+	"enemy_white_short_damage": "./image/enemy/white_short/Enemy_whts_damage_01.png",
+	"enemy_white_short_walk01": "./image/enemy/white_short/Enemy_whts_walk_01.png",
+	"enemy_white_short_walk02": "./image/enemy/white_short/Enemy_whts_walk_02.png",
+
+	// --- ボス
+
 	// クラウンピース
 	"boss_clownpiece_normal": "./image/boss/BOSS_clownpiece_normal_01.png",
 	"boss_clownpiece_damage": "./image/boss/BOSS_clownpiece_damage_01.png",

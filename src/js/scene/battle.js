@@ -1,31 +1,21 @@
 
 /*
-ボスの攻撃やめる
 敵画像を組み込む
-敵はアニメーションする
 
+ユニット実装を修正
 ユニット画像を組み込む
 ユニットはアニメーションする
 
+ボス実装を修正
+
 AP表示量を表示する→ユニット
-
 ユニットをスライドできるようにする
-
-攻撃頻度をつける
-
-
-
 
 咲夜さん量産
 ステージごとに敵のAI調整
 
-↓にPの使用量を調整
-1画面20体くらい。
-→ 安めのやつだと30体くらい。
-1ステージで累計で咲夜の予想量50体くらい
-
 SE・BGM組み込み
-爆発
+ゲームオーバー改善
 
 ◆ TODO:
 スペルカードを使うと全体攻撃となる
@@ -56,16 +46,23 @@ var Sunnymilk = require('../object/boss/sunnymilk');
 
 var UnitSakuyaNormal = require('../object/unit/sakuya_normal');
 
-var EnemyNormal = require('../object/enemy/normal');
+var EnemyBlueLong = require('../object/enemy/blue_long');
+var EnemyBlueShort = require('../object/enemy/blue_short');
+var EnemyPinkLong = require('../object/enemy/pink_long');
+var EnemyPinkShort = require('../object/enemy/pink_short');
+var EnemyRedLong = require('../object/enemy/red_long');
+var EnemyRedShort = require('../object/enemy/red_short');
+var EnemyWhiteLong = require('../object/enemy/white_long');
+var EnemyWhiteShort = require('../object/enemy/white_short');
 
 var Container = require('../hakurei').Object.Container;
 var Util = require('../hakurei').Util;
 var CONSTANT = require('../constant');
 
 var BOSS_CLASSES = [
-	Lunachild,
-	Starsapphire,
 	Sunnymilk,
+	Starsapphire,
+	Lunachild,
 	Clownpiece,
 ];
 
@@ -85,7 +82,14 @@ var UNIT_CLASSES = [
 ];
 
 var ENEMY_CLASSES = [
-	EnemyNormal,
+	EnemyBlueLong,
+	EnemyBlueShort,
+	EnemyPinkLong,
+	EnemyPinkShort,
+	EnemyRedLong,
+	EnemyRedShort,
+	EnemyWhiteLong,
+	EnemyWhiteShort,
 ];
 
 var Scene = function(core) {
