@@ -135,7 +135,7 @@ Scene.prototype.init = function(stage_num){
 
 	//this.core.scene_manager.setFadeIn(60, "white");
 
-	this.changeSubScene("main");
+	this.changeSubScene("ready");
 };
 
 
