@@ -6,13 +6,17 @@ var AssetsConfig = {};
 AssetsConfig.images = {
 	"logo": "./image/logo.png",
 	"title": "./image/title.png",
-	"scenario_start_background": "./image/scenario_start_background.png",
-	"scenario_end_background": "./image/scenario_end_background.png",
 
 	"battle_bg1": "./image/UI_Battle_bg1.jpg",
 	"battle_bg2": "./image/UI_Battle_bg2.jpg",
 	"battle_bg3": "./image/UI_Battle_bg3.jpg",
 	"battle_bg4": "./image/UI_Battle_bg4.jpg",
+
+	"ed_illust1": "./image/ed/ED1.png",
+	"ed_illust2": "./image/ed/ED2.png",
+	"ed_illust3": "./image/ed/ED3.png",
+	"ed_illust4": "./image/ed/ED4.png",
+
 
 	"fort": "./image/koumakan_01.png",
 	"SS_Battle_spell1": "./image/SS_Battle_spell1.png",

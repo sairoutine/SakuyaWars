@@ -28,7 +28,7 @@ SceneScenarioStart.prototype.bgm = function() {
 
 // 背景
 SceneScenarioStart.prototype.background = function() {
-	return "scenario_end_background";
+	return "";
 };
 
 module.exports = SceneScenarioStart;

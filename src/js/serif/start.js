@@ -2,7 +2,7 @@
 
 // セリフ
 var Serif= [
-	{"serif":"妖精メイドが全滅したわ"},
+	{"background": "title", "serif":"妖精メイドが全滅したわ"},
 	{"serif":"かくなるうえは......"},
 	{"serif":"仕方がありません"},
 	{"serif":"ーーいくらでも増えるから、と酷使されてきた紅魔館の妖精メイドたち。", "option": {"font_color": "#FC4455", "outline_color": "#000000"}},

@@ -2,14 +2,20 @@
 
 // セリフ
 var Serif= [
-	{"background": "reminiscence1", "pos":null,"exp":null,"chara":null,"serif":"もう、霊夢ったら。そう力任せにぐちゃっと書いちゃダメよ。\n霊符にならないじゃない"},
-	{"background": "reminiscence1", "pos":null,"exp":null,"chara":null,"serif":"霊符はね、紙と咒文とが組み合わさって初めて効果を発揮するの。いい？\n書く時はこう、筆の向きに逆らわないようにしながら、すすーっと走らせて――"},
-	{"background": "reminiscence1", "pos":null,"exp":null,"chara":null,"serif":"そんなこと言われたって難しいんだもん！"},
-	{"background": "reminiscence1", "pos":null,"exp":null,"chara":null,"serif":"そうやってすぐにむくれて筆を投げ落とさないの。ほら、ちゃんと筆を握って。\nいつかは貴女も、この札を使わなきゃいけなくなる時が来るのよ？"},
-	{"background": "reminiscence1", "pos":null,"exp":null,"chara":null,"serif":"……紫が書いて作り置きしとけばいいじゃん"},
-	{"background": "reminiscence1", "pos":null,"exp":null,"chara":null,"serif":"私がいつまで霊夢のそばにいられるか分からないでしょ？"},
-	{"background": "reminiscence1", "pos":null,"exp":null,"chara":null,"serif":"そんなことあり得るの？\n紫の方がずっと長生きするのに"},
-	{"background": "reminiscence1", "pos":null,"exp":null,"chara":null,"serif":"さぁ、どうかしら"},
-	{"background": "reminiscence2", "pos":null,"exp":null,"chara":null,"serif":"でもね、霊夢。幻想郷は全てを受け入れるのよ。\nそれはそれは残酷な話ですわ"},
+	{"background": "ed_illust1", "serif":"なんとか妖精を片づけたわ"},
+	{"serif":"でもこれでたくさん労働力を捕まえられたから"},
+	{"serif":"しばらくお暇をいただけそう"},
+	{"background": "ed_illust2", "serif":"見つけた！", "option": {"font_color": "#945ae8", "outline_color": "#FFFFFF"}},
+	{"serif":"あなたは？"},
+	{"serif":"いま私のバースでは館が妖精たちに攻撃されているの", "option": {"font_color": "#945ae8", "outline_color": "#FFFFFF"}},
+	{"serif":"だから手伝いに来て頂戴", "option": {"font_color": "#945ae8", "outline_color": "#FFFFFF"}},
+	{"serif":"えっ妖精？"},
+	{"serif":"もう片づけたはずよ"},
+	{"background": "ed_illust3", "serif":"私の世界ではこれから片づけるのよ", "option": {"font_color": "#945ae8", "outline_color": "#FFFFFF"}},
+	{"serif":"手伝いに来てくれないと困るわ", "option": {"font_color": "#945ae8", "outline_color": "#FFFFFF"}},
+	{"serif":"ふえ"},
+	{"serif":"ーー十六夜咲夜は気づいてしまった。", "option": {"font_color": "#FC4455", "outline_color": "#000000"}},
+	{"background": "ed_illust4", "serif":"ーーひょっとするとこの後たくさんの自分が自分をさらいに来るかもしれない。", "option": {"font_color": "#FC4455", "outline_color": "#000000"}},
+	{"serif":"ーー十六夜咲夜は少しだけ妖精の気持ちが分かった気がしたのだった。", "option": {"font_color": "#FC4455", "outline_color": "#000000"}},
 ];
 module.exports = Serif;
