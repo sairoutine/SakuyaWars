@@ -185,6 +185,10 @@ EnemyBase.prototype.draw = function(){
 	ctx.restore();
 };
 
+EnemyBase.prototype.reduceHP = function(damage){
+	this.hp(this.hp() - damage);
+};
+
 // 歩行中か否か
 EnemyBase.prototype.isWalking = function(){
 	return this._status === STATUS_WALKING;

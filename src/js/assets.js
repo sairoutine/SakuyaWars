@@ -41,6 +41,12 @@ AssetsConfig.images = {
 	"btn_icon_sakuya_yoyomu": "./image/UI_Battle_icon_Sakuya_yoyomu.png",
 
 	// --- ユニット
+	"unit_kinkyori_attack1": "./image/units/kinkyori/Sakuya_normalkinkyori_attack_01.png",
+	"unit_kinkyori_attack2": "./image/units/kinkyori/Sakuya_normalkinkyori_attack_02.png",
+	"unit_kinkyori_damage": "./image/units/kinkyori/Sakuya_normalkinkyori_damage_01.png",
+	"unit_kinkyori_stand": "./image/units/kinkyori/Sakuya_normalkinkyori_stand_01.png",
+	"unit_kinkyori_walk1": "./image/units/kinkyori/Sakuya_normalkinkyori_walk_01.png",
+	"unit_kinkyori_walk2": "./image/units/kinkyori/Sakuya_normalkinkyori_walk_02.png",
 
 	// --- 敵
 	"enemy_blue_long_attack": "./image/enemy/blue_long/Enemy_blul_attack_01.png",

@@ -114,6 +114,11 @@ BossBase.prototype.die = function(){
 	this.scene.notifyStageClear();
 };
 
+BossBase.prototype.reduceHP = function(damage){
+	this.hp(this.hp() - damage);
+};
+
+
 // 最大HP
 BossBase.prototype.maxHP = function(){
 	return 0;
