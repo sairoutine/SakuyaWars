@@ -45,6 +45,11 @@ SakuyaNormal.prototype.deadImage = function(){
 	return "unit_meisaku_damage";
 };
 
+
+SakuyaNormal.prototype.deadSound = function(){
+	return "unit_meisaku_damage";
+};
+
 SakuyaNormal.prototype.collisionWidth = function(){
 	return 100;
 };

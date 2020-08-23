@@ -50,6 +50,14 @@ SakuyaNormal.prototype.walkImage2 = function(){
 	return "unit_magician_walk2";
 };
 
+SakuyaNormal.prototype.attackSound = function(){
+	return "unit_magician_attack2";
+};
+
+SakuyaNormal.prototype.deadSound = function(){
+	return "unit_magician_damage";
+};
+
 SakuyaNormal.prototype.collisionWidth = function(){
 	return 200;
 };

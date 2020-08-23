@@ -75,6 +75,8 @@ UnitBase.prototype.update = function(){
 	if (!this.isDead() && this.hp() <= 0) {
 		this._status = STATUS_DEAD;
 
+		this.core.audio_loader.playSound(this.deadSound());
+
 		this._remaining_dead_frame = DEAD_FRAME;
 	}
 
@@ -101,6 +103,8 @@ UnitBase.prototype.update = function(){
 		if (is_any_unit_near_here) {
 			this._status = STATUS_ATTACKING;
 
+			this.core.audio_loader.playSound(this.attackSound());
+
 			this._remaining_attacking_frame = ATTACK_FRAME;
 		}
 	}
@@ -125,6 +129,8 @@ UnitBase.prototype.update = function(){
 			if (is_any_unit_near_here) {
 				// 近くに敵がいれば攻撃モードへ
 				this._status = STATUS_ATTACKING;
+
+				this.core.audio_loader.playSound(this.attackSound());
 
 				this._remaining_attacking_frame = ATTACK_FRAME;
 			}
@@ -187,10 +193,38 @@ UnitBase.prototype.draw = function(){
 
 	var ctx = this.core.ctx;
 
-	var image;
+	var image, t;
 	if (this.isWalking()) {
 		if (this.isStandType()) {
-			image = this.core.image_loader.getImage(this.stoppingImage());
+			// 攻撃画像が3枚ある場合
+			if (this.attackImage1() && this.attackImage2() && this.attackImage3()) {
+				t = ((this.scene.frame_count / 20)|0) % 3;
+				if (t === 0) {
+					image = this.core.image_loader.getImage(this.attackImage1());
+				}
+				else if (t === 1) {
+					image = this.core.image_loader.getImage(this.attackImage2());
+				}
+				else {
+					image = this.core.image_loader.getImage(this.attackImage3());
+				}
+			}
+			// 攻撃画像が2枚ある場合
+			else if (this.attackImage1() && this.attackImage2()) {
+				if (((this.scene.frame_count / 20)|0) % 2 === 0) {
+					image = this.core.image_loader.getImage(this.attackImage1());
+				}
+				else {
+					image = this.core.image_loader.getImage(this.attackImage2());
+				}
+			}
+			// 攻撃画像が1枚ある場合
+			else if (this.attackImage1()) {
+				image = this.core.image_loader.getImage(this.attackImage1());
+			}
+			else {
+				// ここにはこないはず
+			}
 		}
 		else {
 			if (((this.scene.frame_count / 20)|0) % 2 === 0) {
@@ -210,7 +244,7 @@ UnitBase.prototype.draw = function(){
 	else if (this.isAttacking()) {
 		// 攻撃画像が3枚ある場合
 		if (this.attackImage1() && this.attackImage2() && this.attackImage3()) {
-			var t = ((this.scene.frame_count / 20)|0) % 3;
+			t = ((this.scene.frame_count / 20)|0) % 3;
 			if (t === 0) {
 				image = this.core.image_loader.getImage(this.attackImage1());
 			}
@@ -315,6 +349,16 @@ UnitBase.prototype.walkImage1 = function(){
 UnitBase.prototype.walkImage2 = function(){
 	return "";
 };
+
+
+UnitBase.prototype.deadSound = function(){
+	return "unit_default_damage";
+};
+
+UnitBase.prototype.attackSound = function(){
+	return "unit_default_attack2";
+};
+
 
 // 最大HP
 UnitBase.prototype.maxHP = function(){

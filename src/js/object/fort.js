@@ -29,10 +29,10 @@ Fort.prototype.draw = function(){
 };
 
 Fort.prototype.collisionWidth = function(){
-	return 180;
+	return 100;
 };
 Fort.prototype.collisionHeight = function(){
-	return 180;
+	return 100;
 };
 
 module.exports = Fort;

@@ -16,6 +16,8 @@ SceneBattleReady.prototype.init = function(){
 	this._t = 0;
 
 	this.core.audio_loader.stopBGM();
+
+	this.core.audio_loader.playSound("gameover01");
 };
 
 

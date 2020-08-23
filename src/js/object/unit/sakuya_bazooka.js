@@ -40,6 +40,10 @@ SakuyaNormal.prototype.deadImage = function(){
 	return "unit_bazooka_damage";
 };
 
+SakuyaNormal.prototype.attackSound = function(){
+	return "unit_mmd_or_bazooka_attack1";
+};
+
 SakuyaNormal.prototype.collisionWidth = function(){
 	return 400;
 };

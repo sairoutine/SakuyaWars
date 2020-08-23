@@ -35,6 +35,10 @@ SakuyaNormal.prototype.deadImage = function(){
 	return "unit_tea_damage";
 };
 
+SakuyaNormal.prototype.deadSound = function(){
+	return "unit_tea_damage";
+};
+
 SakuyaNormal.prototype.collisionWidth = function(){
 	return 100;
 };

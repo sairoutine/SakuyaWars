@@ -55,6 +55,10 @@ SakuyaNormal.prototype.walkImage2 = function(){
 	return "unit_mandoragora_walk2";
 };
 
+SakuyaNormal.prototype.attackSound = function(){
+	return "unit_mandoragora_attack2";
+};
+
 SakuyaNormal.prototype.collisionWidth = function(){
 	return 100;
 };

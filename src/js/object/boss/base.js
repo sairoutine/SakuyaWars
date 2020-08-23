@@ -102,6 +102,7 @@ BossBase.prototype.reduceHP = function(damage){
 	}
 
 	if (this.hp() <= 0) {
+		this.core.audio_loader.playSound("boss_damage");
 		this.scene.notifyStageClear();
 	}
 };

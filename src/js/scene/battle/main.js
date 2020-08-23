@@ -92,6 +92,8 @@ SceneBattleMain.prototype.update = function(){
 			var unit_button = this._unit_buttons[i];
 
 			if(!unit_button.is_not_show && unit_button.checkCollisionWithPosition(x, y)) {
+				this.core.audio_loader.playSound("summon_unit");
+
 				this.parent.generateUnit(i);
 
 				//this._pass_button.setVariable("isclick", true);
@@ -101,6 +103,7 @@ SceneBattleMain.prototype.update = function(){
 		// スペルカード発動
 		if(this._spellcard_button.checkCollisionWithPosition(x, y)) {
 			if (this.parent.canSpellCard()) {
+				this.core.audio_loader.playSound("use_spellcard");
 				this.parent.useSpellCard();
 			}
 			//this._pass_button.setVariable("isclick", true);

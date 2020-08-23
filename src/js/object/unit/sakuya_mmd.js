@@ -50,6 +50,10 @@ SakuyaNormal.prototype.walkImage2 = function(){
 	return "unit_mmd_stand";
 };
 
+SakuyaNormal.prototype.attackSound = function(){
+	return "unit_mmd_attack2";
+};
+
 SakuyaNormal.prototype.collisionWidth = function(){
 	return 200;
 };

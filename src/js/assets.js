@@ -161,6 +161,86 @@ AssetsConfig.images = {
 };
 
 AssetsConfig.sounds = {
+	"gameover01":    {
+		path: "./sound/se_maoudamashii_explosion02.ogg",
+		volume: 0.1,
+	},
+	"summon_unit":    {
+		path: "./sound/se_maoudamashii_magical07.ogg",
+		volume: 0.1,
+	},
+	"use_spellcard":    {
+		path: "./sound/se_maoudamashii_magical21.ogg",
+		volume: 0.1,
+	},
+	"unit_default_damage":    {
+		path: "./sound/se_maoudamashii_battle15.ogg",
+		volume: 0.1,
+	},
+	"unit_tea_damage":    {
+		path: "./sound/se_maoudamashii_element_water01.ogg",
+		volume: 0.1,
+	},
+	"unit_meisaku_damage":    {
+		path: "./sound/se_maoudamashii_battle09.ogg",
+		volume: 0.1,
+	},
+	"unit_magician_damage":    {
+		path: "./sound/se_maoudamashii_battle05.ogg",
+		volume: 0.1,
+	},
+	"enemy_damage":    {
+		path: "./sound/se_maoudamashii_magical28.ogg",
+		volume: 0.1,
+	},
+	"boss_damage":    {
+		path: "./sound/se_maoudamashii_explosion04.ogg",
+		volume: 0.1,
+	},
+
+	"unit_normal1_attack2":    {
+		path: "./sound/se_maoudamashii_battle17.ogg",
+		volume: 0.1,
+	},
+	"unit_default_attack2":    {
+		path: "./sound/se_maoudamashii_battle03.ogg",
+		volume: 0.1,
+	},
+	"unit_mmd_or_bazooka_attack1":    {
+		path: "./sound/se_maoudamashii_explosion03.ogg",
+		volume: 0.1,
+	},
+	"unit_tupai_attack2":    {
+		path: "./sound/se_maoudamashii_battle11.ogg",
+		volume: 0.1,
+	},
+	"unit_magician_attack2":    {
+		path: "./sound/se_maoudamashii_magical25.ogg",
+		volume: 0.1,
+	},
+	"unit_mandoragora_attack2":    {
+		path: "./sound/se_maoudamashii_battle19.ogg",
+		volume: 0.1,
+	},
+	"unit_mmd_attack2":    {
+		path: "./sound/se_maoudamashii_voice_human02.ogg",
+		volume: 0.1,
+	},
+	"enemy_attack":    {
+		path: "./sound/se_maoudamashii_battle18.ogg",
+		volume: 0.1,
+	},
+
+
+	/*
+        ../../public/sound/se_maoudamashii_battle12.ogg
+        ../../public/sound/se_maoudamashii_magical15.ogg
+	*/
+	/*
+        ../../public/sound/se_maoudamashii_element_water12.ogg
+        ../../public/sound/se_maoudamashii_explosion06.ogg
+        ../../public/sound/se_maoudamashii_system01.ogg
+	*/
 };
 
 AssetsConfig.bgms = {

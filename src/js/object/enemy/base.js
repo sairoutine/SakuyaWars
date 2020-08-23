@@ -63,6 +63,8 @@ EnemyBase.prototype.update = function(){
 	if (!this.isDead() && this.hp() <= 0) {
 		this._status = STATUS_DEAD;
 
+		this.core.audio_loader.playSound("enemy_damage");
+
 		this._remaining_dead_frame = DEAD_FRAME;
 	}
 
@@ -89,6 +91,8 @@ EnemyBase.prototype.update = function(){
 		if (is_any_unit_near_here) {
 			this._status = STATUS_ATTACKING;
 
+			this.core.audio_loader.playSound("enemy_attack");
+
 			this._remaining_attacking_frame = ATTACK_FRAME;
 		}
 	}
@@ -109,6 +113,8 @@ EnemyBase.prototype.update = function(){
 			if (is_any_unit_near_here) {
 				// 近くに敵がいれば攻撃モードへ
 				this._status = STATUS_ATTACKING;
+
+				this.core.audio_loader.playSound("enemy_attack");
 
 				this._remaining_attacking_frame = ATTACK_FRAME;
 			}
@@ -164,11 +170,17 @@ EnemyBase.prototype.draw = function(){
 
 	var image;
 	if (this.isWalking() || this.isStopping()) {
-		if (((this.scene.frame_count / 20)|0) % 2 === 0) {
+		if (this.scene.isTimeStop()) {
+			// 時間が止まっているときは、アニメも固定にする
 			image = this.core.image_loader.getImage(this.walkImage1());
 		}
 		else {
-			image = this.core.image_loader.getImage(this.walkImage2());
+			if (((this.scene.frame_count / 20)|0) % 2 === 0) {
+				image = this.core.image_loader.getImage(this.walkImage1());
+			}
+			else {
+				image = this.core.image_loader.getImage(this.walkImage2());
+			}
 		}
 	}
 	else if (this.isDead()) {
