@@ -3,10 +3,10 @@ var CONSTANT = {
 	DEBUG: false,
 	DEBUG_MUTE: false,
 	DEBUG_SCENE: "battle",
-	DEBUG_STAGE_NO: 3,
+	DEBUG_STAGE_NO: 1,
 
 	// 時を止める時間
-	TIMESTOP_FRAME: 300,
+	TIMESTOP_FRAME: 600,
 	// 時を止めるスペカを使えるようになるまでの時間
 	TIME_TO_USE_TIMESTOP_FRAME: 20 * 60,
 
@@ -14,7 +14,7 @@ var CONSTANT = {
 	P_MAX: 600,
 
 	// 何フレームごとにPが回復するか
-	FRAME_TO_RECOVER_P: 15,
+	FRAME_TO_RECOVER_P: 5,
 
 	// ユニットの生成位置
 	UNIT_GENERATED_AREA_LEFT_X:  100,
