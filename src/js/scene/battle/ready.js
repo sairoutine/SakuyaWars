@@ -10,6 +10,11 @@ Util.inherit(SceneBattleReady, BaseScene);
 
 SceneBattleReady.prototype.init = function(){
 	BaseScene.prototype.init.apply(this, arguments);
+
+	// BGM再生
+	if(!this.core.audio_loader.isPlayingBGM("battle")) {
+		this.core.audio_loader.playBGM("battle");
+	}
 };
 
 

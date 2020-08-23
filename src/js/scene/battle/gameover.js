@@ -14,6 +14,8 @@ SceneBattleReady.prototype.init = function(){
 	BaseScene.prototype.init.apply(this, arguments);
 
 	this._t = 0;
+
+	this.core.audio_loader.stopBGM();
 };
 
 

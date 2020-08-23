@@ -1,8 +1,8 @@
 'use strict';
 var CONSTANT = {
-	DEBUG: false,
+	DEBUG: true,
 	DEBUG_MUTE: false,
-	DEBUG_SCENE: "battle",
+	DEBUG_SCENE: "scenario_end",
 	DEBUG_STAGE_NO: 0,
 
 	// 時を止める時間

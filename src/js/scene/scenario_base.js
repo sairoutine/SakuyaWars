@@ -27,11 +27,10 @@ SceneScenarioBase.prototype.init = function(serif){
 	BaseScene.prototype.init.apply(this, arguments);
 	this.serif.init(this.serifScript());
 
-	// シーン遷移前の BGM 止める
-	this.core.audio_loader.stopBGM();
-
 	// セリフ開始
 	this.serif.start();
+
+	this.notifySerifStart();
 };
 
 SceneScenarioBase.prototype.beforeDraw = function(){
@@ -156,6 +155,10 @@ SceneScenarioBase.prototype._showMessage = function() {
 // 立ち絵＆セリフ終了後
 SceneScenarioBase.prototype.notifySerifEnd = function() {
 	throw new Error("notifySerifEnd method must be defined.");
+};
+
+SceneScenarioBase.prototype.notifySerifStart = function() {
+	throw new Error("notifySerifStart method must be defined.");
 };
 
 // セリフスクリプト

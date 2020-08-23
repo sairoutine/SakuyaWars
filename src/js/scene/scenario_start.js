@@ -11,6 +11,11 @@ var SceneScenarioStart = function(game) {
 
 util.inherit(SceneScenarioStart, base_scene);
 
+SceneScenarioStart.prototype.notifySerifStart = function() {
+	// シーン遷移前の BGM 止める
+	//this.core.audio_loader.stopBGM();
+};
+
 // シナリオ終了後
 SceneScenarioStart.prototype.notifySerifEnd = function() {
 	this.core.scene_manager.changeScene("battle");

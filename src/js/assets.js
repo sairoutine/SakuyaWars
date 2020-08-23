@@ -164,6 +164,24 @@ AssetsConfig.sounds = {
 };
 
 AssetsConfig.bgms = {
+	"title": {
+		path: "./bgm/title/bgm_maoudamashii_fantasy12.ogg",
+		loopStart: 0*60 + 0 + 0.000,
+		//loopEnd: 1*60 + 47 + 0.027,
+		volume: 0.1,
+	},
+	"battle": {
+		path: "./bgm/battle/bgm_maoudamashii_ethnic31.ogg",
+		loopStart: 0*60 + 0 + 0.000,
+		//loopEnd: 1*60 + 47 + 0.027,
+		volume: 0.1,
+	},
+	"result": {
+		path: "./bgm/result/bgm_maoudamashii_acoustic38.ogg",
+		loopStart: 0*60 + 0 + 0.000,
+		//loopEnd: 1*60 + 47 + 0.027,
+		volume: 0.1,
+	},
 };
 
 AssetsConfig.fonts = {

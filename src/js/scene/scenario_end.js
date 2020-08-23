@@ -11,6 +11,10 @@ var SceneScenarioStart = function(game) {
 
 util.inherit(SceneScenarioStart, base_scene);
 
+SceneScenarioStart.prototype.notifySerifStart = function() {
+	this.core.audio_loader.playBGM("result");
+};
+
 // シナリオ終了後
 SceneScenarioStart.prototype.notifySerifEnd = function() {
 	this.core.scene_manager.changeScene("title");

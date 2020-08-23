@@ -12,6 +12,9 @@ Util.inherit(Scene, BaseScene);
 Scene.prototype.init = function(){
 	BaseScene.prototype.init.apply(this, arguments);
 	this.core.scene_manager.setFadeIn(60, "white");
+
+
+	this.core.audio_loader.playBGM("title");
 };
 
 Scene.prototype.update = function(){
