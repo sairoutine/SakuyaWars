@@ -17,6 +17,7 @@ var STATUS_STOPPING = 1;
 var STATUS_ATTACKING = 2;
 var STATUS_DEAD = 3;
 
+var CONSTANT = require('../../constant');
 var BaseObject = require('../../hakurei').Object.Base;
 var Util = require('../../hakurei').Util;
 
@@ -156,6 +157,16 @@ UnitBase.prototype.draw = function(){
 	BaseObject.prototype.draw.apply(this, arguments);
 
 	var ctx = this.core.ctx;
+
+	// デバッグ用にHPを表示
+	if (CONSTANT.DEBUG) {
+		ctx.save();
+		ctx.fillStyle = "blue";
+		ctx.textAlign = 'center';
+		ctx.font = "12px 'MyFont'";
+		ctx.fillText(this.hp() + ' / ' + this.maxHP(), this.x(), this.y() - 100);
+		ctx.restore();
+	}
 
 	var image;
 	if (this.isWalking()) {
