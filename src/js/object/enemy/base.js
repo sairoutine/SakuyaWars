@@ -75,7 +75,7 @@ EnemyBase.prototype.update = function(){
 		}
 
 		// 近くに敵がいれば攻撃する
-		this._attackIfAnyUnitsNearHere();
+		this._attackIfTargetIsNearby();
 	}
 	else if (this.isStopping()) {
 		// 必ず停止しないといけない時間をへらす
@@ -84,7 +84,7 @@ EnemyBase.prototype.update = function(){
 		// 必ず停止しないといけない時間が終わったら
 		if (this._remaining_stopping_frame <= 0) {
 			// 近くに敵がいれば攻撃する
-			var is_attacked = this._attackIfAnyUnitsNearHere();
+			var is_attacked = this._attackIfTargetIsNearby();
 
 			if (!is_attacked) {
 				// 近くに敵がいなければ歩行開始
@@ -119,26 +119,26 @@ EnemyBase.prototype.update = function(){
 	}
 };
 
-// 近くに敵がいれば攻撃する
-EnemyBase.prototype._attackIfAnyUnitsNearHere = function () {
+// 近くに攻撃対象がいれば攻撃する
+EnemyBase.prototype._attackIfTargetIsNearby = function () {
 	var self = this;
-	// 近くに敵がいないか走査
-	var target_unit = null;
+	// 近くに攻撃対象がいないか走査
+	var target = null;
 	this.scene.units.forEach(function(unit) {
 		if(self.intersect(unit)) {
-			target_unit = unit;
+			target = unit;
 		}
 	});
 
-	// 近くに敵がいればダメージを与える
-	if (target_unit) {
+	// 近くに攻撃対象がいればダメージを与える
+	if (target) {
 		var damage = self.damage();
 
-		target_unit.reduceHP(damage);
+		target.reduceHP(damage);
 	}
 
-	// 近くに敵がいれば攻撃モードへ変更
-	if (target_unit) {
+	// 近くに攻撃対象がいれば攻撃モードへ変更
+	if (target) {
 		this._status = STATUS_ATTACKING;
 
 		this.core.audio_loader.playSound("enemy_attack");
@@ -147,7 +147,7 @@ EnemyBase.prototype._attackIfAnyUnitsNearHere = function () {
 	}
 
 	// 攻撃したかどうかを返す
-	return target_unit ? true : false;
+	return target ? true : false;
 };
 
 EnemyBase.prototype.draw = function(){

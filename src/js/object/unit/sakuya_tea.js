@@ -25,9 +25,9 @@ SakuyaNormal.prototype.stoppingImage = function(){
 	return "unit_tea_stand";
 };
 
-// 攻撃する時の画像1
-SakuyaNormal.prototype.attackImage1 = function(){
-	return "unit_tea_attack";
+// 攻撃する時の画像 一覧
+SakuyaNormal.prototype.attackImages = function(){
+	return ["unit_tea_attack"];
 };
 
 // 死んだ時の画像

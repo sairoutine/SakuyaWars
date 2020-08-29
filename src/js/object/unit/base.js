@@ -23,7 +23,7 @@ var Util = require('../../hakurei').Util;
 var UnitBase = function(scene) {
 	BaseObject.apply(this, arguments);
 
-	this._status = STATUS_WALKING;
+	this._status = this.isStandType() ? STATUS_STOPPING : STATUS_WALKING;
 
 	this._remaining_dead_frame = 0;
 	this._remaining_attacking_frame = 0;
@@ -37,7 +37,7 @@ Util.defineProperty(UnitBase, "hp");
 UnitBase.prototype.init = function(){
 	BaseObject.prototype.init.apply(this, arguments);
 
-	this._status = STATUS_WALKING;
+	this._status = this.isStandType() ? STATUS_STOPPING : STATUS_WALKING;
 
 	this._remaining_dead_frame = 0;
 	this._remaining_attacking_frame = 0;
@@ -48,10 +48,6 @@ UnitBase.prototype.init = function(){
 
 UnitBase.prototype.update = function(){
 	BaseObject.prototype.update.apply(this, arguments);
-
-	var self = this;
-
-	var is_any_unit_near_here;
 
 	// 死亡判定
 	// 死亡判定は死亡中以外の全ステータス共通で行う
@@ -64,32 +60,16 @@ UnitBase.prototype.update = function(){
 	}
 
 	if (this.isWalking()) {
-		if (!this.isStandType()) {
-			// キャラが移動する
-			// TODO: 画面端で止まるようにする
-			this.x(this.x() + this.speed());
+		// 歩行しないタイプのユニットはここにこないはず
+		if (this.isStandType()) {
+			throw new Error("stand type unit can't walk");
 		}
 
-		// 近くに敵がいないか走査
-		is_any_unit_near_here = false;
-		this.scene.enemies.forEach(function(enemy) {
-			if(self.intersect(enemy)) {
-				is_any_unit_near_here = true;
-			}
-		});
-		// ボスがいないか
-		if (self.intersect(this.scene.boss)) {
-			is_any_unit_near_here = true;
-		}
+		// キャラが移動する
+		this.x(this.x() + this.speed());
 
-		// 近くに敵がいれば攻撃モードへ
-		if (is_any_unit_near_here) {
-			this._status = STATUS_ATTACKING;
-
-			this.core.audio_loader.playSound(this.attackSound());
-
-			this._remaining_attacking_frame = ATTACK_FRAME;
-		}
+		// 近くに攻撃対象がいれば攻撃する
+		this._attackIfTargetIsNearby();
 	}
 	else if (this.isStopping()) {
 		// 必ず停止しないといけない時間をへらす
@@ -97,27 +77,10 @@ UnitBase.prototype.update = function(){
 
 		// 必ず停止しないといけない時間が終わったら
 		if (this._remaining_stopping_frame <= 0) {
-			// 近くに敵がいないか走査
-			is_any_unit_near_here = false;
-			this.scene.enemies.forEach(function(enemy) {
-				if(self.intersect(enemy)) {
-					is_any_unit_near_here = true;
-				}
-			});
-			// ボスがいないか
-			if (self.intersect(this.scene.boss)) {
-				is_any_unit_near_here = true;
-			}
+			// 近くに攻撃対象がいれば攻撃する
+			var is_attacked = this._attackIfTargetIsNearby();
 
-			if (is_any_unit_near_here) {
-				// 近くに敵がいれば攻撃モードへ
-				this._status = STATUS_ATTACKING;
-
-				this.core.audio_loader.playSound(this.attackSound());
-
-				this._remaining_attacking_frame = ATTACK_FRAME;
-			}
-			else {
+			if (!is_attacked && !this.isStandType()) {
 				// 近くに敵がいなければ歩行開始
 				this._status = STATUS_WALKING;
 			}
@@ -134,28 +97,7 @@ UnitBase.prototype.update = function(){
 			this._remaining_stopping_frame = STOPPING_FRAME;
 		}
 		else { // 攻撃時間がまだあれば
-			var target_enemy;
-
-			// 近くにいるボスにダメージを与える
-			var boss = this.scene.boss;
-			if (self.intersect(boss)) {
-				target_enemy = boss;
-			}
-
-			// 近くにいるユニットにダメージを与える
-			this.scene.enemies.forEach(function(enemy) {
-				if(self.intersect(enemy)) {
-					target_enemy = enemy;
-				}
-			});
-
-			if (target_enemy) {
-				var damage = self.damage();
-
-				target_enemy.reduceHP(damage);
-			}
-
-
+			// なにもしない
 		}
 	}
 	else if (this.isDead()) {
@@ -171,51 +113,57 @@ UnitBase.prototype.update = function(){
 	}
 };
 
+// 近くに攻撃対象がいれば攻撃する
+UnitBase.prototype._attackIfTargetIsNearby = function () {
+	var self = this;
+	var target = null;
+
+	// 近くにボスがいないか
+	// NOTE: ボスと敵が同時に近くにいるときは、敵が優先して攻撃対象となる
+	//       よって、ボス→敵の順番に走査する
+	if (self.intersect(this.scene.boss)) {
+		target = this.scene.boss;
+	}
+
+	// 近くに敵がいないか走査
+	this.scene.enemies.forEach(function(enemy) {
+		if(self.intersect(enemy)) {
+			target = enemy;
+		}
+	});
+
+	// 近くに攻撃対象がいればダメージを与える
+	if (target) {
+		var damage = self.damage();
+
+		target.reduceHP(damage);
+	}
+
+	// 近くに攻撃対象がいれば攻撃モードへ変更
+	if (target) {
+		this._status = STATUS_ATTACKING;
+
+		this.core.audio_loader.playSound(this.attackSound());
+
+		this._remaining_attacking_frame = ATTACK_FRAME;
+	}
+
+	// 攻撃したかどうかを返す
+	return target ? true : false;
+};
+
 UnitBase.prototype.draw = function(){
 	BaseObject.prototype.draw.apply(this, arguments);
 
 	var ctx = this.core.ctx;
 
-	var image, t;
+	var image;
 	if (this.isWalking()) {
-		if (this.isStandType()) {
-			// 攻撃画像が3枚ある場合
-			if (this.attackImage1() && this.attackImage2() && this.attackImage3()) {
-				t = ((this.scene.frame_count / 20)|0) % 3;
-				if (t === 0) {
-					image = this.core.image_loader.getImage(this.attackImage1());
-				}
-				else if (t === 1) {
-					image = this.core.image_loader.getImage(this.attackImage2());
-				}
-				else {
-					image = this.core.image_loader.getImage(this.attackImage3());
-				}
-			}
-			// 攻撃画像が2枚ある場合
-			else if (this.attackImage1() && this.attackImage2()) {
-				if (((this.scene.frame_count / 20)|0) % 2 === 0) {
-					image = this.core.image_loader.getImage(this.attackImage1());
-				}
-				else {
-					image = this.core.image_loader.getImage(this.attackImage2());
-				}
-			}
-			// 攻撃画像が1枚ある場合
-			else if (this.attackImage1()) {
-				image = this.core.image_loader.getImage(this.attackImage1());
-			}
-			else {
-				// ここにはこないはず
-			}
+		if (((this.scene.frame_count / 20)|0) % 2 === 0) {
+			image = this.core.image_loader.getImage(this.walkImage1());
 		}
 		else {
-			if (((this.scene.frame_count / 20)|0) % 2 === 0) {
-				image = this.core.image_loader.getImage(this.walkImage1());
-			}
-			else {
-				image = this.core.image_loader.getImage(this.walkImage2());
-			}
+			image = this.core.image_loader.getImage(this.walkImage2());
 		}
 	}
 	else if (this.isStopping()) {
@@ -225,38 +173,19 @@ UnitBase.prototype.draw = function(){
 		image = this.core.image_loader.getImage(this.deadImage());
 	}
 	else if (this.isAttacking()) {
-		// 攻撃画像が3枚ある場合
-		if (this.attackImage1() && this.attackImage2() && this.attackImage3()) {
-			t = ((this.scene.frame_count / 20)|0) % 3;
-			if (t === 0) {
-				image = this.core.image_loader.getImage(this.attackImage1());
-			}
-			else if (t === 1) {
-				image = this.core.image_loader.getImage(this.attackImage2());
-			}
-			else {
-				image = this.core.image_loader.getImage(this.attackImage3());
-			}
+		var attack_images = this.attackImages();
+
+		if (attack_images.length === 0) {
+			throw new Error("Specify attackImages.");
 		}
-		// 攻撃画像が2枚ある場合
-		else if (this.attackImage1() && this.attackImage2()) {
-			if (((this.scene.frame_count / 20)|0) % 2 === 0) {
-				image = this.core.image_loader.getImage(this.attackImage1());
-			}
-			else {
-				image = this.core.image_loader.getImage(this.attackImage2());
-			}
-		}
-		// 攻撃画像が1枚ある場合
-		else if (this.attackImage1()) {
-			image = this.core.image_loader.getImage(this.attackImage1());
-		}
-		else {
-			// ここにはこないはず
-		}
+
+		var percentage = (ATTACK_FRAME - this._remaining_attacking_frame) / ATTACK_FRAME;
+		var i = ((percentage * attack_images.length)|0) % attack_images.length;
+		image = this.core.image_loader.getImage(attack_images[i]);
 	}
 	else {
 		// ここにはこないはず
+		throw new Error("Illegal status.");
 	}
 
 	ctx.save();
@@ -300,67 +229,57 @@ UnitBase.prototype.isCollision = function(obj) {
 
 // 立ち画像
 UnitBase.prototype.stoppingImage = function(){
-	return "";
+	throw new Error("stoppingImage method must be defined.");
 };
 
-// 攻撃する時の画像1
-UnitBase.prototype.attackImage1 = function(){
-	return "";
-};
-
-// 攻撃する時の画像2
-UnitBase.prototype.attackImage2 = function(){
-	return "";
-};
-
-// 攻撃する時の画像3
-UnitBase.prototype.attackImage3 = function(){
-	return "";
+// 攻撃する時の画像 一覧
+UnitBase.prototype.attackImages = function(){
+	return [];
 };
 
 // 死んだ時の画像
 UnitBase.prototype.deadImage = function(){
-	return "";
+	throw new Error("deadImage method must be defined.");
 };
 
-// 歩くアニメの画像1
+// 歩くアニメの画像1(歩行しないタイプの場合は指定しないこと)
 UnitBase.prototype.walkImage1 = function(){
 	return "";
 };
 
-// 歩くアニメの画像2
+// 歩くアニメの画像2(歩行しないタイプの場合は指定しないこと)
 UnitBase.prototype.walkImage2 = function(){
 	return "";
 };
 
-
+// 死亡時の音
 UnitBase.prototype.deadSound = function(){
 	return "unit_default_damage";
 };
 
+// 攻撃時の音
 UnitBase.prototype.attackSound = function(){
 	return "unit_default_attack2";
 };
 
-
 // 最大HP
 UnitBase.prototype.maxHP = function(){
-	return 100;
+	throw new Error("maxHP method must be defined.");
 };
 
 // ダメージ力
 UnitBase.prototype.damage = function(){
-	return 1;
+	throw new Error("damage method must be defined.");
 };
 
 // 歩くスピード
 UnitBase.prototype.speed = function(){
-	return 0;
+	throw new Error("speed method must be defined.");
 };
 
 // ユニット生成に必要なPの数
 UnitBase.prototype.consumedP = function(){
-	return 0;
+	throw new Error("consumedP method must be defined.");
 };
 
 

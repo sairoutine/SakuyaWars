@@ -25,19 +25,9 @@ SakuyaNormal.prototype.stoppingImage = function(){
 	return "unit_tupai_walk1";
 };
 
-// 攻撃する時の画像1
-SakuyaNormal.prototype.attackImage1 = function(){
-	return "unit_tupai_attack1";
-};
-
-// 攻撃する時の画像2
-SakuyaNormal.prototype.attackImage2 = function(){
-	return "unit_tupai_attack2";
-};
-
-// 攻撃する時の画像3
-SakuyaNormal.prototype.attackImage3 = function(){
-	return "unit_tupai_attack3";
+// 攻撃する時の画像 一覧
+SakuyaNormal.prototype.attackImages = function(){
+	return ["unit_tupai_attack1", "unit_tupai_attack2", "unit_tupai_attack3"];
 };
 
 // 死んだ時の画像
