@@ -240,7 +240,7 @@ SceneBattle.prototype._setupUnitButtons = function() {
 				if (self.currentSubScene() instanceof SceneBattleMain) {
 					// ユニット生成
 					self.core.audio_loader.playSound("summon_unit");
-					self.generateUnit(i);
+					self._generateUnit(i);
 				}
 			};
 		})(i);
@@ -393,7 +393,8 @@ SceneBattle.prototype._showUnitButtonsInCurrentPage = function(){
 	}
 };
 
-SceneBattle.prototype.generateUnit = function(unit_num){
+// ユニット生成
+SceneBattle.prototype._generateUnit = function(unit_num){
 	var Klass = UNITS[unit_num].class;
 	var unit = new Klass(this);
 
@@ -416,21 +417,6 @@ SceneBattle.prototype.generateUnit = function(unit_num){
 	this.units.addObject(unit);
 };
 
-SceneBattle.prototype.generateEnemy = function(enemy_num){
-	var enemy = new ENEMY_CLASSES[enemy_num](this);
-
-	// ユニット追加
-	var x = Util.getRandomInt(CONSTANT.ENEMY_GENERATED_AREA_LEFT_X, CONSTANT.ENEMY_GENERATED_AREA_RIGHT_X);
-	var y = Util.getRandomInt(CONSTANT.ENEMY_GENERATED_AREA_UP_Y, CONSTANT.ENEMY_GENERATED_AREA_DOWN_Y);
-
-	enemy.init();
-	enemy.x(x);
-	enemy.y(y);
-
-	this.enemies.addObject(enemy);
-};
-
-
 // スペルカードを使用できるか否か
 SceneBattle.prototype._canSpellCard = function() {
 	return this._remaining_time_to_use_timestop_frame === 0;
@@ -451,6 +437,21 @@ SceneBattle.prototype._useSpellCard = function() {
 
 	// 時間を止めている期間を設定する
 	this._remaining_timestop_frame = CONSTANT.TIMESTOP_FRAME;
+};
+
+// 敵生成
+SceneBattle.prototype.generateEnemy = function(enemy_num){
+	var enemy = new ENEMY_CLASSES[enemy_num](this);
+
+	// ユニット追加
+	var x = Util.getRandomInt(CONSTANT.ENEMY_GENERATED_AREA_LEFT_X, CONSTANT.ENEMY_GENERATED_AREA_RIGHT_X);
+	var y = Util.getRandomInt(CONSTANT.ENEMY_GENERATED_AREA_UP_Y, CONSTANT.ENEMY_GENERATED_AREA_DOWN_Y);
+
+	enemy.init();
+	enemy.x(x);
+	enemy.y(y);
+
+	this.enemies.addObject(enemy);
 };
 
 // 時を止めてる最中か否か
@@ -484,8 +485,6 @@ SceneBattle.prototype.changeNextStage = function(){
 SceneBattle.prototype.restart = function(){
 	this.core.scene_manager.changeScene("battle", this.stage_no);
 };
-
-
 
 SceneBattle.prototype.update = function(){
 	BaseScene.prototype.update.apply(this, arguments);
