@@ -236,9 +236,12 @@ SceneBattle.prototype._setupUnitButtons = function() {
 
 		var onclick_func = (function (i) {
 			return function () {
-				self.core.audio_loader.playSound("summon_unit");
-
-				self.generateUnit(i);
+				// バトル開始後にしかユニット生成できない
+				if (self.currentSubScene() instanceof SceneBattleMain) {
+					// ユニット生成
+					self.core.audio_loader.playSound("summon_unit");
+					self.generateUnit(i);
+				}
 			};
 		})(i);
 
@@ -270,10 +273,13 @@ SceneBattle.prototype._setupPagingButtons = function() {
 	});
 
 	var unit_paging_button_func = function () {
-		self._current_paging_position = self._current_paging_position === 0 ? 1 : 0;
+		// バトル開始後にしかページングできない
+		if (self.currentSubScene() instanceof SceneBattleMain) {
+			self._current_paging_position = self._current_paging_position === 0 ? 1 : 0;
 
-		// ユニット一覧のボタンを、現在のページのものだけ表示する
-		self._showUnitButtonsInCurrentPage();
+			// ユニット一覧のボタンを、現在のページのものだけ表示する
+			self._showUnitButtonsInCurrentPage();
+		}
 	};
 
 	this._unit_paging_left_button
@@ -296,8 +302,8 @@ SceneBattle.prototype._setupSpellCardButton = function() {
 	});
 
 	var spellcard_button_func = function () {
-		// スペルカードが使えるならば
-		if (self._canSpellCard()) {
+		// バトル開始後、かつスペルカードが使えるならば
+		if (self.currentSubScene() instanceof SceneBattleMain && self._canSpellCard()) {
 			// スペルカード発動
 			self.core.audio_loader.playSound("use_spellcard");
 			self._useSpellCard();
