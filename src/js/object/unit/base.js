@@ -17,7 +17,6 @@ var STATUS_STOPPING = 1;
 var STATUS_ATTACKING = 2;
 var STATUS_DEAD = 3;
 
-var CONSTANT = require('../../constant');
 var BaseObject = require('../../hakurei').Object.Base;
 var Util = require('../../hakurei').Util;
 
@@ -159,7 +158,7 @@ UnitBase.prototype.draw = function(){
 	var ctx = this.core.ctx;
 
 	// デバッグ用にHPを表示
-	if (CONSTANT.DEBUG) {
+	if (this.core.debug_manager.get("is_show_hp")) {
 		ctx.save();
 		ctx.fillStyle = "blue";
 		ctx.textAlign = 'center';

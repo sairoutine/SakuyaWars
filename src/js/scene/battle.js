@@ -2,8 +2,6 @@
 /*
 
 ◆ TODO:
-デバッグ用にPやBを回復したい
-セリフスキップを入れたい
 AP表示量を表示する→ユニット
 ボタンを押下するとへこむようにしたい
 リザルト画面
@@ -410,6 +408,11 @@ SceneBattle.prototype._generateUnit = function(unit_num){
 	unit.y(y);
 
 	this.units.addObject(unit);
+};
+
+// スペルカードを使用できるようにする
+SceneBattle.prototype.enableSpellCard = function() {
+	this._remaining_time_to_use_timestop_frame = 0;
 };
 
 // スペルカードを使用できるか否か

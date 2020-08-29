@@ -77,6 +77,16 @@ BossBase.prototype.draw = function(){
 		return;
 	}
 
+	// デバッグ用にHPを表示
+	if (this.core.debug_manager.get("is_show_hp")) {
+		ctx.save();
+		ctx.fillStyle = "red";
+		ctx.textAlign = 'center';
+		ctx.font = "12px 'MyFont'";
+		ctx.fillText(this.hp() + ' / ' + this.maxHP(), this.x(), this.y() - 100);
+		ctx.restore();
+	}
+
 	var image;
 	if (this._damage_showing_time > 0) {
 		// ダメージを受けている時の画像
