@@ -113,17 +113,17 @@ BossBase.prototype.isCollision = function(obj) {
 
 // 最大HP
 BossBase.prototype.maxHP = function(){
-	return 0;
+	throw new Error("maxHP method must be defined.");
 };
 
 // 通常時の画像
 BossBase.prototype.normalImage = function(){
-	return "";
+	throw new Error("normalImage method must be defined.");
 };
 
 // ダメージを受けた時の画像
 BossBase.prototype.damageImage = function(){
-	return "";
+	throw new Error("damageImage method must be defined.");
 };
 
 

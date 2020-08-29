@@ -49,10 +49,6 @@ EnemyBase.prototype.init = function(){
 EnemyBase.prototype.update = function(){
 	BaseObject.prototype.update.apply(this, arguments);
 
-	var self = this;
-
-	var is_any_unit_near_here;
-
 	// 時が止まってる最中は何も行動できない
 	if(this.scene.isTimeStop()) {
 		return;
@@ -70,7 +66,6 @@ EnemyBase.prototype.update = function(){
 
 	if (this.isWalking()) {
 		// キャラが移動する
-		// TODO: 画面端で止まるようにする
 		this.x(this.x() - this.speed());
 
 		// 自陣に到達したらゲームオーバー
@@ -79,22 +74,8 @@ EnemyBase.prototype.update = function(){
 			this.scene.notifyGameover();
 		}
 
-		// 近くに敵がいないか走査
-		is_any_unit_near_here = false;
-		this.scene.units.forEach(function(unit) {
-			if(self.intersect(unit)) {
-				is_any_unit_near_here = true;
-			}
-		});
-
-		// 近くに敵がいれば攻撃モードへ
-		if (is_any_unit_near_here) {
-			this._status = STATUS_ATTACKING;
-
-			this.core.audio_loader.playSound("enemy_attack");
-
-			this._remaining_attacking_frame = ATTACK_FRAME;
-		}
+		// 近くに敵がいれば攻撃する
+		this._attackIfAnyUnitsNearHere();
 	}
 	else if (this.isStopping()) {
 		// 必ず停止しないといけない時間をへらす
@@ -102,23 +83,10 @@ EnemyBase.prototype.update = function(){
 
 		// 必ず停止しないといけない時間が終わったら
 		if (this._remaining_stopping_frame <= 0) {
-			// 近くに敵がいないか走査
-			is_any_unit_near_here = false;
-			this.scene.units.forEach(function(unit) {
-				if(self.intersect(unit)) {
-					is_any_unit_near_here = true;
-				}
-			});
+			// 近くに敵がいれば攻撃する
+			var is_attacked = this._attackIfAnyUnitsNearHere();
 
-			if (is_any_unit_near_here) {
-				// 近くに敵がいれば攻撃モードへ
-				this._status = STATUS_ATTACKING;
-
-				this.core.audio_loader.playSound("enemy_attack");
-
-				this._remaining_attacking_frame = ATTACK_FRAME;
-			}
-			else {
+			if (!is_attacked) {
 				// 近くに敵がいなければ歩行開始
 				this._status = STATUS_WALKING;
 			}
@@ -135,19 +103,7 @@ EnemyBase.prototype.update = function(){
 			this._remaining_stopping_frame = STOPPING_FRAME;
 		}
 		else { // 攻撃時間がまだあれば
-			// 近くにいるユニットにダメージを与える
-			var target_unit;
-			this.scene.units.forEach(function(unit) {
-				if(self.intersect(unit)) {
-					target_unit = unit;
-				}
-			});
-
-			if (target_unit) {
-				var damage = self.damage();
-
-				target_unit.reduceHP(damage);
-			}
+			// なにもしない
 		}
 	}
 	else if (this.isDead()) {
@@ -163,13 +119,44 @@ EnemyBase.prototype.update = function(){
 	}
 };
 
+// 近くに敵がいれば攻撃する
+EnemyBase.prototype._attackIfAnyUnitsNearHere = function () {
+	var self = this;
+	// 近くに敵がいないか走査
+	var target_unit = null;
+	this.scene.units.forEach(function(unit) {
+		if(self.intersect(unit)) {
+			target_unit = unit;
+		}
+	});
+
+	// 近くに敵がいればダメージを与える
+	if (target_unit) {
+		var damage = self.damage();
+
+		target_unit.reduceHP(damage);
+	}
+
+	// 近くに敵がいれば攻撃モードへ変更
+	if (target_unit) {
+		this._status = STATUS_ATTACKING;
+
+		this.core.audio_loader.playSound("enemy_attack");
+
+		this._remaining_attacking_frame = ATTACK_FRAME;
+	}
+
+	// 攻撃したかどうかを返す
+	return target_unit ? true : false;
+};
+
 EnemyBase.prototype.draw = function(){
 	BaseObject.prototype.draw.apply(this, arguments);
 
 	var ctx = this.core.ctx;
 
 	var image;
-	if (this.isWalking() || this.isStopping()) {
+	if (this.isWalking() || this.isStopping()) { // 移動中と停止中に表示するものは同じ
 		if (this.scene.isTimeStop()) {
 			// 時間が止まっているときは、アニメも固定にする
 			image = this.core.image_loader.getImage(this.walkImage1());
@@ -191,6 +178,7 @@ EnemyBase.prototype.draw = function(){
 	}
 	else {
 		// ここにはこないはず
+		throw new Error("Illegal status.");
 	}
 
 	ctx.save();
@@ -229,37 +217,37 @@ EnemyBase.prototype.isCollision = function(obj) {
 
 // 攻撃する時の画像
 EnemyBase.prototype.attackImage = function(){
-	return "";
+	throw new Error("attackImage method must be defined.");
 };
 
 // 死んだ時の画像
 EnemyBase.prototype.deadImage = function(){
-	return "";
+	throw new Error("deadImage method must be defined.");
 };
 
 // 歩くアニメの画像1
 EnemyBase.prototype.walkImage1 = function(){
-	return "";
+	throw new Error("walkImage1 method must be defined.");
 };
 
 // 歩くアニメの画像2
 EnemyBase.prototype.walkImage2 = function(){
-	return "";
+	throw new Error("walkImage2 method must be defined.");
 };
 
 // 最大HP
 EnemyBase.prototype.maxHP = function(){
-	return 0;
+	throw new Error("maxHP method must be defined.");
 };
 
 // ダメージ力
 EnemyBase.prototype.damage = function(){
-	return 0;
+	throw new Error("damage method must be defined.");
 };
 
 // 歩くスピード
 EnemyBase.prototype.speed = function(){
-	return 0;
+	throw new Error("speed method must be defined.");
 };
 
 module.exports = EnemyBase;
