@@ -176,6 +176,10 @@ var SceneBattle = function(core) {
 	this._spellcard_button = null;
 	this._setupSpellCardButton();
 
+	this.addObject(this.fort);
+	this.addObjects(this._unit_buttons);
+	this.addObjects([this._unit_paging_left_button, this._unit_paging_right_button, this._spellcard_button]);
+
 	// サブシーン
 	this.addSubScene("ready", new SceneBattleReady(core));
 	this.addSubScene("main", new SceneBattleMain(core));
@@ -214,9 +218,7 @@ var SceneBattle = function(core) {
 	// ユニット一覧のページング位置
 	this._current_paging_position = 0;
 
-	this.addObject(this.fort);
-	this.addObjects(this._unit_buttons);
-	this.addObjects([this._unit_paging_left_button, this._unit_paging_right_button, this._spellcard_button]);
+	// ---
 	this.addObjects(this.units);
 	this.addObjects(this.enemies);
 };
