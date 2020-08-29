@@ -3,63 +3,63 @@
 var BaseObject = require('./base');
 var Util = require('../../hakurei').Util;
 
-var EnemyBlueLong = function(scene) {
+var EnemyPinkShort = function(scene) {
 	BaseObject.apply(this, arguments);
 };
-Util.inherit(EnemyBlueLong, BaseObject);
+Util.inherit(EnemyPinkShort, BaseObject);
 
-EnemyBlueLong.prototype.init = function(){
+EnemyPinkShort.prototype.init = function(){
 	BaseObject.prototype.init.apply(this, arguments);
 };
 
-EnemyBlueLong.prototype.update = function(){
+EnemyPinkShort.prototype.update = function(){
 	BaseObject.prototype.update.apply(this, arguments);
 };
 
-EnemyBlueLong.prototype.draw = function(){
+EnemyPinkShort.prototype.draw = function(){
 	BaseObject.prototype.draw.apply(this, arguments);
 };
 
 // 攻撃する時の画像
-EnemyBlueLong.prototype.attackImage = function(){
+EnemyPinkShort.prototype.attackImage = function(){
 	return "enemy_pink_short_attack";
 };
 
 // 死んだ時の画像
-EnemyBlueLong.prototype.deadImage = function(){
+EnemyPinkShort.prototype.deadImage = function(){
 	return "enemy_pink_short_damage";
 };
 
 // 歩くアニメの画像1
-EnemyBlueLong.prototype.walkImage1 = function(){
+EnemyPinkShort.prototype.walkImage1 = function(){
 	return "enemy_pink_short_walk01";
 };
 
 // 歩くアニメの画像2
-EnemyBlueLong.prototype.walkImage2 = function(){
+EnemyPinkShort.prototype.walkImage2 = function(){
 	return "enemy_pink_short_walk02";
 };
 
-EnemyBlueLong.prototype.collisionWidth = function(){
+EnemyPinkShort.prototype.collisionWidth = function(){
 	return 100;
 };
-EnemyBlueLong.prototype.collisionHeight = function(){
+EnemyPinkShort.prototype.collisionHeight = function(){
 	return 200;
 };
 
 // 最大HP
-EnemyBlueLong.prototype.maxHP = function(){
+EnemyPinkShort.prototype.maxHP = function(){
 	return 200;
 };
 
 // ダメージ力
-EnemyBlueLong.prototype.damage = function(){
+EnemyPinkShort.prototype.damage = function(){
 	return 2;
 };
 
 // 歩くスピード
-EnemyBlueLong.prototype.speed = function(){
+EnemyPinkShort.prototype.speed = function(){
 	return 0.5;
 };
 
-module.exports = EnemyBlueLong;
+module.exports = EnemyPinkShort;

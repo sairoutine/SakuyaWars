@@ -3,74 +3,74 @@
 var BaseObject = require('./base');
 var Util = require('../../hakurei').Util;
 
-var SakuyaNormal = function(scene) {
+var SakuyaYoyomu = function(scene) {
 	BaseObject.apply(this, arguments);
 };
-Util.inherit(SakuyaNormal, BaseObject);
+Util.inherit(SakuyaYoyomu, BaseObject);
 
-SakuyaNormal.prototype.init = function(){
+SakuyaYoyomu.prototype.init = function(){
 	BaseObject.prototype.init.apply(this, arguments);
 };
 
-SakuyaNormal.prototype.update = function(){
+SakuyaYoyomu.prototype.update = function(){
 	BaseObject.prototype.update.apply(this, arguments);
 };
 
-SakuyaNormal.prototype.draw = function(){
+SakuyaYoyomu.prototype.draw = function(){
 	BaseObject.prototype.draw.apply(this, arguments);
 };
 
 // 立ち画像
-SakuyaNormal.prototype.stoppingImage = function(){
+SakuyaYoyomu.prototype.stoppingImage = function(){
 	return "unit_yoyomu_walk1";
 };
 
 // 攻撃する時の画像 一覧
-SakuyaNormal.prototype.attackImages = function(){
+SakuyaYoyomu.prototype.attackImages = function(){
 	return ["unit_yoyomu_attack1", "unit_yoyomu_attack2"];
 };
 
 // 死んだ時の画像
-SakuyaNormal.prototype.deadImage = function(){
+SakuyaYoyomu.prototype.deadImage = function(){
 	return "unit_yoyomu_damage";
 };
 
 // 歩くアニメの画像1
-SakuyaNormal.prototype.walkImage1 = function(){
+SakuyaYoyomu.prototype.walkImage1 = function(){
 	return "unit_yoyomu_walk1";
 };
 
 // 歩くアニメの画像2
-SakuyaNormal.prototype.walkImage2 = function(){
+SakuyaYoyomu.prototype.walkImage2 = function(){
 	return "unit_yoyomu_walk2";
 };
 
-SakuyaNormal.prototype.collisionWidth = function(){
+SakuyaYoyomu.prototype.collisionWidth = function(){
 	return 100;
 };
-SakuyaNormal.prototype.collisionHeight = function(){
+SakuyaYoyomu.prototype.collisionHeight = function(){
 	return 200;
 };
 
 // ユニット生成に必要なPの数
-SakuyaNormal.prototype.consumedP = function(){
+SakuyaYoyomu.prototype.consumedP = function(){
 	return 20;
 };
 
 // 最大HP
-SakuyaNormal.prototype.maxHP = function(){
+SakuyaYoyomu.prototype.maxHP = function(){
 	return 100;
 };
 
 
 // ダメージ力
-SakuyaNormal.prototype.damage = function(){
+SakuyaYoyomu.prototype.damage = function(){
 	return 3;
 };
 
 // 歩くスピード
-SakuyaNormal.prototype.speed = function(){
+SakuyaYoyomu.prototype.speed = function(){
 	return 1.0;
 };
 
-module.exports = SakuyaNormal;
+module.exports = SakuyaYoyomu;

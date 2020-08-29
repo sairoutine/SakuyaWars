@@ -3,83 +3,83 @@
 var BaseObject = require('./base');
 var Util = require('../../hakurei').Util;
 
-var SakuyaNormal = function(scene) {
+var SakuyaMandoragora = function(scene) {
 	BaseObject.apply(this, arguments);
 };
-Util.inherit(SakuyaNormal, BaseObject);
+Util.inherit(SakuyaMandoragora, BaseObject);
 
-SakuyaNormal.prototype.init = function(){
+SakuyaMandoragora.prototype.init = function(){
 	BaseObject.prototype.init.apply(this, arguments);
 };
 
-SakuyaNormal.prototype.update = function(){
+SakuyaMandoragora.prototype.update = function(){
 	BaseObject.prototype.update.apply(this, arguments);
 };
 
-SakuyaNormal.prototype.draw = function(){
+SakuyaMandoragora.prototype.draw = function(){
 	BaseObject.prototype.draw.apply(this, arguments);
 };
 
 // 立ち画像
-SakuyaNormal.prototype.stoppingImage = function(){
+SakuyaMandoragora.prototype.stoppingImage = function(){
 	return "unit_mandoragora_walk1";
 };
 
 // 攻撃する時の画像 一覧
-SakuyaNormal.prototype.attackImages = function(){
+SakuyaMandoragora.prototype.attackImages = function(){
 	return ["unit_mandoragora_attack1", "unit_mandoragora_attack2"];
 };
 
 // 攻撃する時の画像3
-SakuyaNormal.prototype.attackImage3 = function(){
+SakuyaMandoragora.prototype.attackImage3 = function(){
 	return "unit_mandoragora_attack3";
 };
 
 // 死んだ時の画像
-SakuyaNormal.prototype.deadImage = function(){
+SakuyaMandoragora.prototype.deadImage = function(){
 	return "unit_mandoragora_damage";
 };
 
 // 歩くアニメの画像1
-SakuyaNormal.prototype.walkImage1 = function(){
+SakuyaMandoragora.prototype.walkImage1 = function(){
 	return "unit_mandoragora_walk1";
 };
 
 // 歩くアニメの画像2
-SakuyaNormal.prototype.walkImage2 = function(){
+SakuyaMandoragora.prototype.walkImage2 = function(){
 	return "unit_mandoragora_walk2";
 };
 
-SakuyaNormal.prototype.attackSound = function(){
+SakuyaMandoragora.prototype.attackSound = function(){
 	return "unit_mandoragora_attack2";
 };
 
-SakuyaNormal.prototype.collisionWidth = function(){
+SakuyaMandoragora.prototype.collisionWidth = function(){
 	return 100;
 };
-SakuyaNormal.prototype.collisionHeight = function(){
+SakuyaMandoragora.prototype.collisionHeight = function(){
 	return 200;
 };
 
 // ユニット生成に必要なPの数
-SakuyaNormal.prototype.consumedP = function(){
+SakuyaMandoragora.prototype.consumedP = function(){
 	return 20;
 };
 
 // 最大HP
-SakuyaNormal.prototype.maxHP = function(){
+SakuyaMandoragora.prototype.maxHP = function(){
 	return 100;
 };
 
 
 // ダメージ力
-SakuyaNormal.prototype.damage = function(){
+SakuyaMandoragora.prototype.damage = function(){
 	return 20;
 };
 
 // 歩くスピード
-SakuyaNormal.prototype.speed = function(){
+SakuyaMandoragora.prototype.speed = function(){
 	return 0.25;
 };
 
-module.exports = SakuyaNormal;
+module.exports = SakuyaMandoragora;

@@ -3,45 +3,45 @@
 var BaseObject = require('./base');
 var Util = require('../../hakurei').Util;
 
-var ClownPiece = function(scene) {
+var Lunachild = function(scene) {
 	BaseObject.apply(this, arguments);
 };
-Util.inherit(ClownPiece, BaseObject);
+Util.inherit(Lunachild, BaseObject);
 
-ClownPiece.prototype.init = function(){
+Lunachild.prototype.init = function(){
 	BaseObject.prototype.init.apply(this, arguments);
 };
 
-ClownPiece.prototype.update = function(){
+Lunachild.prototype.update = function(){
 	BaseObject.prototype.update.apply(this, arguments);
 };
 
-ClownPiece.prototype.draw = function(){
+Lunachild.prototype.draw = function(){
 	BaseObject.prototype.draw.apply(this, arguments);
 };
 
-ClownPiece.prototype.collisionWidth = function(){
+Lunachild.prototype.collisionWidth = function(){
 	return 180;
 };
-ClownPiece.prototype.collisionHeight = function(){
+Lunachild.prototype.collisionHeight = function(){
 	return 180;
 };
 
 // 最大HP
-ClownPiece.prototype.maxHP = function(){
+Lunachild.prototype.maxHP = function(){
 	return 600;
 };
 
 // 通常時の画像
-ClownPiece.prototype.normalImage = function(){
+Lunachild.prototype.normalImage = function(){
 	return "boss_lunachild_normal";
 };
 
 // ダメージを受けた時の画像
-ClownPiece.prototype.damageImage = function(){
+Lunachild.prototype.damageImage = function(){
 	return "boss_lunachild_damage";
 };
 
 
 
-module.exports = ClownPiece;
+module.exports = Lunachild;

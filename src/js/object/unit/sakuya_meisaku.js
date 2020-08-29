@@ -3,69 +3,69 @@
 var BaseObject = require('./base');
 var Util = require('../../hakurei').Util;
 
-var SakuyaNormal = function(scene) {
+var SakuyaMeisaku = function(scene) {
 	BaseObject.apply(this, arguments);
 };
-Util.inherit(SakuyaNormal, BaseObject);
+Util.inherit(SakuyaMeisaku, BaseObject);
 
-SakuyaNormal.prototype.init = function(){
+SakuyaMeisaku.prototype.init = function(){
 	BaseObject.prototype.init.apply(this, arguments);
 };
 
-SakuyaNormal.prototype.update = function(){
+SakuyaMeisaku.prototype.update = function(){
 	BaseObject.prototype.update.apply(this, arguments);
 };
 
-SakuyaNormal.prototype.draw = function(){
+SakuyaMeisaku.prototype.draw = function(){
 	BaseObject.prototype.draw.apply(this, arguments);
 };
 
 // 立ち画像
-SakuyaNormal.prototype.stoppingImage = function(){
+SakuyaMeisaku.prototype.stoppingImage = function(){
 	return "unit_meisaku_stand";
 };
 
 // 攻撃する時の画像 一覧
-SakuyaNormal.prototype.attackImages = function(){
+SakuyaMeisaku.prototype.attackImages = function(){
 	return ["unit_meisaku_attack1", "unit_meisaku_attack2", "unit_meisaku_attack3"];
 };
 
 // 死んだ時の画像
-SakuyaNormal.prototype.deadImage = function(){
+SakuyaMeisaku.prototype.deadImage = function(){
 	return "unit_meisaku_damage";
 };
 
 
-SakuyaNormal.prototype.deadSound = function(){
+SakuyaMeisaku.prototype.deadSound = function(){
 	return "unit_meisaku_damage";
 };
 
-SakuyaNormal.prototype.collisionWidth = function(){
+SakuyaMeisaku.prototype.collisionWidth = function(){
 	return 100;
 };
-SakuyaNormal.prototype.collisionHeight = function(){
+SakuyaMeisaku.prototype.collisionHeight = function(){
 	return 200;
 };
 
 // ユニット生成に必要なPの数
-SakuyaNormal.prototype.consumedP = function(){
+SakuyaMeisaku.prototype.consumedP = function(){
 	return 20;
 };
 
 // 最大HP
-SakuyaNormal.prototype.maxHP = function(){
+SakuyaMeisaku.prototype.maxHP = function(){
 	return 300;
 };
 
 
 // ダメージ力
-SakuyaNormal.prototype.damage = function(){
+SakuyaMeisaku.prototype.damage = function(){
 	return 15;
 };
 
 // 歩くスピード
-SakuyaNormal.prototype.speed = function(){
+SakuyaMeisaku.prototype.speed = function(){
 	return 0.0;
 };
 
-module.exports = SakuyaNormal;
+module.exports = SakuyaMeisaku;

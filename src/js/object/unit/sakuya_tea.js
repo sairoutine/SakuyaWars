@@ -3,68 +3,68 @@
 var BaseObject = require('./base');
 var Util = require('../../hakurei').Util;
 
-var SakuyaNormal = function(scene) {
+var SakuyaTea = function(scene) {
 	BaseObject.apply(this, arguments);
 };
-Util.inherit(SakuyaNormal, BaseObject);
+Util.inherit(SakuyaTea, BaseObject);
 
-SakuyaNormal.prototype.init = function(){
+SakuyaTea.prototype.init = function(){
 	BaseObject.prototype.init.apply(this, arguments);
 };
 
-SakuyaNormal.prototype.update = function(){
+SakuyaTea.prototype.update = function(){
 	BaseObject.prototype.update.apply(this, arguments);
 };
 
-SakuyaNormal.prototype.draw = function(){
+SakuyaTea.prototype.draw = function(){
 	BaseObject.prototype.draw.apply(this, arguments);
 };
 
 // 立ち画像
-SakuyaNormal.prototype.stoppingImage = function(){
+SakuyaTea.prototype.stoppingImage = function(){
 	return "unit_tea_stand";
 };
 
 // 攻撃する時の画像 一覧
-SakuyaNormal.prototype.attackImages = function(){
+SakuyaTea.prototype.attackImages = function(){
 	return ["unit_tea_attack"];
 };
 
 // 死んだ時の画像
-SakuyaNormal.prototype.deadImage = function(){
+SakuyaTea.prototype.deadImage = function(){
 	return "unit_tea_damage";
 };
 
-SakuyaNormal.prototype.deadSound = function(){
+SakuyaTea.prototype.deadSound = function(){
 	return "unit_tea_damage";
 };
 
-SakuyaNormal.prototype.collisionWidth = function(){
+SakuyaTea.prototype.collisionWidth = function(){
 	return 100;
 };
-SakuyaNormal.prototype.collisionHeight = function(){
+SakuyaTea.prototype.collisionHeight = function(){
 	return 200;
 };
 
 // ユニット生成に必要なPの数
-SakuyaNormal.prototype.consumedP = function(){
+SakuyaTea.prototype.consumedP = function(){
 	return 20;
 };
 
 // 最大HP
-SakuyaNormal.prototype.maxHP = function(){
+SakuyaTea.prototype.maxHP = function(){
 	return 500;
 };
 
 
 // ダメージ力
-SakuyaNormal.prototype.damage = function(){
+SakuyaTea.prototype.damage = function(){
 	return 0;
 };
 
 // 歩くスピード
-SakuyaNormal.prototype.speed = function(){
+SakuyaTea.prototype.speed = function(){
 	return 0.0;
 };
 
-module.exports = SakuyaNormal;
+module.exports = SakuyaTea;

@@ -3,63 +3,63 @@
 var BaseObject = require('./base');
 var Util = require('../../hakurei').Util;
 
-var EnemyBlueLong = function(scene) {
+var EnemyWhiteLong = function(scene) {
 	BaseObject.apply(this, arguments);
 };
-Util.inherit(EnemyBlueLong, BaseObject);
+Util.inherit(EnemyWhiteLong, BaseObject);
 
-EnemyBlueLong.prototype.init = function(){
+EnemyWhiteLong.prototype.init = function(){
 	BaseObject.prototype.init.apply(this, arguments);
 };
 
-EnemyBlueLong.prototype.update = function(){
+EnemyWhiteLong.prototype.update = function(){
 	BaseObject.prototype.update.apply(this, arguments);
 };
 
-EnemyBlueLong.prototype.draw = function(){
+EnemyWhiteLong.prototype.draw = function(){
 	BaseObject.prototype.draw.apply(this, arguments);
 };
 
 // 攻撃する時の画像
-EnemyBlueLong.prototype.attackImage = function(){
+EnemyWhiteLong.prototype.attackImage = function(){
 	return "enemy_white_long_attack";
 };
 
 // 死んだ時の画像
-EnemyBlueLong.prototype.deadImage = function(){
+EnemyWhiteLong.prototype.deadImage = function(){
 	return "enemy_white_long_damage";
 };
 
 // 歩くアニメの画像1
-EnemyBlueLong.prototype.walkImage1 = function(){
+EnemyWhiteLong.prototype.walkImage1 = function(){
 	return "enemy_white_long_walk01";
 };
 
 // 歩くアニメの画像2
-EnemyBlueLong.prototype.walkImage2 = function(){
+EnemyWhiteLong.prototype.walkImage2 = function(){
 	return "enemy_white_long_walk02";
 };
 
-EnemyBlueLong.prototype.collisionWidth = function(){
+EnemyWhiteLong.prototype.collisionWidth = function(){
 	return 100;
 };
-EnemyBlueLong.prototype.collisionHeight = function(){
+EnemyWhiteLong.prototype.collisionHeight = function(){
 	return 200;
 };
 
 // 最大HP
-EnemyBlueLong.prototype.maxHP = function(){
+EnemyWhiteLong.prototype.maxHP = function(){
 	return 600;
 };
 
 // ダメージ力
-EnemyBlueLong.prototype.damage = function(){
+EnemyWhiteLong.prototype.damage = function(){
 	return 1;
 };
 
 // 歩くスピード
-EnemyBlueLong.prototype.speed = function(){
+EnemyWhiteLong.prototype.speed = function(){
 	return 0.25;
 };
 
-module.exports = EnemyBlueLong;
+module.exports = EnemyWhiteLong;

@@ -3,63 +3,63 @@
 var BaseObject = require('./base');
 var Util = require('../../hakurei').Util;
 
-var EnemyBlueLong = function(scene) {
+var EnemyRedLong = function(scene) {
 	BaseObject.apply(this, arguments);
 };
-Util.inherit(EnemyBlueLong, BaseObject);
+Util.inherit(EnemyRedLong, BaseObject);
 
-EnemyBlueLong.prototype.init = function(){
+EnemyRedLong.prototype.init = function(){
 	BaseObject.prototype.init.apply(this, arguments);
 };
 
-EnemyBlueLong.prototype.update = function(){
+EnemyRedLong.prototype.update = function(){
 	BaseObject.prototype.update.apply(this, arguments);
 };
 
-EnemyBlueLong.prototype.draw = function(){
+EnemyRedLong.prototype.draw = function(){
 	BaseObject.prototype.draw.apply(this, arguments);
 };
 
 // 攻撃する時の画像
-EnemyBlueLong.prototype.attackImage = function(){
+EnemyRedLong.prototype.attackImage = function(){
 	return "enemy_red_long_attack";
 };
 
 // 死んだ時の画像
-EnemyBlueLong.prototype.deadImage = function(){
+EnemyRedLong.prototype.deadImage = function(){
 	return "enemy_red_long_damage";
 };
 
 // 歩くアニメの画像1
-EnemyBlueLong.prototype.walkImage1 = function(){
+EnemyRedLong.prototype.walkImage1 = function(){
 	return "enemy_red_long_walk01";
 };
 
 // 歩くアニメの画像2
-EnemyBlueLong.prototype.walkImage2 = function(){
+EnemyRedLong.prototype.walkImage2 = function(){
 	return "enemy_red_long_walk02";
 };
 
-EnemyBlueLong.prototype.collisionWidth = function(){
+EnemyRedLong.prototype.collisionWidth = function(){
 	return 400;
 };
-EnemyBlueLong.prototype.collisionHeight = function(){
+EnemyRedLong.prototype.collisionHeight = function(){
 	return 200;
 };
 
 // 最大HP
-EnemyBlueLong.prototype.maxHP = function(){
+EnemyRedLong.prototype.maxHP = function(){
 	return 200;
 };
 
 // ダメージ力
-EnemyBlueLong.prototype.damage = function(){
+EnemyRedLong.prototype.damage = function(){
 	return 2;
 };
 
 // 歩くスピード
-EnemyBlueLong.prototype.speed = function(){
+EnemyRedLong.prototype.speed = function(){
 	return 0.25;
 };
 
-module.exports = EnemyBlueLong;
+module.exports = EnemyRedLong;

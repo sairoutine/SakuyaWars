@@ -3,45 +3,45 @@
 var BaseObject = require('./base');
 var Util = require('../../hakurei').Util;
 
-var ClownPiece = function(scene) {
+var Starsapphire = function(scene) {
 	BaseObject.apply(this, arguments);
 };
-Util.inherit(ClownPiece, BaseObject);
+Util.inherit(Starsapphire, BaseObject);
 
-ClownPiece.prototype.init = function(){
+Starsapphire.prototype.init = function(){
 	BaseObject.prototype.init.apply(this, arguments);
 };
 
-ClownPiece.prototype.update = function(){
+Starsapphire.prototype.update = function(){
 	BaseObject.prototype.update.apply(this, arguments);
 };
 
-ClownPiece.prototype.draw = function(){
+Starsapphire.prototype.draw = function(){
 	BaseObject.prototype.draw.apply(this, arguments);
 };
 
-ClownPiece.prototype.collisionWidth = function(){
+Starsapphire.prototype.collisionWidth = function(){
 	return 180;
 };
-ClownPiece.prototype.collisionHeight = function(){
+Starsapphire.prototype.collisionHeight = function(){
 	return 180;
 };
 
 // 最大HP
-ClownPiece.prototype.maxHP = function(){
+Starsapphire.prototype.maxHP = function(){
 	return 600;
 };
 
 // 通常時の画像
-ClownPiece.prototype.normalImage = function(){
+Starsapphire.prototype.normalImage = function(){
 	return "boss_starsapphire_normal";
 };
 
 // ダメージを受けた時の画像
-ClownPiece.prototype.damageImage = function(){
+Starsapphire.prototype.damageImage = function(){
 	return "boss_starsapphire_damage";
 };
 
 
 
-module.exports = ClownPiece;
+module.exports = Starsapphire;

@@ -3,82 +3,82 @@
 var BaseObject = require('./base');
 var Util = require('../../hakurei').Util;
 
-var SakuyaNormal = function(scene) {
+var SakuyaMagician = function(scene) {
 	BaseObject.apply(this, arguments);
 };
-Util.inherit(SakuyaNormal, BaseObject);
+Util.inherit(SakuyaMagician, BaseObject);
 
-SakuyaNormal.prototype.init = function(){
+SakuyaMagician.prototype.init = function(){
 	BaseObject.prototype.init.apply(this, arguments);
 };
 
-SakuyaNormal.prototype.update = function(){
+SakuyaMagician.prototype.update = function(){
 	BaseObject.prototype.update.apply(this, arguments);
 };
 
-SakuyaNormal.prototype.draw = function(){
+SakuyaMagician.prototype.draw = function(){
 	BaseObject.prototype.draw.apply(this, arguments);
 };
 
 // 立ち画像
-SakuyaNormal.prototype.stoppingImage = function(){
+SakuyaMagician.prototype.stoppingImage = function(){
 	return "unit_magician_walk1";
 };
 
 // 攻撃する時の画像 一覧
-SakuyaNormal.prototype.attackImages = function(){
+SakuyaMagician.prototype.attackImages = function(){
 	return ["unit_magician_attack1", "unit_magician_attack2"];
 };
 
 // 死んだ時の画像
-SakuyaNormal.prototype.deadImage = function(){
+SakuyaMagician.prototype.deadImage = function(){
 	return "unit_magician_damage";
 };
 
 // 歩くアニメの画像1
-SakuyaNormal.prototype.walkImage1 = function(){
+SakuyaMagician.prototype.walkImage1 = function(){
 	return "unit_magician_walk1";
 };
 
 // 歩くアニメの画像2
-SakuyaNormal.prototype.walkImage2 = function(){
+SakuyaMagician.prototype.walkImage2 = function(){
 	return "unit_magician_walk2";
 };
 
-SakuyaNormal.prototype.attackSound = function(){
+SakuyaMagician.prototype.attackSound = function(){
 	return "unit_magician_attack2";
 };
 
-SakuyaNormal.prototype.deadSound = function(){
+SakuyaMagician.prototype.deadSound = function(){
 	return "unit_magician_damage";
 };
 
-SakuyaNormal.prototype.collisionWidth = function(){
+SakuyaMagician.prototype.collisionWidth = function(){
 	return 200;
 };
-SakuyaNormal.prototype.collisionHeight = function(){
+SakuyaMagician.prototype.collisionHeight = function(){
 	return 200;
 };
 
 // ユニット生成に必要なPの数
-SakuyaNormal.prototype.consumedP = function(){
+SakuyaMagician.prototype.consumedP = function(){
 	return 20;
 };
 
 // 最大HP
-SakuyaNormal.prototype.maxHP = function(){
+SakuyaMagician.prototype.maxHP = function(){
 	return 300;
 };
 
 
 // ダメージ力
-SakuyaNormal.prototype.damage = function(){
+SakuyaMagician.prototype.damage = function(){
 	return 5;
 };
 
 // 歩くスピード
-SakuyaNormal.prototype.speed = function(){
+SakuyaMagician.prototype.speed = function(){
 	return 0.75;
 };
 
-module.exports = SakuyaNormal;
+module.exports = SakuyaMagician;

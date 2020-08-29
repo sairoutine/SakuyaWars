@@ -3,77 +3,77 @@
 var BaseObject = require('./base');
 var Util = require('../../hakurei').Util;
 
-var SakuyaNormal = function(scene) {
+var SakuyaMMD = function(scene) {
 	BaseObject.apply(this, arguments);
 };
-Util.inherit(SakuyaNormal, BaseObject);
+Util.inherit(SakuyaMMD, BaseObject);
 
-SakuyaNormal.prototype.init = function(){
+SakuyaMMD.prototype.init = function(){
 	BaseObject.prototype.init.apply(this, arguments);
 };
 
-SakuyaNormal.prototype.update = function(){
+SakuyaMMD.prototype.update = function(){
 	BaseObject.prototype.update.apply(this, arguments);
 };
 
-SakuyaNormal.prototype.draw = function(){
+SakuyaMMD.prototype.draw = function(){
 	BaseObject.prototype.draw.apply(this, arguments);
 };
 
 // 立ち画像
-SakuyaNormal.prototype.stoppingImage = function(){
+SakuyaMMD.prototype.stoppingImage = function(){
 	return "unit_mmd_stand";
 };
 
 // 攻撃する時の画像 一覧
-SakuyaNormal.prototype.attackImages = function(){
+SakuyaMMD.prototype.attackImages = function(){
 	return ["unit_mmd_attack"];
 };
 
 // 死んだ時の画像
-SakuyaNormal.prototype.deadImage = function(){
+SakuyaMMD.prototype.deadImage = function(){
 	return "unit_mmd_stand";
 };
 
 // 歩くアニメの画像1
-SakuyaNormal.prototype.walkImage1 = function(){
+SakuyaMMD.prototype.walkImage1 = function(){
 	return "unit_mmd_stand";
 };
 
 // 歩くアニメの画像2
-SakuyaNormal.prototype.walkImage2 = function(){
+SakuyaMMD.prototype.walkImage2 = function(){
 	return "unit_mmd_stand";
 };
 
-SakuyaNormal.prototype.attackSound = function(){
+SakuyaMMD.prototype.attackSound = function(){
 	return "unit_mmd_attack2";
 };
 
-SakuyaNormal.prototype.collisionWidth = function(){
+SakuyaMMD.prototype.collisionWidth = function(){
 	return 200;
 };
-SakuyaNormal.prototype.collisionHeight = function(){
+SakuyaMMD.prototype.collisionHeight = function(){
 	return 200;
 };
 
 // ユニット生成に必要なPの数
-SakuyaNormal.prototype.consumedP = function(){
+SakuyaMMD.prototype.consumedP = function(){
 	return 20;
 };
 
 // 最大HP
-SakuyaNormal.prototype.maxHP = function(){
+SakuyaMMD.prototype.maxHP = function(){
 	return 100;
 };
 
 // ダメージ力
-SakuyaNormal.prototype.damage = function(){
+SakuyaMMD.prototype.damage = function(){
 	return 50;
 };
 
 // 歩くスピード
-SakuyaNormal.prototype.speed = function(){
+SakuyaMMD.prototype.speed = function(){
 	return 0.125;
 };
 
-module.exports = SakuyaNormal;
+module.exports = SakuyaMMD;
