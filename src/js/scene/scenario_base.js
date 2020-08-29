@@ -36,12 +36,10 @@ SceneScenarioBase.prototype.init = function(serif){
 SceneScenarioBase.prototype.beforeDraw = function(){
 	BaseScene.prototype.beforeDraw.apply(this, arguments);
 
-	/*
 	// BGM 再生
 	if (this.frame_count === 60 && this.bgm()) {
-		this.core.playBGM(this.bgm());
+		this.core.audio_loader.playBGM(this.bgm());
 	}
-	*/
 
 	if(this.core.input_manager.isLeftClickPush()) {
 		if(this.serif.isEnd()) {

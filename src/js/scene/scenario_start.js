@@ -11,6 +11,7 @@ var SceneScenarioStart = function(game) {
 
 util.inherit(SceneScenarioStart, base_scene);
 
+// シナリオ開始時
 SceneScenarioStart.prototype.notifySerifStart = function() {
 	// シーン遷移前の BGM 止める
 	//this.core.audio_loader.stopBGM();
@@ -28,7 +29,8 @@ SceneScenarioStart.prototype.serifScript = function() {
 
 // BGM
 SceneScenarioStart.prototype.bgm = function() {
-	// TODO:
+	// 最初のシナリオは、タイトル画面のBGMそのままなので何も必要がない
+	return "";
 };
 
 // 背景

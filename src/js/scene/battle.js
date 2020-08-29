@@ -2,7 +2,8 @@
 /*
 
 ◆ TODO:
-スペルカードを使うと全体攻撃となる
+リファクタ → object系
+
 
 デバッグ用にユニットや敵のHPを表示したい
 デバッグ用にPやBを回復したい
@@ -13,6 +14,7 @@
 → よって、一旦遠距離攻撃を削除したので、復活させる
 ダメージを与えたときのエフェクトを表示する
 AP表示量を表示する→ユニット
+ボタンを押下するとへこむようにしたい
 
 // FB1
 ただ、現状通常咲夜を連打で出すだけで勝ててしまうので、妖精の攻撃力体力を増やすなどしてすこし難度をあげたほうがいいかもしれません（咲夜はいっぱい出てきて楽しい）
@@ -20,6 +22,19 @@ AP表示量を表示する→ユニット
 // FB2
 もう一点、無移動組は攻撃と攻撃の間にインターバル（walk絵1枚）を挟むことはできますでしょうか？
 */
+/*
+
+体力1000あって、体力が残ってるほどスコアが高い。→減点法。
+アークナイツだと、陣地に入った敵の数に応じてスコアが下がる。
+→ 勝利までの時間が短いとボーナス。
+
+ボム使わずにクリアするとボーナス。変なことするとボーナス。
+めーさくだけのユニットで統一すると +1000点とか。
+
+*/
+
+
+
 
 'use strict';
 
@@ -57,6 +72,7 @@ var EnemyPinkShort = require('../object/enemy/pink_short');
 var EnemyWhiteLong = require('../object/enemy/white_long');
 var EnemyWhiteShort = require('../object/enemy/white_short');
 
+var UIImage = require('../hakurei').Object.UI.Image;
 var Container = require('../hakurei').Object.Container;
 var Util = require('../hakurei').Util;
 var CONSTANT = require('../constant');
@@ -75,17 +91,57 @@ var BACKGROUND_IMAGES = [
 	"battle_bg4",
 ];
 
-var UNIT_CLASSES = [
-	UnitSakuyaNormal1,
-	UnitSakuyaNormal2,
-	UnitSakuyaTea,
-	UnitSakuyaMeisaku,
-	UnitSakuyaBazooka,
-	UnitSakuyaMMD,
-	UnitSakuyaMagician,
-	UnitSakuyaMandoragora,
-	UnitSakuyaTupai,
-	UnitSakuyaYoyomu,
+// ユニットボタン一覧の1ページに表示する、それぞれのボタン位置
+var UNIT_BUTTONS_POSITIONS = [
+	{x: 286, y: 574},
+	{x: 396, y: 574},
+	{x: 506, y: 574},
+	{x: 616, y: 574},
+	{x: 726, y: 574},
+];
+
+// ユニットの種類一覧
+var UNITS = [
+	{
+		"image": "btn_icon_sakuya_normalkinkyori",
+		"class": UnitSakuyaNormal1,
+	},
+	{
+		"image": "btn_icon_sakuya_normalenkyori",
+		"class": UnitSakuyaNormal2,
+	},
+	{
+		"image": "btn_icon_sakuya_tea",
+		"class": UnitSakuyaTea,
+	},
+	{
+		"image": "btn_icon_sakuya_meisaku",
+		"class": UnitSakuyaMeisaku,
+	},
+	{
+		"image": "btn_icon_sakuya_bazooka",
+		"class": UnitSakuyaBazooka,
+	},
+	{
+		"image": "btn_icon_sakuya_mmd",
+		"class": UnitSakuyaMMD,
+	},
+	{
+		"image": "btn_icon_sakuya_magic",
+		"class": UnitSakuyaMagician,
+	},
+	{
+		"image": "btn_icon_sakuya_mandoragora",
+		"class": UnitSakuyaMandoragora,
+	},
+	{
+		"image": "btn_icon_sakuya_tupai",
+		"class": UnitSakuyaTupai,
+	},
+	{
+		"image": "btn_icon_sakuya_yoyomu",
+		"class": UnitSakuyaYoyomu,
+	},
 ];
 
 var ENEMY_CLASSES = [
@@ -99,14 +155,91 @@ var ENEMY_CLASSES = [
 	EnemyWhiteShort,
 ];
 
-var Scene = function(core) {
+var SceneBattle = function(core) {
 	BaseScene.apply(this, arguments);
+	var self = this;
 
 	// 自陣
 	this.fort = new Fort(this);
 
 	// スペルカード演出
 	this.spellcard_anime = new SpellCardAnime(this);
+
+	// ユニットボタン一覧
+	this._unit_buttons = [];
+
+	for (var i = 0, len = UNITS.length; i < len; i++) {
+		var unit_per_page_no = i % UNIT_BUTTONS_POSITIONS.length;
+		var x = UNIT_BUTTONS_POSITIONS[unit_per_page_no].x;
+		var y = UNIT_BUTTONS_POSITIONS[unit_per_page_no].y;
+
+		var button_image = UNITS[i].image;
+
+		var onclick_func = (function (i) {
+			return function () {
+				self.core.audio_loader.playSound("summon_unit");
+
+				self.generateUnit(i);
+			};
+		})(i);
+
+		var ui_image = new UIImage(this, {
+			imageName: button_image,
+			x: x,
+			y: y,
+		})
+			.on("click", onclick_func)
+			.on("touch", onclick_func);
+
+		this._unit_buttons.push(ui_image);
+	}
+
+	// ユニットボタンのページング ボタン
+	this._unit_paging_left_button  = new UIImage(this, {
+		imageName: "btn_arrow_l",
+		x: 211,
+		y: 574,
+	});
+	this._unit_paging_right_button  = new UIImage(this, {
+		imageName: "btn_arrow_r",
+		x: 801,
+		y: 574,
+	});
+
+	var unit_paging_button_func = function () {
+		self._current_paging_position = self._current_paging_position === 0 ? 1 : 0;
+
+		// ユニット一覧のボタンを、現在のページのものだけ表示する
+		self._showUnitButtonsInCurrentPage();
+	};
+
+	this._unit_paging_left_button
+		.on("click", unit_paging_button_func)
+		.on("touch", unit_paging_button_func);
+
+	this._unit_paging_right_button
+		.on("click", unit_paging_button_func)
+		.on("touch", unit_paging_button_func);
+
+	// スペルカード ボタン
+	this._spellcard_button = new UIImage(this, {
+		imageName: "btn_spell_off",
+		x: 86,
+		y: 573.5,
+	});
+
+	var spellcard_button_func = function () {
+		// スペルカードが使えるならば
+		if (self._canSpellCard()) {
+			// スペルカード発動
+			self.core.audio_loader.playSound("use_spellcard");
+			self._useSpellCard();
+		}
+	};
+
+	this._spellcard_button
+		.on("click", spellcard_button_func)
+		.on("touch", spellcard_button_func);
 
 	// サブシーン
 	this.addSubScene("ready", new SceneBattleReady(core));
@@ -135,7 +268,7 @@ var Scene = function(core) {
 	this.enemies = new Container(this);
 
 	// 時を止めるスペカが使えるようになるまでの残り時間(frame)
-	this._remaining_time_to_use_timestop_frame = 0;
+	this._remaining_time_to_use_timestop_frame = CONSTANT.TIME_TO_USE_TIMESTOP_FRAME;
 
 	// 時を止めてる際の残り時間(frame)
 	this._remaining_timestop_frame = 0;
@@ -143,13 +276,18 @@ var Scene = function(core) {
 	// スペカ演出を表示するか否か
 	this._is_show_spellcard_anime = false;
 
+	// ユニット一覧のページング位置
+	this._current_paging_position = 0;
+
 	this.addObject(this.fort);
+	this.addObjects(this._unit_buttons);
+	this.addObjects([this._unit_paging_left_button, this._unit_paging_right_button, this._spellcard_button]);
 	this.addObjects(this.units);
 	this.addObjects(this.enemies);
 };
-Util.inherit(Scene, BaseScene);
+Util.inherit(SceneBattle, BaseScene);
 
-Scene.prototype.init = function(stage_no){
+SceneBattle.prototype.init = function(stage_no){
 	BaseScene.prototype.init.apply(this, arguments);
 
 	this.stage_no = stage_no || 0;
@@ -169,7 +307,6 @@ Scene.prototype.init = function(stage_no){
 	this.spellcard_anime.y(this.height/2);
 
 	// ボス
-	// TODO: コンストラクタですべてのボスを初期化して、ここでは初期化しないようにしたい
 	if (this.boss !== null) { // stage 2 以降は前のステージのボスを削除する
 		this.removeObject(this.boss);
 	}
@@ -178,6 +315,9 @@ Scene.prototype.init = function(stage_no){
 	this.boss.x(726);
 	this.boss.y(410);
 	this.addObject(this.boss);
+
+	// ユニット一覧のボタンを、現在のページのものだけ表示する
+	this._showUnitButtonsInCurrentPage();
 
 	// P ポイントの数
 	this.p_num = CONSTANT.P_MAX;
@@ -195,19 +335,37 @@ Scene.prototype.init = function(stage_no){
 	this._remaining_timestop_frame = 0;
 
 	// 時を止めるスペカが使えるようになるまでの残り時間(frame)
-	this._remaining_time_to_use_timestop_frame = 0;
+	this._remaining_time_to_use_timestop_frame = CONSTANT.TIME_TO_USE_TIMESTOP_FRAME;
 
 	// スペカ演出を表示するか否か
 	this._is_show_spellcard_anime = false;
 
-	//this.core.scene_manager.setFadeIn(60, "white");
+	// ユニット一覧のページング位置
+	this._current_paging_position = 0;
 
 	this.changeSubScene("ready");
 };
 
+// ユニット一覧のボタンを、現在のページのものだけ表示する
+SceneBattle.prototype._showUnitButtonsInCurrentPage = function(){
+	for (var i = 0, len = this._unit_buttons.length; i < len; i++) {
+		var button = this._unit_buttons[i];
 
-Scene.prototype.generateUnit = function(unit_num){
-	var unit = new UNIT_CLASSES[unit_num](this);
+		var start = UNIT_BUTTONS_POSITIONS.length * this._current_paging_position;
+		var end   = UNIT_BUTTONS_POSITIONS.length * (this._current_paging_position+1) - 1;
+
+		if (start <= i && i <= end) {
+			button.show();
+		}
+		else {
+			button.hide();
+		}
+	}
+};
+
+SceneBattle.prototype.generateUnit = function(unit_num){
+	var Klass = UNITS[unit_num].class;
+	var unit = new Klass(this);
 
 	// P消費できるかチェック
 	if (this.p_num < unit.consumedP()) {
@@ -228,7 +386,7 @@ Scene.prototype.generateUnit = function(unit_num){
 	this.units.addObject(unit);
 };
 
-Scene.prototype.generateEnemy = function(enemy_num){
+SceneBattle.prototype.generateEnemy = function(enemy_num){
 	var enemy = new ENEMY_CLASSES[enemy_num](this);
 
 	// ユニット追加
@@ -244,62 +402,62 @@ Scene.prototype.generateEnemy = function(enemy_num){
 
 
 // スペルカードを使用できるか否か
-Scene.prototype.canSpellCard = function() {
+SceneBattle.prototype._canSpellCard = function() {
 	return this._remaining_time_to_use_timestop_frame === 0;
 };
 
 // スペルカード使用
-Scene.prototype.useSpellCard = function() {
-	// TODO: アニメのいい感じのところで、全体にダメージ
-
+SceneBattle.prototype._useSpellCard = function() {
 	// 時を止めるスペカが使えるようになるまでの残り時間を戻す(frame)
 	this._remaining_time_to_use_timestop_frame = CONSTANT.TIME_TO_USE_TIMESTOP_FRAME;
 
 	// スペルカード演出を再生
 	this._is_show_spellcard_anime = true;
+
 	var self = this;
 	this.spellcard_anime.playAnimationOnce(function () {
 		self._is_show_spellcard_anime = false;
 	});
 
+	// 時間を止めている期間を設定する
 	this._remaining_timestop_frame = CONSTANT.TIMESTOP_FRAME;
 };
 
 // 時を止めてる最中か否か
-Scene.prototype.isTimeStop = function() {
+SceneBattle.prototype.isTimeStop = function() {
 	return this._remaining_timestop_frame > 0;
 };
 
 // ゲームクリアになった
-Scene.prototype.notifyStageClear = function(){
+SceneBattle.prototype.notifyStageClear = function(){
 	this.changeSubScene("result");
 };
 
 // ゲームオーバーになった
-Scene.prototype.notifyGameover = function(){
+SceneBattle.prototype.notifyGameover = function(){
 	if (this.currentSubScene() instanceof SceneBattleMain) {
 		this.changeSubScene("gameover");
 	}
 };
 
 // 次のステージが存在するか否か
-Scene.prototype.hasNextStage = function(){
+SceneBattle.prototype.hasNextStage = function(){
 	return(BACKGROUND_IMAGES[this.stage_no + 1] ? true : false);
 };
 
 // 次のステージへ遷移
-Scene.prototype.changeNextStage = function(){
+SceneBattle.prototype.changeNextStage = function(){
 	this.core.scene_manager.changeScene("battle", this.stage_no + 1);
 };
 
 // 現在のステージをやり直す
-Scene.prototype.restart = function(){
+SceneBattle.prototype.restart = function(){
 	this.core.scene_manager.changeScene("battle", this.stage_no);
 };
 
 
 
-Scene.prototype.update = function(){
+SceneBattle.prototype.update = function(){
 	BaseScene.prototype.update.apply(this, arguments);
 
 	this.spellcard_anime.update();
@@ -316,11 +474,17 @@ Scene.prototype.update = function(){
 		this._remaining_timestop_frame--;
 	}
 
-
-
 	// 時を止めるスペカが使えるようになるまでの残り時間をへらす
 	if (!this.isTimeStop() && this._remaining_time_to_use_timestop_frame > 0) {
 		this._remaining_time_to_use_timestop_frame--;
+	}
+
+	// スペルカードが使えれば、スペルカードボタンを有効にする
+	if(this._canSpellCard()) {
+		this._spellcard_button.imageName("btn_spell_on");
+	}
+	else {
+		this._spellcard_button.imageName("btn_spell_off");
 	}
 
 	// 左クリック位置を出力
@@ -334,7 +498,7 @@ Scene.prototype.update = function(){
 	}
 };
 
-Scene.prototype.draw = function(){
+SceneBattle.prototype.draw = function(){
 	var ctx = this.core.ctx;
 
 	// 背景
@@ -380,4 +544,4 @@ Scene.prototype.draw = function(){
 	}
 };
 
-module.exports = Scene;
+module.exports = SceneBattle;

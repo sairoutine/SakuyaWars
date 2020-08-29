@@ -3,14 +3,14 @@
 var BaseScene = require('./base');
 var Util = require('../../hakurei').Util;
 
-var SceneBattleReady = function(core) {
+var SceneBattleGameover = function(core) {
 	BaseScene.apply(this, arguments);
 
 	this._t = 0;
 };
-Util.inherit(SceneBattleReady, BaseScene);
+Util.inherit(SceneBattleGameover, BaseScene);
 
-SceneBattleReady.prototype.init = function(){
+SceneBattleGameover.prototype.init = function(){
 	BaseScene.prototype.init.apply(this, arguments);
 
 	this._t = 0;
@@ -21,7 +21,7 @@ SceneBattleReady.prototype.init = function(){
 };
 
 
-SceneBattleReady.prototype.update = function(){
+SceneBattleGameover.prototype.update = function(){
 	BaseScene.prototype.update.apply(this, arguments);
 
 	// GameOver 画像の透過を減らす
@@ -34,19 +34,19 @@ SceneBattleReady.prototype.update = function(){
 	}
 };
 
-SceneBattleReady.prototype.draw = function(){
+SceneBattleGameover.prototype.draw = function(){
 	BaseScene.prototype.draw.apply(this, arguments);
 
 	var ctx = this.core.ctx;
 
-	// 爆発
+	// 爆発 画像
 	var bg_image = this.core.image_loader.getImage("explosion");
 	ctx.save();
 	ctx.translate(this.width/2, this.height/2);
 	ctx.drawImage(bg_image, -bg_image.width/2, -bg_image.height/2);
 	ctx.restore();
 
-	// Gameover
+	// Gameover 画像
 	var bg_image = this.core.image_loader.getImage("gameover");
 	ctx.save();
 	ctx.globalAlpha = this._t;
@@ -55,4 +55,4 @@ SceneBattleReady.prototype.draw = function(){
 	ctx.restore();
 };
 
-module.exports = SceneBattleReady;
+module.exports = SceneBattleGameover;

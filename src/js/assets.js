@@ -162,102 +162,102 @@ AssetsConfig.images = {
 
 AssetsConfig.sounds = {
 	"gameover01":    {
-		path: "./sound/se_maoudamashii_explosion02.ogg",
+		path: "./sound/se_maoudamashii_explosion02",
 		volume: 0.1,
 	},
 	"summon_unit":    {
-		path: "./sound/se_maoudamashii_magical07.ogg",
+		path: "./sound/se_maoudamashii_magical07",
 		volume: 0.1,
 	},
 	"use_spellcard":    {
-		path: "./sound/se_maoudamashii_magical21.ogg",
+		path: "./sound/se_maoudamashii_magical21",
 		volume: 0.1,
 	},
 	"unit_default_damage":    {
-		path: "./sound/se_maoudamashii_battle15.ogg",
+		path: "./sound/se_maoudamashii_battle15",
 		volume: 0.1,
 	},
 	"unit_tea_damage":    {
-		path: "./sound/se_maoudamashii_element_water01.ogg",
+		path: "./sound/se_maoudamashii_element_water01",
 		volume: 0.1,
 	},
 	"unit_meisaku_damage":    {
-		path: "./sound/se_maoudamashii_battle09.ogg",
+		path: "./sound/se_maoudamashii_battle09",
 		volume: 0.1,
 	},
 	"unit_magician_damage":    {
-		path: "./sound/se_maoudamashii_battle05.ogg",
+		path: "./sound/se_maoudamashii_battle05",
 		volume: 0.1,
 	},
 	"enemy_damage":    {
-		path: "./sound/se_maoudamashii_magical28.ogg",
+		path: "./sound/se_maoudamashii_magical28",
 		volume: 0.1,
 	},
 	"boss_damage":    {
-		path: "./sound/se_maoudamashii_explosion04.ogg",
+		path: "./sound/se_maoudamashii_explosion04",
 		volume: 0.1,
 	},
 
 	"unit_normal1_attack2":    {
-		path: "./sound/se_maoudamashii_battle17.ogg",
+		path: "./sound/se_maoudamashii_battle17",
 		volume: 0.1,
 	},
 	"unit_default_attack2":    {
-		path: "./sound/se_maoudamashii_battle03.ogg",
+		path: "./sound/se_maoudamashii_battle03",
 		volume: 0.1,
 	},
 	"unit_mmd_or_bazooka_attack1":    {
-		path: "./sound/se_maoudamashii_explosion03.ogg",
+		path: "./sound/se_maoudamashii_explosion03",
 		volume: 0.1,
 	},
 	"unit_tupai_attack2":    {
-		path: "./sound/se_maoudamashii_battle11.ogg",
+		path: "./sound/se_maoudamashii_battle11",
 		volume: 0.1,
 	},
 	"unit_magician_attack2":    {
-		path: "./sound/se_maoudamashii_magical25.ogg",
+		path: "./sound/se_maoudamashii_magical25",
 		volume: 0.1,
 	},
 	"unit_mandoragora_attack2":    {
-		path: "./sound/se_maoudamashii_battle19.ogg",
+		path: "./sound/se_maoudamashii_battle19",
 		volume: 0.1,
 	},
 	"unit_mmd_attack2":    {
-		path: "./sound/se_maoudamashii_voice_human02.ogg",
+		path: "./sound/se_maoudamashii_voice_human02",
 		volume: 0.1,
 	},
 	"enemy_attack":    {
-		path: "./sound/se_maoudamashii_battle18.ogg",
+		path: "./sound/se_maoudamashii_battle18",
 		volume: 0.1,
 	},
 
 
 	/*
-        ../../public/sound/se_maoudamashii_battle12.ogg
-        ../../public/sound/se_maoudamashii_magical15.ogg
+        ../../public/sound/se_maoudamashii_battle12
+        ../../public/sound/se_maoudamashii_magical15
 	*/
 	/*
-        ../../public/sound/se_maoudamashii_element_water12.ogg
-        ../../public/sound/se_maoudamashii_explosion06.ogg
-        ../../public/sound/se_maoudamashii_system01.ogg
+        ../../public/sound/se_maoudamashii_element_water12
+        ../../public/sound/se_maoudamashii_explosion06
+        ../../public/sound/se_maoudamashii_system01
 	*/
 };
 
 AssetsConfig.bgms = {
 	"title": {
-		path: "./bgm/title/bgm_maoudamashii_fantasy12.ogg",
+		path: "./bgm/title/bgm_maoudamashii_fantasy12",
 		loopStart: 0*60 + 0 + 0.000,
 		//loopEnd: 1*60 + 47 + 0.027,
 		volume: 0.1,
 	},
 	"battle": {
-		path: "./bgm/battle/bgm_maoudamashii_ethnic31.ogg",
+		path: "./bgm/battle/bgm_maoudamashii_ethnic31",
 		loopStart: 0*60 + 0 + 0.000,
 		//loopEnd: 1*60 + 47 + 0.027,
 		volume: 0.1,
 	},
 	"result": {
-		path: "./bgm/result/bgm_maoudamashii_acoustic38.ogg",
+		path: "./bgm/result/bgm_maoudamashii_acoustic38",
 		loopStart: 0*60 + 0 + 0.000,
 		//loopEnd: 1*60 + 47 + 0.027,
 		volume: 0.1,

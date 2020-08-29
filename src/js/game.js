@@ -2,7 +2,7 @@
 var Core = require('./hakurei').Core;
 var Util = require('./hakurei').Util;
 
-var SceneLoading = require('./hakurei').Scene.Loading;
+var SceneLoading = require('./scene/loading');
 var SceneTitle = require('./scene/title');
 var SceneScenarioStart = require('./scene/scenario_start');
 var SceneBattle = require('./scene/battle');

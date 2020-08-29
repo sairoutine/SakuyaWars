@@ -4,12 +4,12 @@ var BaseScene = require('../hakurei').Scene.Base;
 
 var Util = require('../hakurei').Util;
 
-var Scene = function(core) {
+var SceneTitle = function(core) {
 	BaseScene.apply(this, arguments);
 };
-Util.inherit(Scene, BaseScene);
+Util.inherit(SceneTitle, BaseScene);
 
-Scene.prototype.init = function(){
+SceneTitle.prototype.init = function(){
 	BaseScene.prototype.init.apply(this, arguments);
 	this.core.scene_manager.setFadeIn(60, "white");
 
@@ -17,19 +17,16 @@ Scene.prototype.init = function(){
 	this.core.audio_loader.playBGM("title");
 };
 
-Scene.prototype.update = function(){
+SceneTitle.prototype.update = function(){
 	BaseScene.prototype.update.apply(this, arguments);
 
 	if (this.core.input_manager.isLeftClickPush()) {
-		// フェードアウトする
-		//this.core.scene_manager.setFadeOut(60, "white");
-
 		// 次のシーンへ
 		this.core.scene_manager.changeScene("scenario_start");
 	}
 };
 
-Scene.prototype.draw = function(){
+SceneTitle.prototype.draw = function(){
 	BaseScene.prototype.draw.apply(this, arguments);
 	var ctx = this.core.ctx;
 
@@ -70,4 +67,4 @@ Scene.prototype.draw = function(){
 	ctx.restore();
 };
 
-module.exports = Scene;
+module.exports = SceneTitle;
