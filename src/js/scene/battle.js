@@ -157,7 +157,6 @@ var ENEMY_CLASSES = [
 
 var SceneBattle = function(core) {
 	BaseScene.apply(this, arguments);
-	var self = this;
 
 	// 自陣
 	this.fort = new Fort(this);
@@ -167,79 +166,15 @@ var SceneBattle = function(core) {
 
 	// ユニットボタン一覧
 	this._unit_buttons = [];
-
-	for (var i = 0, len = UNITS.length; i < len; i++) {
-		var unit_per_page_no = i % UNIT_BUTTONS_POSITIONS.length;
-		var x = UNIT_BUTTONS_POSITIONS[unit_per_page_no].x;
-		var y = UNIT_BUTTONS_POSITIONS[unit_per_page_no].y;
-
-		var button_image = UNITS[i].image;
-
-		var onclick_func = (function (i) {
-			return function () {
-				self.core.audio_loader.playSound("summon_unit");
-
-				self.generateUnit(i);
-			};
-		})(i);
-
-		var ui_image = new UIImage(this, {
-			imageName: button_image,
-			x: x,
-			y: y,
-		})
-			.on("click", onclick_func)
-			.on("touch", onclick_func);
-
-		this._unit_buttons.push(ui_image);
-	}
+	this._setupUnitButtons();
 
 	// ユニットボタンのページング ボタン
-	this._unit_paging_left_button  = new UIImage(this, {
-		imageName: "btn_arrow_l",
-		x: 211,
-		y: 574,
-	});
-	this._unit_paging_right_button  = new UIImage(this, {
-		imageName: "btn_arrow_r",
-		x: 801,
-		y: 574,
-	});
+	this._unit_paging_left_button  = null;
+	this._unit_paging_right_button = null;
+	this._setupPagingButtons();
 
-	var unit_paging_button_func = function () {
-		self._current_paging_position = self._current_paging_position === 0 ? 1 : 0;
-
-		// ユニット一覧のボタンを、現在のページのものだけ表示する
-		self._showUnitButtonsInCurrentPage();
-	};
-
-	this._unit_paging_left_button
-		.on("click", unit_paging_button_func)
-		.on("touch", unit_paging_button_func);
-
-	this._unit_paging_right_button
-		.on("click", unit_paging_button_func)
-		.on("touch", unit_paging_button_func);
-
-	// スペルカード ボタン
-	this._spellcard_button = new UIImage(this, {
-		imageName: "btn_spell_off",
-		x: 86,
-		y: 573.5,
-	});
-
-	var spellcard_button_func = function () {
-		// スペルカードが使えるならば
-		if (self._canSpellCard()) {
-			// スペルカード発動
-			self.core.audio_loader.playSound("use_spellcard");
-			self._useSpellCard();
-		}
-	};
-
-	this._spellcard_button
-		.on("click", spellcard_button_func)
-		.on("touch", spellcard_button_func);
+	this._spellcard_button = null;
+	this._setupSpellCardButton();
 
 	// サブシーン
 	this.addSubScene("ready", new SceneBattleReady(core));
@@ -286,6 +221,93 @@ var SceneBattle = function(core) {
 	this.addObjects(this.enemies);
 };
 Util.inherit(SceneBattle, BaseScene);
+
+// ユニット生成ボタン生成
+SceneBattle.prototype._setupUnitButtons = function() {
+	var self = this;
+	for (var i = 0, len = UNITS.length; i < len; i++) {
+		var unit_per_page_no = i % UNIT_BUTTONS_POSITIONS.length;
+		var x = UNIT_BUTTONS_POSITIONS[unit_per_page_no].x;
+		var y = UNIT_BUTTONS_POSITIONS[unit_per_page_no].y;
+
+		var button_image = UNITS[i].image;
+
+		var onclick_func = (function (i) {
+			return function () {
+				self.core.audio_loader.playSound("summon_unit");
+
+				self.generateUnit(i);
+			};
+		})(i);
+
+		var ui_image = new UIImage(this, {
+			imageName: button_image,
+			x: x,
+			y: y,
+		})
+			.on("click", onclick_func)
+			.on("touch", onclick_func);
+
+		this._unit_buttons.push(ui_image);
+	}
+};
+
+// ページングボタン生成
+SceneBattle.prototype._setupPagingButtons = function() {
+	var self = this;
+	// ユニットボタンのページング ボタン
+	this._unit_paging_left_button  = new UIImage(this, {
+		imageName: "btn_arrow_l",
+		x: 211,
+		y: 574,
+	});
+	this._unit_paging_right_button  = new UIImage(this, {
+		imageName: "btn_arrow_r",
+		x: 801,
+		y: 574,
+	});
+
+	var unit_paging_button_func = function () {
+		self._current_paging_position = self._current_paging_position === 0 ? 1 : 0;
+
+		// ユニット一覧のボタンを、現在のページのものだけ表示する
+		self._showUnitButtonsInCurrentPage();
+	};
+
+	this._unit_paging_left_button
+		.on("click", unit_paging_button_func)
+		.on("touch", unit_paging_button_func);
+
+	this._unit_paging_right_button
+		.on("click", unit_paging_button_func)
+		.on("touch", unit_paging_button_func);
+};
+
+// スペルカード ボタン生成
+SceneBattle.prototype._setupSpellCardButton = function() {
+	var self = this;
+	// スペルカード ボタン
+	this._spellcard_button = new UIImage(this, {
+		imageName: "btn_spell_off",
+		x: 86,
+		y: 573.5,
+	});
+
+	var spellcard_button_func = function () {
+		// スペルカードが使えるならば
+		if (self._canSpellCard()) {
+			// スペルカード発動
+			self.core.audio_loader.playSound("use_spellcard");
+			self._useSpellCard();
+		}
+	};
+
+	this._spellcard_button
+		.on("click", spellcard_button_func)
+		.on("touch", spellcard_button_func);
+};
+
+
 
 SceneBattle.prototype.init = function(stage_no){
 	BaseScene.prototype.init.apply(this, arguments);
