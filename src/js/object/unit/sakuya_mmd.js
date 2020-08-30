@@ -45,6 +45,11 @@ SakuyaMMD.prototype.walkImage2 = function(){
 	return "unit_mmd_stand";
 };
 
+// ユニット生成 ボタン画像
+SakuyaMMD.buttonImage = function(){
+	return "btn_icon_sakuya_mmd";
+};
+
 SakuyaMMD.prototype.attackSound = function(){
 	return "unit_mmd_attack2";
 };
@@ -57,7 +62,7 @@ SakuyaMMD.prototype.collisionHeight = function(){
 };
 
 // ユニット生成に必要なPの数
-SakuyaMMD.prototype.consumedP = function(){
+SakuyaMMD.consumedP = function(){
 	return 20;
 };
 

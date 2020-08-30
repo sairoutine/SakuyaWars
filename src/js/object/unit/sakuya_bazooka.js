@@ -35,6 +35,11 @@ SakuyaBazooka.prototype.deadImage = function(){
 	return "unit_bazooka_damage";
 };
 
+// ユニット生成 ボタン画像
+SakuyaBazooka.buttonImage = function(){
+	return "btn_icon_sakuya_bazooka";
+};
+
 SakuyaBazooka.prototype.attackSound = function(){
 	return "unit_mmd_or_bazooka_attack1";
 };
@@ -47,7 +52,7 @@ SakuyaBazooka.prototype.collisionHeight = function(){
 };
 
 // ユニット生成に必要なPの数
-SakuyaBazooka.prototype.consumedP = function(){
+SakuyaBazooka.consumedP = function(){
 	return 20;
 };
 

@@ -45,6 +45,11 @@ SakuyaTupai.prototype.walkImage2 = function(){
 	return "unit_tupai_walk2";
 };
 
+// ユニット生成 ボタン画像
+SakuyaTupai.buttonImage = function(){
+	return "btn_icon_sakuya_tupai";
+};
+
 SakuyaTupai.prototype.attackSound = function(){
 	return "unit_tupai_attack2";
 };
@@ -57,7 +62,7 @@ SakuyaTupai.prototype.collisionHeight = function(){
 };
 
 // ユニット生成に必要なPの数
-SakuyaTupai.prototype.consumedP = function(){
+SakuyaTupai.consumedP = function(){
 	return 20;
 };
 

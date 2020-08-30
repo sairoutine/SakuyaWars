@@ -45,6 +45,11 @@ SakuyaNormal2.prototype.walkImage2 = function(){
 	return "unit_enkyori_walk2";
 };
 
+// ユニット生成 ボタン画像
+SakuyaNormal2.buttonImage = function(){
+	return "btn_icon_sakuya_normalenkyori";
+};
+
 SakuyaNormal2.prototype.collisionWidth = function(){
 	return 400;
 };
@@ -53,7 +58,7 @@ SakuyaNormal2.prototype.collisionHeight = function(){
 };
 
 // ユニット生成に必要なPの数
-SakuyaNormal2.prototype.consumedP = function(){
+SakuyaNormal2.consumedP = function(){
 	return 20;
 };
 

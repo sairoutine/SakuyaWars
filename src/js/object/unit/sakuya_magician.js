@@ -45,6 +45,11 @@ SakuyaMagician.prototype.walkImage2 = function(){
 	return "unit_magician_walk2";
 };
 
+// ユニット生成 ボタン画像
+SakuyaMagician.buttonImage = function(){
+	return "btn_icon_sakuya_magic";
+};
+
 SakuyaMagician.prototype.attackSound = function(){
 	return "unit_magician_attack2";
 };
@@ -61,7 +66,7 @@ SakuyaMagician.prototype.collisionHeight = function(){
 };
 
 // ユニット生成に必要なPの数
-SakuyaMagician.prototype.consumedP = function(){
+SakuyaMagician.consumedP = function(){
 	return 20;
 };
 

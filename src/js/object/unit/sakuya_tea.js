@@ -35,6 +35,11 @@ SakuyaTea.prototype.deadImage = function(){
 	return "unit_tea_damage";
 };
 
+// ユニット生成 ボタン画像
+SakuyaTea.buttonImage = function(){
+	return "btn_icon_sakuya_tea";
+};
+
 SakuyaTea.prototype.deadSound = function(){
 	return "unit_tea_damage";
 };
@@ -47,7 +52,7 @@ SakuyaTea.prototype.collisionHeight = function(){
 };
 
 // ユニット生成に必要なPの数
-SakuyaTea.prototype.consumedP = function(){
+SakuyaTea.consumedP = function(){
 	return 20;
 };
 

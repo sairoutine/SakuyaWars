@@ -50,6 +50,11 @@ SakuyaMandoragora.prototype.walkImage2 = function(){
 	return "unit_mandoragora_walk2";
 };
 
+// ユニット生成 ボタン画像
+SakuyaMandoragora.buttonImage = function(){
+	return "btn_icon_sakuya_mandoragora";
+};
+
 SakuyaMandoragora.prototype.attackSound = function(){
 	return "unit_mandoragora_attack2";
 };
@@ -62,7 +67,7 @@ SakuyaMandoragora.prototype.collisionHeight = function(){
 };
 
 // ユニット生成に必要なPの数
-SakuyaMandoragora.prototype.consumedP = function(){
+SakuyaMandoragora.consumedP = function(){
 	return 20;
 };
 

@@ -45,6 +45,11 @@ SakuyaYoyomu.prototype.walkImage2 = function(){
 	return "unit_yoyomu_walk2";
 };
 
+// ユニット生成 ボタン画像
+SakuyaYoyomu.buttonImage = function(){
+	return "btn_icon_sakuya_yoyomu";
+};
+
 SakuyaYoyomu.prototype.collisionWidth = function(){
 	return 100;
 };
@@ -53,7 +58,7 @@ SakuyaYoyomu.prototype.collisionHeight = function(){
 };
 
 // ユニット生成に必要なPの数
-SakuyaYoyomu.prototype.consumedP = function(){
+SakuyaYoyomu.consumedP = function(){
 	return 20;
 };
 

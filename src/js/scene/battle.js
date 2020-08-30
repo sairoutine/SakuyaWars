@@ -2,7 +2,6 @@
 /*
 
 ◆ TODO:
-AP表示量を表示する→ユニット
 ボタンを押下するとへこむようにしたい
 リザルト画面
 称号の組み込み
@@ -66,6 +65,7 @@ var EnemyWhiteLong = require('../object/enemy/white_long');
 var EnemyWhiteShort = require('../object/enemy/white_short');
 
 var UIImage = require('../hakurei').Object.UI.Image;
+var UIText = require('../hakurei').Object.UI.Text;
 var Container = require('../hakurei').Object.Container;
 var Util = require('../hakurei').Util;
 var CONSTANT = require('../constant');
@@ -94,47 +94,17 @@ var UNIT_BUTTONS_POSITIONS = [
 ];
 
 // ユニットの種類一覧
-var UNITS = [
-	{
-		"image": "btn_icon_sakuya_normalkinkyori",
-		"class": UnitSakuyaNormal1,
-	},
-	{
-		"image": "btn_icon_sakuya_normalenkyori",
-		"class": UnitSakuyaNormal2,
-	},
-	{
-		"image": "btn_icon_sakuya_tea",
-		"class": UnitSakuyaTea,
-	},
-	{
-		"image": "btn_icon_sakuya_meisaku",
-		"class": UnitSakuyaMeisaku,
-	},
-	{
-		"image": "btn_icon_sakuya_bazooka",
-		"class": UnitSakuyaBazooka,
-	},
-	{
-		"image": "btn_icon_sakuya_mmd",
-		"class": UnitSakuyaMMD,
-	},
-	{
-		"image": "btn_icon_sakuya_magic",
-		"class": UnitSakuyaMagician,
-	},
-	{
-		"image": "btn_icon_sakuya_mandoragora",
-		"class": UnitSakuyaMandoragora,
-	},
-	{
-		"image": "btn_icon_sakuya_tupai",
-		"class": UnitSakuyaTupai,
-	},
-	{
-		"image": "btn_icon_sakuya_yoyomu",
-		"class": UnitSakuyaYoyomu,
-	},
+var UNITS_CLASSES = [
+	UnitSakuyaNormal1,
+	UnitSakuyaNormal2,
+	UnitSakuyaTea,
+	UnitSakuyaMeisaku,
+	UnitSakuyaBazooka,
+	UnitSakuyaMMD,
+	UnitSakuyaMagician,
+	UnitSakuyaMandoragora,
+	UnitSakuyaTupai,
+	UnitSakuyaYoyomu,
 ];
 
 var ENEMY_CLASSES = [
@@ -220,12 +190,13 @@ Util.inherit(SceneBattle, BaseScene);
 // ユニット生成ボタン生成
 SceneBattle.prototype._setupUnitButtons = function() {
 	var self = this;
-	for (var i = 0, len = UNITS.length; i < len; i++) {
+	for (var i = 0, len = UNITS_CLASSES.length; i < len; i++) {
 		var unit_per_page_no = i % UNIT_BUTTONS_POSITIONS.length;
 		var x = UNIT_BUTTONS_POSITIONS[unit_per_page_no].x;
 		var y = UNIT_BUTTONS_POSITIONS[unit_per_page_no].y;
 
-		var button_image = UNITS[i].image;
+		var button_image = UNITS_CLASSES[i].buttonImage();
+		var consume_p = UNITS_CLASSES[i].consumedP();
 
 		var onclick_func = (function (i) {
 			return function () {
@@ -242,6 +213,20 @@ SceneBattle.prototype._setupUnitButtons = function() {
 			imageName: button_image,
 			x: x,
 			y: y,
+			children: [
+				new UIText(this, {
+					text: consume_p.toString() + "P",
+					textColor: "black",
+					//textColor: Util.hexToRGBString("#945ae8"),
+					textSize:  "18px",
+					textAlign: "center",
+					textFont:  "MyFont",
+					lineColor: "white",
+					lineWidth: 4,
+					x: x,
+					y: y + 35,
+				}),
+			],
 		})
 			.on("click", onclick_func)
 			.on("touch", onclick_func);
@@ -388,7 +373,7 @@ SceneBattle.prototype._showUnitButtonsInCurrentPage = function(){
 
 // ユニット生成
 SceneBattle.prototype._generateUnit = function(unit_num){
-	var Klass = UNITS[unit_num].class;
+	var Klass = UNITS_CLASSES[unit_num];
 	var unit = new Klass(this);
 
 	// P消費できるかチェック

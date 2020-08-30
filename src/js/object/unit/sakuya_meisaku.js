@@ -35,6 +35,10 @@ SakuyaMeisaku.prototype.deadImage = function(){
 	return "unit_meisaku_damage";
 };
 
+// ユニット生成 ボタン画像
+SakuyaMeisaku.buttonImage = function(){
+	return "btn_icon_sakuya_meisaku";
+};
 
 SakuyaMeisaku.prototype.deadSound = function(){
 	return "unit_meisaku_damage";
@@ -48,7 +52,7 @@ SakuyaMeisaku.prototype.collisionHeight = function(){
 };
 
 // ユニット生成に必要なPの数
-SakuyaMeisaku.prototype.consumedP = function(){
+SakuyaMeisaku.consumedP = function(){
 	return 20;
 };
 

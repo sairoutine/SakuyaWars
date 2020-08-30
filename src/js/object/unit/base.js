@@ -237,6 +237,12 @@ UnitBase.prototype.isCollision = function(obj) {
 	return !this.isDead();
 };
 
+// 静的メソッド→動的メソッド
+UnitBase.prototype.consumedP = function(){
+	var Klass = this.constructor;
+	return Klass.consumedP();
+};
+
 // 立ち画像
 UnitBase.prototype.stoppingImage = function(){
 	throw new Error("stoppingImage method must be defined.");
@@ -260,6 +266,11 @@ UnitBase.prototype.walkImage1 = function(){
 // 歩くアニメの画像2(歩行しないタイプの場合は指定しないこと)
 UnitBase.prototype.walkImage2 = function(){
 	return "";
+};
+
+// ユニット生成 ボタン画像
+UnitBase.buttonImage = function(){
+	throw new Error("buttonImage method must be defined.");
 };
 
 // 死亡時の音
@@ -288,9 +299,8 @@ UnitBase.prototype.speed = function(){
 };
 
 // ユニット生成に必要なPの数
-UnitBase.prototype.consumedP = function(){
+UnitBase.consumedP = function() {
 	throw new Error("consumedP method must be defined.");
 };
-
 
 module.exports = UnitBase;
