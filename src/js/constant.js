@@ -2,7 +2,7 @@
 var CONSTANT = {
 	DEBUG: true,
 	DEBUG_MUTE: true,
-	DEBUG_SCENE: "clear",
+	DEBUG_SCENE: "battle",
 	DEBUG_STAGE_NO: 1,
 
 	// 時を止める時間

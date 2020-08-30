@@ -88,19 +88,13 @@ var SceneClearAtsumaruShareDialog = function(core) {
 
 	yes_button
 		.on("click", yes_button_func)
-		.on("touch", yes_button_func)
 		.on("clickstart", onclickstart_func)
 		.on("clickend", onclickend_func)
-		.on("touchstart", onclickstart_func)
-		.on("touchend", onclickend_func);
 
 	no_button
 		.on("click", no_button_func)
-		.on("touch", no_button_func)
 		.on("clickstart", onclickstart_func)
 		.on("clickend", onclickend_func)
-		.on("touchstart", onclickstart_func)
-		.on("touchend", onclickend_func);
 
 	this.addObjects([modal, yes_button, no_button]);
 };

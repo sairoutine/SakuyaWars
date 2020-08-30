@@ -3,14 +3,13 @@
 
 ◆ TODO:
 ボス撃破デバッグ
-称号の組み込み
-遠距離攻撃の敵、紅魔館にすぐたどり着く。。。
-→ よって、一旦遠距離攻撃を削除したので、復活させる
-ダメージを与えたときのエフェクトを表示する
-SNSシェアの組み込み
 咲夜を生成できないときは押せないようにするか、別の音を出したい
 ボタン押下時に動くのを、hakureijsへ
-click と mouse の指定が必要ないか確認→ UI
+
+称号の組み込み
+遠距離攻撃の敵、紅魔館にすぐたどり着く。。。→ よって、一旦遠距離攻撃を削除したので、復活させる
+ダメージを与えたときのエフェクトを表示する
+GameClear 画像の組み込みと、スコア表示
 
 ステージごとに敵のAI調整
 味方のパラメータ調整
@@ -232,11 +231,8 @@ SceneBattle.prototype._setupUnitButtons = function() {
 			],
 		})
 			.on("click", onclick_func)
-			.on("touch", onclick_func)
 			.on("clickstart", onclickstart_func)
 			.on("clickend", onclickend_func)
-			.on("touchstart", onclickstart_func)
-			.on("touchend", onclickend_func);
 
 		this._unit_buttons.push(ui_image);
 	}
@@ -269,20 +265,14 @@ SceneBattle.prototype._setupPagingButtons = function() {
 
 	this._unit_paging_left_button
 		.on("click", unit_paging_button_func)
-		.on("touch", unit_paging_button_func)
 		.on("clickstart", onclickstart_func)
 		.on("clickend", onclickend_func)
-		.on("touchstart", onclickstart_func)
-		.on("touchend", onclickend_func);
 
 
 	this._unit_paging_right_button
 		.on("click", unit_paging_button_func)
-		.on("touch", unit_paging_button_func)
 		.on("clickstart", onclickstart_func)
 		.on("clickend", onclickend_func)
-		.on("touchstart", onclickstart_func)
-		.on("touchend", onclickend_func);
 
 
 };
@@ -308,11 +298,8 @@ SceneBattle.prototype._setupSpellCardButton = function() {
 
 	this._spellcard_button
 		.on("click", spellcard_button_func)
-		.on("touch", spellcard_button_func)
 		.on("clickstart", onclickstart_func)
 		.on("clickend", onclickend_func)
-		.on("touchstart", onclickstart_func)
-		.on("touchend", onclickend_func);
 
 
 };
