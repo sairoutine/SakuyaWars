@@ -23,6 +23,8 @@ AssetsConfig.images = {
 
 	"result_frame": "./image/UI_Battle_frm_result.png",
 
+	"button_white": "./image/button_white.png",
+
 	"fort": "./image/koumakan_01.png",
 	"SS_Battle_spell1": "./image/SS_Battle_spell1.png",
 

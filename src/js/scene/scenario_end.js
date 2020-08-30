@@ -18,7 +18,7 @@ SceneScenarioEnd.prototype.notifySerifStart = function() {
 
 // シナリオ終了後
 SceneScenarioEnd.prototype.notifySerifEnd = function() {
-	this.core.scene_manager.changeScene("title");
+	this.core.scene_manager.changeScene("clear");
 };
 
 // セリフスクリプト

@@ -11,7 +11,7 @@ Util.inherit(SceneTitle, BaseScene);
 
 SceneTitle.prototype.init = function(){
 	BaseScene.prototype.init.apply(this, arguments);
-	this.core.scene_manager.setFadeIn(60, "white");
+	this.core.scene_manager.setFadeIn(60, "black");
 
 
 	this.core.audio_loader.playBGM("title");
