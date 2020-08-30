@@ -54,6 +54,9 @@ UnitBase.prototype.update = function(){
 	if (!this.isDead() && this.hp() <= 0) {
 		this._status = STATUS_DEAD;
 
+		// ユニットが死亡したことをミッション管理へ通知
+		this.scene.mission_manager.notifyUnitDied();
+
 		this.core.audio_loader.playSound(this.deadSound());
 
 		this._remaining_dead_frame = DEAD_FRAME;
@@ -137,6 +140,11 @@ UnitBase.prototype._attackIfTargetIsNearby = function () {
 		var damage = self.damage();
 
 		target.reduceHP(damage);
+
+		// 攻撃対象が死亡していたらミッション管理へ通知
+		if (target.hp() <= 0) {
+			this.scene.mission_manager.notifyEnemyKilled(this, target);
+		}
 	}
 
 	// 近くに攻撃対象がいれば攻撃モードへ変更

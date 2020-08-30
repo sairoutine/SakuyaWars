@@ -2,8 +2,6 @@
 /*
 
 ◆ TODO:
-咲夜を生成できないときは押せないようにするか、別の音を出したい
-
 称号の組み込み
 遠距離攻撃の敵、紅魔館にすぐたどり着く。。。→ よって、一旦遠距離攻撃を削除したので、復活させる
 ダメージを与えたときのエフェクトを表示する
@@ -12,6 +10,7 @@ GameClear 画像の組み込みと、スコア表示
 ステージごとに敵のAI調整
 味方のパラメータ調整
 敵のパラメータ調整
+ミッション難易度調整
 → 軽いコストの咲夜は画面に30体くらい出せるレベル
 
 oggのm4a化
@@ -33,6 +32,7 @@ var SceneBattleResult = require('./battle/result');
 
 var Fort = require('../object/fort');
 var SpellCardAnime = require('../object/anime/spellcard');
+var MissionManager = require('../logic/mission_manager');
 
 var Clownpiece = require('../object/boss/clownpiece');
 var Lunachild = require('../object/boss/lunachild');
@@ -122,6 +122,9 @@ var SceneBattle = function(core) {
 	// スペルカード演出
 	this.spellcard_anime = new SpellCardAnime(this);
 
+	// ミッション管理
+	this.mission_manager = new MissionManager(this);
+
 	// ユニットボタン一覧
 	this._unit_buttons = [];
 	this._setupUnitButtons();
@@ -135,6 +138,7 @@ var SceneBattle = function(core) {
 	this._setupSpellCardButton();
 
 	this.addObject(this.fort);
+	this.addObject(this.mission_manager);
 	this.addObjects(this._unit_buttons);
 	this.addObjects([this._unit_paging_left_button, this._unit_paging_right_button, this._spellcard_button]);
 
@@ -220,8 +224,11 @@ SceneBattle.prototype._setupUnitButtons = function() {
 					// バトル開始後にしかユニット生成できない
 					if (self.currentSubScene() instanceof SceneBattleMain) {
 						// ユニット生成
-						self.core.audio_loader.playSound("summon_unit");
-						self._generateUnit(i);
+						var is_generated = self._generateUnit(i);
+
+						if (is_generated) {
+							self.core.audio_loader.playSound("summon_unit");
+						}
 					}
 				})
 		})(i);
@@ -372,7 +379,7 @@ SceneBattle.prototype._generateUnit = function(unit_num){
 
 	// P消費できるかチェック
 	if (this.p_num < unit.consumedP()) {
-		return;
+		return false;
 	}
 
 	// P消費
@@ -387,6 +394,11 @@ SceneBattle.prototype._generateUnit = function(unit_num){
 	unit.y(y);
 
 	this.units.addObject(unit);
+
+	// ユニットを生成したことをミッション管理へ通知
+	this.mission_manager.notifyUnitGenerated(unit);
+
+	return true;
 };
 
 // ボスを撃破する
@@ -419,6 +431,9 @@ SceneBattle.prototype._useSpellCard = function() {
 
 	// 時間を止めている期間を設定する
 	this._remaining_timestop_frame = CONSTANT.TIMESTOP_FRAME;
+
+	// スペルカードを使用したことをミッション管理へ通知
+	this.mission_manager.notifySpellCardUsed();
 };
 
 // 敵生成
@@ -451,6 +466,16 @@ SceneBattle.prototype.notifyGameover = function(){
 	if (this.currentSubScene() instanceof SceneBattleMain) {
 		this.changeSubScene("gameover");
 	}
+};
+
+// 経過時間を返す
+SceneBattle.prototype.getElapsedSeconds = function(){
+	return this.getSubScene("main").getElapsedSeconds();
+};
+
+// 経過時間をテキストで返す
+SceneBattle.prototype.getElapsedSecondsText = function(){
+	return this.getSubScene("main").getElapsedSecondsText();
 };
 
 // 次のステージが存在するか否か

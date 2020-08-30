@@ -44,66 +44,9 @@ SceneBattleResult.prototype.init = function(){
 	this._bonuses_current_page = 0;
 
 	// リザルトに表示する情報一覧
-	this._time_text = "00:00";
-	this._score  = "2123456789";
-	this._bonuses = [
-		{
-			"text": "なんてこった！咲夜がピチュっちゃった！",
-			"num": 3,
-		},
-		{
-			"text": "なんてこった！咲夜がピチュっちゃった！",
-			"num": 3,
-		},
-		{
-			"text": "なんてこった！咲夜がピチュっちゃった！",
-			"num": 3,
-		},
-		{
-			"text": "なんてこった！咲夜がピチュっちゃった！",
-			"num": 3,
-		},
-		{
-			"text": "なんてこった！咲夜がピチュっちゃった！",
-			"num": 3,
-		},
-		{
-			"text": "なんてこった！咲夜がピチュっちゃった！",
-			"num": 3,
-		},
-		{
-			"text": "なんてこった！咲夜がピチュっちゃった！",
-			"num": 3,
-		},
-		{
-			"text": "紅魔館は燃えているか",
-			"num": 3,
-		},
-		{
-			"text": "紅魔館は燃えているか",
-			"num": 3,
-		},
-		{
-			"text": "紅魔館は燃えているか",
-			"num": 3,
-		},
-		{
-			"text": "紅魔館は燃えているか",
-			"num": 3,
-		},
-		{
-			"text": "紅魔館は燃えているか",
-			"num": 3,
-		},
-		{
-			"text": "紅魔館は燃えているか",
-			"num": 3,
-		},
-		{
-			"text": "紅魔館は燃えているか",
-			"num": 3,
-		},
-	];
+	this._time_text = this.parent.getElapsedSecondsText();
+	this._score  = this.parent.mission_manager.calcScore(this.parent.getElapsedSeconds());
+	this._bonuses = this.parent.mission_manager.calcAccomplishedMissions();
 };
 
 SceneBattleResult.prototype.update = function(){

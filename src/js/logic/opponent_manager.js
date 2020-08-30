@@ -8,7 +8,7 @@ var OpponentManager = function(scene) {
 };
 Util.inherit(OpponentManager, BaseObject);
 
-OpponentManager.prototype.init = function(serif_idx){
+OpponentManager.prototype.init = function(){
 	BaseObject.prototype.init.apply(this, arguments);
 
 };
