@@ -21,6 +21,8 @@ AssetsConfig.images = {
 	"explosion": "./image/explosion.jpg",
 	"gameover": "./image/gameover.jpg",
 
+	"result_frame": "./image/UI_Battle_frm_result.png",
+
 	"fort": "./image/koumakan_01.png",
 	"SS_Battle_spell1": "./image/SS_Battle_spell1.png",
 
@@ -171,6 +173,10 @@ AssetsConfig.sounds = {
 	},
 	"use_spellcard":    {
 		path: "./sound/se_maoudamashii_magical21",
+		volume: 0.1,
+	},
+	"result":    {
+		path: "./sound/se_maoudamashii_system46",
 		volume: 0.1,
 	},
 	"unit_default_damage":    {
