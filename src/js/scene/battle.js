@@ -67,9 +67,6 @@ var Container = require('../hakurei').Object.Container;
 var Util = require('../hakurei').Util;
 var CONSTANT = require('../constant');
 
-// ボタン押下時にボタンが動くPX(x, y)
-var BUTTON_MOVE_PX = 3;
-
 var BOSS_CLASSES = [
 	Sunnymilk,
 	Starsapphire,
@@ -198,41 +195,38 @@ SceneBattle.prototype._setupUnitButtons = function() {
 		var button_image = UNITS_CLASSES[i].buttonImage();
 		var consume_p = UNITS_CLASSES[i].consumedP();
 
-		var onclick_func = (function (i) {
-			return function () {
-				// バトル開始後にしかユニット生成できない
-				if (self.currentSubScene() instanceof SceneBattleMain) {
-					// ユニット生成
-					self.core.audio_loader.playSound("summon_unit");
-					self._generateUnit(i);
-				}
-			};
-		})(i);
-
 		// ボタン画像
-		var ui_image = new UIImage(this, {
-			imageName: button_image,
-			x: x,
-			y: y,
-			children: [
-				// 消費P
-				new UIText(this, {
-					text: consume_p.toString() + "P",
-					textColor: "black",
-					//textColor: Util.hexToRGBString("#945ae8"),
-					textSize:  "18px",
-					textAlign: "center",
-					textFont:  "MyFont",
-					lineColor: "white",
-					lineWidth: 4,
-					x: x,
-					y: y + 35,
-				}),
-			],
-		})
-			.on("click", onclick_func)
-			.on("clickstart", onclickstart_func)
-			.on("clickend", onclickend_func)
+		var ui_image = (function (i) {
+			return new UIImage(self, {
+				imageName: button_image,
+				x: x,
+				y: y,
+				children: [
+					// 消費P
+					new UIText(self, {
+						text: consume_p.toString() + "P",
+						textColor: "black",
+						//textColor: Util.hexToRGBString("#945ae8"),
+						textSize:  "18px",
+						textAlign: "center",
+						textFont:  "MyFont",
+						lineColor: "white",
+						lineWidth: 4,
+						x: x,
+						y: y + 35,
+					}),
+				],
+			})
+				.setMoveOnClick()
+				.on("click",function () {
+					// バトル開始後にしかユニット生成できない
+					if (self.currentSubScene() instanceof SceneBattleMain) {
+						// ユニット生成
+						self.core.audio_loader.playSound("summon_unit");
+						self._generateUnit(i);
+					}
+				})
+		})(i);
 
 		this._unit_buttons.push(ui_image);
 	}
@@ -264,15 +258,13 @@ SceneBattle.prototype._setupPagingButtons = function() {
 	};
 
 	this._unit_paging_left_button
+		.setMoveOnClick()
 		.on("click", unit_paging_button_func)
-		.on("clickstart", onclickstart_func)
-		.on("clickend", onclickend_func)
 
 
 	this._unit_paging_right_button
+		.setMoveOnClick()
 		.on("click", unit_paging_button_func)
-		.on("clickstart", onclickstart_func)
-		.on("clickend", onclickend_func)
 
 
 };
@@ -285,23 +277,16 @@ SceneBattle.prototype._setupSpellCardButton = function() {
 		imageName: "btn_spell_off",
 		x: 86,
 		y: 573.5,
-	});
-
-	var spellcard_button_func = function () {
-		// バトル開始後、かつスペルカードが使えるならば
-		if (self.currentSubScene() instanceof SceneBattleMain && self._canSpellCard()) {
-			// スペルカード発動
-			self.core.audio_loader.playSound("use_spellcard");
-			self._useSpellCard();
-		}
-	};
-
-	this._spellcard_button
-		.on("click", spellcard_button_func)
-		.on("clickstart", onclickstart_func)
-		.on("clickend", onclickend_func)
-
-
+	})
+		.setMoveOnClick()
+		.on("click", function () {
+			// バトル開始後、かつスペルカードが使えるならば
+			if (self.currentSubScene() instanceof SceneBattleMain && self._canSpellCard()) {
+				// スペルカード発動
+				self.core.audio_loader.playSound("use_spellcard");
+				self._useSpellCard();
+			}
+		})
 };
 
 
@@ -566,29 +551,5 @@ SceneBattle.prototype.draw = function(){
 		this.spellcard_anime.draw();
 	}
 };
-
-var onclickstart_func = function () {
-	this.x(this.x() + BUTTON_MOVE_PX);
-	this.y(this.y() + BUTTON_MOVE_PX);
-
-	for (var i = 0, len = this.objects.length; i < len; i++) {
-		var child = this.objects[i];
-		child.x(child.x() + BUTTON_MOVE_PX);
-		child.y(child.y() + BUTTON_MOVE_PX);
-	}
-};
-
-var onclickend_func = function () {
-	this.x(this.x() - BUTTON_MOVE_PX);
-	this.y(this.y() - BUTTON_MOVE_PX);
-
-	for (var i = 0, len = this.objects.length; i < len; i++) {
-		var child = this.objects[i];
-		child.x(child.x() - BUTTON_MOVE_PX);
-		child.y(child.y() - BUTTON_MOVE_PX);
-	}
-};
-
-
 
 module.exports = SceneBattle;
