@@ -70,6 +70,9 @@ var Container = require('../hakurei').Object.Container;
 var Util = require('../hakurei').Util;
 var CONSTANT = require('../constant');
 
+// ボタン押下時にボタンが動くPX(x, y)
+var BUTTON_MOVE_PX = 3;
+
 var BOSS_CLASSES = [
 	Sunnymilk,
 	Starsapphire,
@@ -209,11 +212,13 @@ SceneBattle.prototype._setupUnitButtons = function() {
 			};
 		})(i);
 
+		// ボタン画像
 		var ui_image = new UIImage(this, {
 			imageName: button_image,
 			x: x,
 			y: y,
 			children: [
+				// 消費P
 				new UIText(this, {
 					text: consume_p.toString() + "P",
 					textColor: "black",
@@ -229,7 +234,11 @@ SceneBattle.prototype._setupUnitButtons = function() {
 			],
 		})
 			.on("click", onclick_func)
-			.on("touch", onclick_func);
+			.on("touch", onclick_func)
+			.on("clickstart", onclickstart_func)
+			.on("clickend", onclickend_func)
+			.on("touchstart", onclickstart_func)
+			.on("touchend", onclickend_func);
 
 		this._unit_buttons.push(ui_image);
 	}
@@ -262,11 +271,22 @@ SceneBattle.prototype._setupPagingButtons = function() {
 
 	this._unit_paging_left_button
 		.on("click", unit_paging_button_func)
-		.on("touch", unit_paging_button_func);
+		.on("touch", unit_paging_button_func)
+		.on("clickstart", onclickstart_func)
+		.on("clickend", onclickend_func)
+		.on("touchstart", onclickstart_func)
+		.on("touchend", onclickend_func);
+
 
 	this._unit_paging_right_button
 		.on("click", unit_paging_button_func)
-		.on("touch", unit_paging_button_func);
+		.on("touch", unit_paging_button_func)
+		.on("clickstart", onclickstart_func)
+		.on("clickend", onclickend_func)
+		.on("touchstart", onclickstart_func)
+		.on("touchend", onclickend_func);
+
+
 };
 
 // スペルカード ボタン生成
@@ -290,7 +310,13 @@ SceneBattle.prototype._setupSpellCardButton = function() {
 
 	this._spellcard_button
 		.on("click", spellcard_button_func)
-		.on("touch", spellcard_button_func);
+		.on("touch", spellcard_button_func)
+		.on("clickstart", onclickstart_func)
+		.on("clickend", onclickend_func)
+		.on("touchstart", onclickstart_func)
+		.on("touchend", onclickend_func);
+
+
 };
 
 
@@ -555,5 +581,29 @@ SceneBattle.prototype.draw = function(){
 		this.spellcard_anime.draw();
 	}
 };
+
+var onclickstart_func = function () {
+	this.x(this.x() + BUTTON_MOVE_PX);
+	this.y(this.y() + BUTTON_MOVE_PX);
+
+	for (var i = 0, len = this.objects.length; i < len; i++) {
+		var child = this.objects[i];
+		child.x(child.x() + BUTTON_MOVE_PX);
+		child.y(child.y() + BUTTON_MOVE_PX);
+	}
+};
+
+var onclickend_func = function () {
+	this.x(this.x() - BUTTON_MOVE_PX);
+	this.y(this.y() - BUTTON_MOVE_PX);
+
+	for (var i = 0, len = this.objects.length; i < len; i++) {
+		var child = this.objects[i];
+		child.x(child.x() - BUTTON_MOVE_PX);
+		child.y(child.y() - BUTTON_MOVE_PX);
+	}
+};
+
+
 
 module.exports = SceneBattle;
