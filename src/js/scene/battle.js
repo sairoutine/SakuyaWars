@@ -2,9 +2,7 @@
 /*
 
 ◆ TODO:
-ボス撃破デバッグ
 咲夜を生成できないときは押せないようにするか、別の音を出したい
-ボタン押下時に動くのを、hakureijsへ
 
 称号の組み込み
 遠距離攻撃の敵、紅魔館にすぐたどり着く。。。→ よって、一旦遠距離攻撃を削除したので、復活させる
@@ -389,6 +387,11 @@ SceneBattle.prototype._generateUnit = function(unit_num){
 	unit.y(y);
 
 	this.units.addObject(unit);
+};
+
+// ボスを撃破する
+SceneBattle.prototype.destroyBoss = function() {
+	this.boss.reduceHP(this.boss.maxHP());
 };
 
 // スペルカードを使用できるようにする

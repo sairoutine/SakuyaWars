@@ -69,6 +69,15 @@ Game.prototype.setupDebug = function (dom) {
 		game.debug_manager.set("is_show_hp", false);
 	});
 
+	this.debug_manager.addMenuButton("ボス撃破", function (game) {
+		if(game.scene_manager.currentScene() instanceof SceneBattle) {
+			game.scene_manager.currentScene().destroyBoss();
+		}
+		else {
+			window.alert("バトル中に押してください");
+		}
+	});
+
 	this.debug_manager.addMenuButton("スペカを使用可にする", function (game) {
 		if(game.scene_manager.currentScene() instanceof SceneBattle) {
 			game.scene_manager.currentScene().enableSpellCard();
