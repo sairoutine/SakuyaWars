@@ -2,6 +2,7 @@
 
 var BaseObject = require('./base');
 var Util = require('../../hakurei').Util;
+var CONSTANT = require('../../constant');
 
 var SakuyaMeisaku = function(scene) {
 	BaseObject.apply(this, arguments);
@@ -49,6 +50,11 @@ SakuyaMeisaku.prototype.collisionWidth = function(){
 };
 SakuyaMeisaku.prototype.collisionHeight = function(){
 	return 200;
+};
+
+// ユニットの種類
+SakuyaMeisaku.prototype.type = function(){
+	return CONSTANT.UNIT_TYPE_MEISAKU;
 };
 
 // ユニット生成に必要なPの数

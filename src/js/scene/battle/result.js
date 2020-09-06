@@ -156,8 +156,8 @@ SceneBattleResult.prototype.draw = function(){
 			if (bonus) {
 				ctx.save();
 				ctx.font = "24px 'MyFont'";
-				drawWithLine(ctx, 120, 250 + i*30, bonus.text + ":");
-				drawWithLine(ctx, 630, 250 + i*30, "×" +  bonus.num + "倍");
+				drawWithLine(ctx, 120, 250 + i*30, bonus.text() + ":");
+				drawWithLine(ctx, 630, 250 + i*30, "×" +  bonus.num() + "倍");
 				ctx.restore();
 			}
 		}

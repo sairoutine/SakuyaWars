@@ -2,6 +2,7 @@
 
 var BaseObject = require('./base');
 var Util = require('../../hakurei').Util;
+var CONSTANT = require('../../constant');
 
 var SakuyaMMD = function(scene) {
 	BaseObject.apply(this, arguments);
@@ -59,6 +60,11 @@ SakuyaMMD.prototype.collisionWidth = function(){
 };
 SakuyaMMD.prototype.collisionHeight = function(){
 	return 200;
+};
+
+// ユニットの種類
+SakuyaMMD.prototype.type = function(){
+	return CONSTANT.UNIT_TYPE_MMD;
 };
 
 // ユニット生成に必要なPの数

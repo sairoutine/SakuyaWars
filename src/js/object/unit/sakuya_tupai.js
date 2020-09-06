@@ -2,6 +2,7 @@
 
 var BaseObject = require('./base');
 var Util = require('../../hakurei').Util;
+var CONSTANT = require('../../constant');
 
 var SakuyaTupai = function(scene) {
 	BaseObject.apply(this, arguments);
@@ -59,6 +60,11 @@ SakuyaTupai.prototype.collisionWidth = function(){
 };
 SakuyaTupai.prototype.collisionHeight = function(){
 	return 200;
+};
+
+// ユニットの種類
+SakuyaTupai.prototype.type = function(){
+	return CONSTANT.UNIT_TYPE_TUPAI;
 };
 
 // ユニット生成に必要なPの数

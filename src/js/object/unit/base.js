@@ -291,6 +291,11 @@ UnitBase.prototype.attackSound = function(){
 	return "unit_default_attack2";
 };
 
+// ユニットの種類
+UnitBase.prototype.type = function(){
+	throw new Error("type method must be defined.");
+};
+
 // 最大HP
 UnitBase.prototype.maxHP = function(){
 	throw new Error("maxHP method must be defined.");

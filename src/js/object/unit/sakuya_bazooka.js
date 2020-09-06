@@ -2,6 +2,7 @@
 
 var BaseObject = require('./base');
 var Util = require('../../hakurei').Util;
+var CONSTANT = require('../../constant');
 
 var SakuyaBazooka = function(scene) {
 	BaseObject.apply(this, arguments);
@@ -49,6 +50,11 @@ SakuyaBazooka.prototype.collisionWidth = function(){
 };
 SakuyaBazooka.prototype.collisionHeight = function(){
 	return 200;
+};
+
+// ユニットの種類
+SakuyaBazooka.prototype.type = function(){
+	return CONSTANT.UNIT_TYPE_BAZOOKA;
 };
 
 // ユニット生成に必要なPの数

@@ -2,6 +2,7 @@
 
 var BaseObject = require('./base');
 var Util = require('../../hakurei').Util;
+var CONSTANT = require('../../constant');
 
 var SakuyaTea = function(scene) {
 	BaseObject.apply(this, arguments);
@@ -49,6 +50,11 @@ SakuyaTea.prototype.collisionWidth = function(){
 };
 SakuyaTea.prototype.collisionHeight = function(){
 	return 200;
+};
+
+// ユニットの種類
+SakuyaTea.prototype.type = function(){
+	return CONSTANT.UNIT_TYPE_TEA;
 };
 
 // ユニット生成に必要なPの数

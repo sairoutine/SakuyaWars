@@ -2,6 +2,7 @@
 
 var BaseObject = require('./base');
 var Util = require('../../hakurei').Util;
+var CONSTANT = require('../../constant');
 
 var SakuyaMandoragora = function(scene) {
 	BaseObject.apply(this, arguments);
@@ -64,6 +65,11 @@ SakuyaMandoragora.prototype.collisionWidth = function(){
 };
 SakuyaMandoragora.prototype.collisionHeight = function(){
 	return 200;
+};
+
+// ユニットの種類
+SakuyaMandoragora.prototype.type = function(){
+	return CONSTANT.UNIT_TYPE_MANDORAGORA;
 };
 
 // ユニット生成に必要なPの数

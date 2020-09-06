@@ -2,6 +2,7 @@
 
 var BaseObject = require('./base');
 var Util = require('../../hakurei').Util;
+var CONSTANT = require('../../constant');
 
 var SakuyaNormal1 = function(scene) {
 	BaseObject.apply(this, arguments);
@@ -59,6 +60,11 @@ SakuyaNormal1.prototype.collisionWidth = function(){
 };
 SakuyaNormal1.prototype.collisionHeight = function(){
 	return 200;
+};
+
+// ユニットの種類
+SakuyaNormal1.prototype.type = function(){
+	return CONSTANT.UNIT_TYPE_NORMAL1;
 };
 
 // ユニット生成に必要なPの数

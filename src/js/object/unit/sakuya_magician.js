@@ -2,6 +2,7 @@
 
 var BaseObject = require('./base');
 var Util = require('../../hakurei').Util;
+var CONSTANT = require('../../constant');
 
 var SakuyaMagician = function(scene) {
 	BaseObject.apply(this, arguments);
@@ -63,6 +64,11 @@ SakuyaMagician.prototype.collisionWidth = function(){
 };
 SakuyaMagician.prototype.collisionHeight = function(){
 	return 200;
+};
+
+// ユニットの種類
+SakuyaMagician.prototype.type = function(){
+	return CONSTANT.UNIT_TYPE_MAGICIAN;
 };
 
 // ユニット生成に必要なPの数

@@ -2,6 +2,7 @@
 
 var BaseObject = require('./base');
 var Util = require('../../hakurei').Util;
+var CONSTANT = require('../../constant');
 
 var SakuyaYoyomu = function(scene) {
 	BaseObject.apply(this, arguments);
@@ -55,6 +56,11 @@ SakuyaYoyomu.prototype.collisionWidth = function(){
 };
 SakuyaYoyomu.prototype.collisionHeight = function(){
 	return 200;
+};
+
+// ユニットの種類
+SakuyaYoyomu.prototype.type = function(){
+	return CONSTANT.UNIT_TYPE_YOYOMU;
 };
 
 // ユニット生成に必要なPの数
