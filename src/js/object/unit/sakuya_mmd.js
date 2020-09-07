@@ -55,10 +55,19 @@ SakuyaMMD.prototype.attackSound = function(){
 	return "unit_mmd_attack2";
 };
 
-SakuyaMMD.prototype.collisionWidth = function(){
+// 攻撃の当たり判定
+SakuyaMMD.prototype.attackCollisionWidth = function(){
 	return 200;
 };
-SakuyaMMD.prototype.collisionHeight = function(){
+SakuyaMMD.prototype.attackCollisionHeight = function(){
+	return 200;
+};
+
+// 本体の当たり判定
+SakuyaMMD.prototype.bodyCollisionWidth = function(){
+	return 200;
+};
+SakuyaMMD.prototype.bodyCollisionHeight = function(){
 	return 200;
 };
 

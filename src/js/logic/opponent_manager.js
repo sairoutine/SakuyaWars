@@ -39,7 +39,7 @@ OpponentManager.prototype.update = function(){
 
 	// とりあえず仮で時間経過でランダムに敵を生成する
 	if (this.frame_count % interval === 0) {
-		var no = Util.getRandomInt(0,3);
+		var no = Util.getRandomInt(0,7);
 		scene.generateEnemy(no);
 	}
 };

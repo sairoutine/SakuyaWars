@@ -45,10 +45,19 @@ SakuyaTea.prototype.deadSound = function(){
 	return "unit_tea_damage";
 };
 
-SakuyaTea.prototype.collisionWidth = function(){
+// 攻撃の当たり判定
+SakuyaTea.prototype.attackCollisionWidth = function(){
 	return 100;
 };
-SakuyaTea.prototype.collisionHeight = function(){
+SakuyaTea.prototype.attackCollisionHeight = function(){
+	return 200;
+};
+
+// 本体の当たり判定
+SakuyaTea.prototype.bodyCollisionWidth = function(){
+	return 200;
+};
+SakuyaTea.prototype.bodyCollisionHeight = function(){
 	return 200;
 };
 

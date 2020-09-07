@@ -2,10 +2,10 @@
 /*
 
 ◆ TODO:
-遠距離攻撃の敵、紅魔館にすぐたどり着く。。。→ よって、一旦遠距離攻撃を削除したので、復活させる
 ダメージを与えたときのエフェクトを表示する
 GameClear 画像の組み込みと、スコア表示
 
+敵／味方の当たり判定調整
 ステージごとに敵のAI調整
 味方のパラメータ調整
 敵のパラメータ調整
@@ -50,12 +50,12 @@ var UnitSakuyaMandoragora = require('../object/unit/sakuya_mandoragora');
 var UnitSakuyaTupai = require('../object/unit/sakuya_tupai');
 var UnitSakuyaYoyomu = require('../object/unit/sakuya_yoyomu');
 
-//var EnemyBlueLong = require('../object/enemy/blue_long');
-//var EnemyBlueShort = require('../object/enemy/blue_short');
+var EnemyBlueLong = require('../object/enemy/blue_long');
+var EnemyBlueShort = require('../object/enemy/blue_short');
 var EnemyPinkLong = require('../object/enemy/pink_long');
 var EnemyPinkShort = require('../object/enemy/pink_short');
-//var EnemyRedLong = require('../object/enemy/red_long');
-//var EnemyRedShort = require('../object/enemy/red_short');
+var EnemyRedLong = require('../object/enemy/red_long');
+var EnemyRedShort = require('../object/enemy/red_short');
 var EnemyWhiteLong = require('../object/enemy/white_long');
 var EnemyWhiteShort = require('../object/enemy/white_short');
 
@@ -103,12 +103,12 @@ var UNITS_CLASSES = [
 ];
 
 var ENEMY_CLASSES = [
-	//EnemyBlueLong,
-	//EnemyBlueShort,
+	EnemyBlueLong,
+	EnemyBlueShort,
 	EnemyPinkLong,
 	EnemyPinkShort,
-	//EnemyRedLong,
-	//EnemyRedShort,
+	EnemyRedLong,
+	EnemyRedShort,
 	EnemyWhiteLong,
 	EnemyWhiteShort,
 ];

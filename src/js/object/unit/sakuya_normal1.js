@@ -55,10 +55,19 @@ SakuyaNormal1.prototype.attackSound = function(){
 	return "unit_normal1_attack2";
 };
 
-SakuyaNormal1.prototype.collisionWidth = function(){
+// 攻撃の当たり判定
+SakuyaNormal1.prototype.attackCollisionWidth = function(){
 	return 100;
 };
-SakuyaNormal1.prototype.collisionHeight = function(){
+SakuyaNormal1.prototype.attackCollisionHeight = function(){
+	return 200;
+};
+
+// 本体の当たり判定
+SakuyaNormal1.prototype.bodyCollisionWidth = function(){
+	return 200;
+};
+SakuyaNormal1.prototype.bodyCollisionHeight = function(){
 	return 200;
 };
 

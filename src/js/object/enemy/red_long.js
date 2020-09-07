@@ -40,10 +40,19 @@ EnemyRedLong.prototype.walkImage2 = function(){
 	return "enemy_red_long_walk02";
 };
 
-EnemyRedLong.prototype.collisionWidth = function(){
+// 攻撃の当たり判定
+EnemyRedLong.prototype.attackCollisionWidth = function(){
 	return 400;
 };
-EnemyRedLong.prototype.collisionHeight = function(){
+EnemyRedLong.prototype.attackCollisionHeight = function(){
+	return 200;
+};
+
+// 本体の当たり判定
+EnemyRedLong.prototype.bodyCollisionWidth = function(){
+	return 200;
+};
+EnemyRedLong.prototype.bodyCollisionHeight = function(){
 	return 200;
 };
 

@@ -60,10 +60,19 @@ SakuyaMandoragora.prototype.attackSound = function(){
 	return "unit_mandoragora_attack2";
 };
 
-SakuyaMandoragora.prototype.collisionWidth = function(){
+// 攻撃の当たり判定
+SakuyaMandoragora.prototype.attackCollisionWidth = function(){
 	return 100;
 };
-SakuyaMandoragora.prototype.collisionHeight = function(){
+SakuyaMandoragora.prototype.attackCollisionHeight = function(){
+	return 200;
+};
+
+// 本体の当たり判定
+SakuyaMandoragora.prototype.bodyCollisionWidth = function(){
+	return 200;
+};
+SakuyaMandoragora.prototype.bodyCollisionHeight = function(){
 	return 200;
 };
 

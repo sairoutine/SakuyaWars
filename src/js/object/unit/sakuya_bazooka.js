@@ -45,10 +45,19 @@ SakuyaBazooka.prototype.attackSound = function(){
 	return "unit_mmd_or_bazooka_attack1";
 };
 
-SakuyaBazooka.prototype.collisionWidth = function(){
+// 攻撃の当たり判定
+SakuyaBazooka.prototype.attackCollisionWidth = function(){
 	return 400;
 };
-SakuyaBazooka.prototype.collisionHeight = function(){
+SakuyaBazooka.prototype.attackCollisionHeight = function(){
+	return 200;
+};
+
+// 本体の当たり判定
+SakuyaBazooka.prototype.bodyCollisionWidth = function(){
+	return 200;
+};
+SakuyaBazooka.prototype.bodyCollisionHeight = function(){
 	return 200;
 };
 

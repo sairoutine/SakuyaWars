@@ -40,12 +40,22 @@ EnemyBlueShort.prototype.walkImage2 = function(){
 	return "enemy_blue_short_walk02";
 };
 
-EnemyBlueShort.prototype.collisionWidth = function(){
+// 攻撃の当たり判定
+EnemyBlueShort.prototype.attackCollisionWidth = function(){
 	return 400;
 };
-EnemyBlueShort.prototype.collisionHeight = function(){
+EnemyBlueShort.prototype.attackCollisionHeight = function(){
 	return 200;
 };
+
+// 本体の当たり判定
+EnemyBlueShort.prototype.bodyCollisionWidth = function(){
+	return 200;
+};
+EnemyBlueShort.prototype.bodyCollisionHeight = function(){
+	return 200;
+};
+
 
 // 最大HP
 EnemyBlueShort.prototype.maxHP = function(){

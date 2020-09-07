@@ -51,10 +51,19 @@ SakuyaNormal2.buttonImage = function(){
 	return "btn_icon_sakuya_normalenkyori";
 };
 
-SakuyaNormal2.prototype.collisionWidth = function(){
+// 攻撃の当たり判定
+SakuyaNormal2.prototype.attackCollisionWidth = function(){
 	return 400;
 };
-SakuyaNormal2.prototype.collisionHeight = function(){
+SakuyaNormal2.prototype.attackCollisionHeight = function(){
+	return 200;
+};
+
+// 本体の当たり判定
+SakuyaNormal2.prototype.bodyCollisionWidth = function(){
+	return 200;
+};
+SakuyaNormal2.prototype.bodyCollisionHeight = function(){
 	return 200;
 };
 

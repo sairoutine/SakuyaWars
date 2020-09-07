@@ -20,8 +20,14 @@ var STATUS_DEAD = 3;
 var BaseObject = require('../../hakurei').Object.Base;
 var Util = require('../../hakurei').Util;
 
+var Collision = require('../collision');
+
 var UnitBase = function(scene) {
 	BaseObject.apply(this, arguments);
+
+	this._attack_collision = new Collision(scene, this.attackCollisionWidth(), this.attackCollisionHeight());
+	this._body_collision = new Collision(scene, this.bodyCollisionWidth(), this.bodyCollisionHeight());
+	this.addSubObjects([this._attack_collision, this._body_collision]);
 
 	this._status = this.isStandType() ? STATUS_STOPPING : STATUS_WALKING;
 
@@ -124,13 +130,13 @@ UnitBase.prototype._attackIfTargetIsNearby = function () {
 	// 近くにボスがいないか
 	// NOTE: ボスと敵が同時に近くにいるときは、敵が優先して攻撃対象となる
 	//       よって、ボス→敵の順番に走査する
-	if (self.intersect(this.scene.boss)) {
+	if (self.attackCollision().intersect(this.scene.boss)) {
 		target = this.scene.boss;
 	}
 
 	// 近くに敵がいないか走査
 	this.scene.enemies.forEach(function(enemy) {
-		if(self.intersect(enemy)) {
+		if(self.attackCollision().intersect(enemy)) {
 			target = enemy;
 		}
 	});
@@ -245,6 +251,14 @@ UnitBase.prototype.isCollision = function(obj) {
 	return !this.isDead();
 };
 
+UnitBase.prototype.attackCollision = function(){
+	return this._attack_collision;
+};
+
+UnitBase.prototype.bodyCollision = function(){
+	return this._body_collision;
+};
+
 // 静的メソッド→動的メソッド
 UnitBase.prototype.consumedP = function(){
 	var Klass = this.constructor;
@@ -294,6 +308,22 @@ UnitBase.prototype.attackSound = function(){
 // ユニットの種類
 UnitBase.prototype.type = function(){
 	throw new Error("type method must be defined.");
+};
+
+// 攻撃の当たり判定
+UnitBase.prototype.attackCollisionWidth = function(){
+	throw new Error("attackCollisionWidth method must be defined.");
+};
+UnitBase.prototype.attackCollisionHeight = function(){
+	throw new Error("attackCollisionHeight method must be defined.");
+};
+
+// 本体の当たり判定
+UnitBase.prototype.bodyCollisionWidth = function(){
+	throw new Error("bodyCollisionWidth method must be defined.");
+};
+UnitBase.prototype.bodyCollisionHeight = function(){
+	throw new Error("bodyCollisionHeight method must be defined.");
 };
 
 // 最大HP

@@ -20,8 +20,14 @@ var STATUS_DEAD = 3;
 var BaseObject = require('../../hakurei').Object.Base;
 var Util = require('../../hakurei').Util;
 
+var Collision = require('../collision');
+
 var EnemyBase = function(scene) {
 	BaseObject.apply(this, arguments);
+
+	this._attack_collision = new Collision(scene, this.attackCollisionWidth(), this.attackCollisionHeight());
+	this._body_collision = new Collision(scene, this.bodyCollisionWidth(), this.bodyCollisionHeight());
+	this.addSubObjects([this._attack_collision, this._body_collision]);
 
 	this._status = STATUS_WALKING;
 
@@ -70,7 +76,7 @@ EnemyBase.prototype.update = function(){
 
 		// 自陣に到達したらゲームオーバー
 		var fort = this.scene.fort;
-		if (this.intersect(fort)) {
+		if (this.bodyCollision().intersect(fort)) {
 			this.scene.notifyGameover();
 		}
 
@@ -125,7 +131,7 @@ EnemyBase.prototype._attackIfTargetIsNearby = function () {
 	// 近くに攻撃対象がいないか走査
 	var target = null;
 	this.scene.units.forEach(function(unit) {
-		if(self.intersect(unit)) {
+		if(self.attackCollision().intersect(unit.bodyCollision())) {
 			target = unit;
 		}
 	});
@@ -225,6 +231,15 @@ EnemyBase.prototype.isCollision = function(obj) {
 	return !this.isDead();
 };
 
+EnemyBase.prototype.attackCollision = function(){
+	return this._attack_collision;
+};
+
+EnemyBase.prototype.bodyCollision = function(){
+	return this._body_collision;
+};
+
+
 // 攻撃する時の画像
 EnemyBase.prototype.attackImage = function(){
 	throw new Error("attackImage method must be defined.");
@@ -244,6 +259,23 @@ EnemyBase.prototype.walkImage1 = function(){
 EnemyBase.prototype.walkImage2 = function(){
 	throw new Error("walkImage2 method must be defined.");
 };
+
+// 攻撃の当たり判定
+EnemyBase.prototype.attackCollisionWidth = function(){
+	throw new Error("attackCollisionWidth method must be defined.");
+};
+EnemyBase.prototype.attackCollisionHeight = function(){
+	throw new Error("attackCollisionHeight method must be defined.");
+};
+
+// 本体の当たり判定
+EnemyBase.prototype.bodyCollisionWidth = function(){
+	throw new Error("bodyCollisionWidth method must be defined.");
+};
+EnemyBase.prototype.bodyCollisionHeight = function(){
+	throw new Error("bodyCollisionHeight method must be defined.");
+};
+
 
 // 最大HP
 EnemyBase.prototype.maxHP = function(){

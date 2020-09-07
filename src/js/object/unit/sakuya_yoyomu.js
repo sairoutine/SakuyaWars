@@ -51,10 +51,19 @@ SakuyaYoyomu.buttonImage = function(){
 	return "btn_icon_sakuya_yoyomu";
 };
 
-SakuyaYoyomu.prototype.collisionWidth = function(){
+// 攻撃の当たり判定
+SakuyaYoyomu.prototype.attackCollisionWidth = function(){
 	return 100;
 };
-SakuyaYoyomu.prototype.collisionHeight = function(){
+SakuyaYoyomu.prototype.attackCollisionHeight = function(){
+	return 200;
+};
+
+// 本体の当たり判定
+SakuyaYoyomu.prototype.bodyCollisionWidth = function(){
+	return 200;
+};
+SakuyaYoyomu.prototype.bodyCollisionHeight = function(){
 	return 200;
 };
 

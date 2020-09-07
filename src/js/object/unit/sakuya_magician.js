@@ -59,10 +59,19 @@ SakuyaMagician.prototype.deadSound = function(){
 	return "unit_magician_damage";
 };
 
-SakuyaMagician.prototype.collisionWidth = function(){
+// 攻撃の当たり判定
+SakuyaMagician.prototype.attackCollisionWidth = function(){
 	return 200;
 };
-SakuyaMagician.prototype.collisionHeight = function(){
+SakuyaMagician.prototype.attackCollisionHeight = function(){
+	return 200;
+};
+
+// 本体の当たり判定
+SakuyaMagician.prototype.bodyCollisionWidth = function(){
+	return 200;
+};
+SakuyaMagician.prototype.bodyCollisionHeight = function(){
 	return 200;
 };
 
