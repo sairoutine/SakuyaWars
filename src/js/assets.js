@@ -25,6 +25,9 @@ AssetsConfig.images = {
 
 	"button_white": "./image/button_white.png",
 
+	"effect_hit": "./image/hit_01.png",
+	"effect_slash": "./image/slash_01.png",
+
 	"fort": "./image/koumakan_01.png",
 	"SS_Battle_spell1": "./image/SS_Battle_spell1.png",
 

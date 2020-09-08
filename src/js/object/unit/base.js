@@ -34,6 +34,10 @@ var UnitBase = function(scene) {
 	this._remaining_dead_frame = 0;
 	this._remaining_attacking_frame = 0;
 	this._remaining_stopping_frame = 0;
+
+	// 攻撃エフェクトの位置(0は表示しない)
+	this._attack_effect_x = 0;
+	this._attack_effect_y = 0;
 };
 Util.inherit(UnitBase, BaseObject);
 
@@ -48,6 +52,10 @@ UnitBase.prototype.init = function(){
 	this._remaining_dead_frame = 0;
 	this._remaining_attacking_frame = 0;
 	this._remaining_stopping_frame = 0;
+
+	// 攻撃エフェクトの位置(0は表示しない)
+	this._attack_effect_x = 0;
+	this._attack_effect_y = 0;
 
 	this.hp(this.maxHP());
 };
@@ -104,6 +112,10 @@ UnitBase.prototype.update = function(){
 			this._status = STATUS_STOPPING;
 
 			this._remaining_stopping_frame = STOPPING_FRAME;
+
+			// 攻撃エフェクトの表示をやめる
+			this._attack_effect_x = 0;
+			this._attack_effect_y = 0;
 		}
 		else { // 攻撃時間がまだあれば
 			// なにもしない
@@ -155,6 +167,10 @@ UnitBase.prototype._attackIfTargetIsNearby = function () {
 		if (target.hp() <= 0) {
 			this.scene.mission_manager.notifyEnemyKilled(this, target);
 		}
+
+		// 攻撃エフェクトの表示
+		this._attack_effect_x = target.x();
+		this._attack_effect_y = target.y();
 
 		// 攻撃SE再生
 		this.core.audio_loader.playSound(this.attackSound());
@@ -210,10 +226,22 @@ UnitBase.prototype.draw = function(){
 		throw new Error("Illegal status.");
 	}
 
+	// キャラの表示
 	ctx.save();
 	ctx.translate(this.x(), this.y());
 	ctx.drawImage(image, -image.width/2 + RENDER_MARGIN, -image.height/2);
 	ctx.restore();
+
+
+	// 攻撃エフェクトの表示
+	if (this._attack_effect_x && this._attack_effect_y && this.attackEffect()) {
+		var effect_image = this.core.image_loader.getImage(this.attackEffect());
+
+		ctx.save();
+		ctx.translate(this._attack_effect_x, this._attack_effect_y);
+		ctx.drawImage(effect_image, -effect_image.width/2, -effect_image.height/2);
+		ctx.restore();
+	}
 };
 
 UnitBase.prototype.reduceHP = function(damage){
@@ -290,7 +318,7 @@ UnitBase.prototype.walkImage2 = function(){
 
 // 敵にダメージを与えたときのエフェクト
 UnitBase.prototype.attackEffect = function(){
-	return "effect_hit";
+	return "";
 };
 
 // ユニット生成 ボタン画像

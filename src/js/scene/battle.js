@@ -2,7 +2,6 @@
 /*
 
 ◆ TODO:
-ダメージを与えたときのエフェクトを表示する
 GameClear 画像の組み込みと、スコア表示
 
 敵／味方の当たり判定調整
@@ -162,11 +161,11 @@ var SceneBattle = function(core) {
 	// ボムの数
 	this.b_num = 0;
 
-	// 召喚したユニット一覧
-	this.units = new Container(this);
-
 	// 召喚した敵一覧
 	this.enemies = new Container(this);
+
+	// 召喚したユニット一覧
+	this.units = new Container(this);
 
 	// 時を止めるスペカが使えるようになるまでの残り時間(frame)
 	this._remaining_time_to_use_timestop_frame = CONSTANT.TIME_TO_USE_TIMESTOP_FRAME;
@@ -181,8 +180,8 @@ var SceneBattle = function(core) {
 	this._current_paging_position = 0;
 
 	// ---
-	this.addObjects(this.units);
 	this.addObjects(this.enemies);
+	this.addObjects(this.units);
 };
 Util.inherit(SceneBattle, BaseScene);
 
@@ -334,11 +333,11 @@ SceneBattle.prototype.init = function(stage_no){
 	// ボムの数
 	this.b_num = 0;
 
-	// 召喚したユニット一覧 初期化
-	this.units.removeAllObject();
-
 	// 召喚した敵一覧 初期化
 	this.enemies.removeAllObject();
+
+	// 召喚したユニット一覧 初期化
+	this.units.removeAllObject();
 
 	// 時を止めてる際の残り時間(frame)
 	this._remaining_timestop_frame = 0;

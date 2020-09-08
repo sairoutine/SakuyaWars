@@ -36,6 +36,11 @@ SakuyaMeisaku.prototype.deadImage = function(){
 	return "unit_meisaku_damage";
 };
 
+// 敵にダメージを与えたときのエフェクト
+SakuyaMeisaku.prototype.attackEffect = function(){
+	return "effect_hit";
+};
+
 // ユニット生成 ボタン画像
 SakuyaMeisaku.buttonImage = function(){
 	return "btn_icon_sakuya_meisaku";

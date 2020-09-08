@@ -46,6 +46,11 @@ SakuyaNormal2.prototype.walkImage2 = function(){
 	return "unit_enkyori_walk2";
 };
 
+// 敵にダメージを与えたときのエフェクト
+SakuyaNormal2.prototype.attackEffect = function(){
+	return "effect_slash";
+};
+
 // ユニット生成 ボタン画像
 SakuyaNormal2.buttonImage = function(){
 	return "btn_icon_sakuya_normalenkyori";

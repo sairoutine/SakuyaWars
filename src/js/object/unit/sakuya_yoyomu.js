@@ -46,6 +46,11 @@ SakuyaYoyomu.prototype.walkImage2 = function(){
 	return "unit_yoyomu_walk2";
 };
 
+// 敵にダメージを与えたときのエフェクト
+SakuyaYoyomu.prototype.attackEffect = function(){
+	return "effect_slash";
+};
+
 // ユニット生成 ボタン画像
 SakuyaYoyomu.buttonImage = function(){
 	return "btn_icon_sakuya_yoyomu";
