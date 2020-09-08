@@ -41,32 +41,42 @@ Game.prototype.setupDebug = function (dom) {
 
 	this.debug_manager.setOn(dom);
 
-	// ゲームスタート ボタン
-	this.debug_manager.addMenuButton("Run", function (game) {
-		game.startRun();
-	});
-
-	// ゲームストップ ボタン
-	this.debug_manager.addMenuButton("Stop", function (game) {
-		game.stopRun();
+	// ゲームスタート／ストップ ボタン
+	this.debug_manager.addMenuButton("Run/Stop", function (game) {
+		if(game.isRunning()) {
+			game.stopRun();
+		}
+		else {
+			game.startRun();
+		}
 	});
 
 	// キャプチャボタン
 	this.debug_manager.addCaputureImageButton("画面キャプチャ");
 
 	// FPS 表示
-	this.debug_manager.addMenuButton("FPS表示", function (game) {
-		game.debug_manager.setShowingFpsOn();
-	});
-	this.debug_manager.addMenuButton("FPS非表示", function (game) {
-		game.debug_manager.setShowingFpsOff();
+	this.debug_manager.addMenuButton("FPS表示／非表示", function (game) {
+		if (game.debug_manager.isShowingFps()) {
+			game.debug_manager.setShowingFpsOff();
+		}
+		else {
+			game.debug_manager.setShowingFpsOn();
+		}
 	});
 
-	this.debug_manager.addMenuButton("HP表示", function (game) {
-		game.debug_manager.set("is_show_hp", true);
+	// 当たり判定 表示
+	this.debug_manager.addMenuButton("当たり判定表示／非表示", function (game) {
+		if (game.debug_manager.isShowingCollisionArea()) {
+			game.debug_manager.setShowingCollisionAreaOff();
+		}
+		else {
+			game.debug_manager.setShowingCollisionAreaOn();
+		}
 	});
-	this.debug_manager.addMenuButton("HP非表示", function (game) {
-		game.debug_manager.set("is_show_hp", false);
+
+	this.debug_manager.addMenuButton("HP表示／非表示", function (game) {
+		var flag = game.debug_manager.get("is_show_hp") || false;
+		game.debug_manager.set("is_show_hp", !flag);
 	});
 
 	this.debug_manager.addMenuButton("ボス撃破", function (game) {
