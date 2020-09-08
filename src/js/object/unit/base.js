@@ -142,8 +142,8 @@ UnitBase.prototype._attackIfTargetIsNearby = function () {
 	// 近くにボスがいないか
 	// NOTE: ボスと敵が同時に近くにいるときは、敵が優先して攻撃対象となる
 	//       よって、ボス→敵の順番に走査する
-	if (self.attackCollision().intersect(this.scene.boss)) {
-		target = this.scene.boss;
+	if (self.attackCollision().intersect(this.scene.currentBoss())) {
+		target = this.scene.currentBoss();
 	}
 
 	// 近くに敵がいないか走査

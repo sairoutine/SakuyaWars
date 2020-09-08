@@ -3,11 +3,12 @@
 
 ◆ TODO:
 GameClear 画像の組み込みと、スコア表示
-
 敵／味方の当たり判定調整
+
 ステージごとに敵のAI調整
 味方のパラメータ調整
 敵のパラメータ調整
+ボスのパラメータ調整
 ミッション難易度調整
 ゲームクリア画像の閾値調整
 → 軽いコストの咲夜は画面に30体くらい出せるレベル
@@ -117,9 +118,22 @@ var SceneBattle = function(core) {
 
 	// 自陣
 	this.fort = new Fort(this);
+	this.fort.x(90);
+	this.fort.y(416);
+
+	// ボス一覧
+	this._bosses = [];
+	for (var i = 0, len = BOSS_CLASSES.length; i < len; i++) {
+		var boss = new BOSS_CLASSES[i](this);
+		boss.x(726);
+		boss.y(410);
+		this._bosses.push(boss);
+	}
 
 	// スペルカード演出
 	this.spellcard_anime = new SpellCardAnime(this);
+	this.spellcard_anime.x(this.width/2);
+	this.spellcard_anime.y(this.height/2);
 
 	// ミッション管理
 	this.mission_manager = new MissionManager(this);
@@ -151,9 +165,6 @@ var SceneBattle = function(core) {
 
 	// ステージNo
 	this.stage_no = 0;
-
-	// ボス
-	this.boss = null;
 
 	// P ポイントの数
 	this.p_num = CONSTANT.P_MAX;
@@ -305,24 +316,11 @@ SceneBattle.prototype.init = function(stage_no){
 		this.stage_no = CONSTANT.DEBUG_STAGE_NO;
 	}
 
-	// 自陣
-	this.fort.x(90);
-	this.fort.y(416);
-
 	// スペルカード演出
 	this.spellcard_anime.init();
-	this.spellcard_anime.x(this.width/2);
-	this.spellcard_anime.y(this.height/2);
 
-	// ボス
-	if (this.boss !== null) { // stage 2 以降は前のステージのボスを削除する
-		this.removeObject(this.boss);
-	}
-	this.boss = new BOSS_CLASSES[this.stage_no](this);
-	this.boss.init();
-	this.boss.x(726);
-	this.boss.y(410);
-	this.addObject(this.boss);
+	// 現在のボス
+	this.currentBoss().init();
 
 	// ユニット一覧のボタンを、現在のページのものだけ表示する
 	this._showUnitButtonsInCurrentPage();
@@ -400,9 +398,16 @@ SceneBattle.prototype._generateUnit = function(unit_num){
 	return true;
 };
 
+
+// 現在のステージのボス
+SceneBattle.prototype.currentBoss = function() {
+	return this._bosses[this.stage_no];
+};
+
+
 // ボスを撃破する
 SceneBattle.prototype.destroyBoss = function() {
-	this.boss.reduceHP(this.boss.maxHP());
+	this.currentBoss().reduceHP(this.currentBoss().maxHP());
 };
 
 // スペルカードを使用できるようにする
@@ -495,6 +500,7 @@ SceneBattle.prototype.restart = function(){
 SceneBattle.prototype.update = function(){
 	BaseScene.prototype.update.apply(this, arguments);
 
+	this.currentBoss().update();
 	this.spellcard_anime.update();
 
 	// P は時間経過で自動回復する
@@ -569,6 +575,9 @@ SceneBattle.prototype.draw = function(){
 	ctx.fillText("/" + CONSTANT.P_MAX + "P", 740, 35);
 
 	ctx.restore();
+
+	// ボス描画
+	this.currentBoss().draw();
 
 	// 各種オブジェクトやサブシーンの描画
 	BaseScene.prototype.draw.apply(this, arguments);
