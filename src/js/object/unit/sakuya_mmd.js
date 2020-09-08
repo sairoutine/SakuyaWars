@@ -57,7 +57,7 @@ SakuyaMMD.prototype.attackSound = function(){
 
 // 攻撃の当たり判定
 SakuyaMMD.prototype.attackCollisionWidth = function(){
-	return 200;
+	return 150;
 };
 SakuyaMMD.prototype.attackCollisionHeight = function(){
 	return 200;
@@ -65,7 +65,7 @@ SakuyaMMD.prototype.attackCollisionHeight = function(){
 
 // 本体の当たり判定
 SakuyaMMD.prototype.bodyCollisionWidth = function(){
-	return 200;
+	return 100;
 };
 SakuyaMMD.prototype.bodyCollisionHeight = function(){
 	return 200;

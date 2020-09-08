@@ -55,7 +55,7 @@ SakuyaTea.prototype.attackCollisionHeight = function(){
 
 // 本体の当たり判定
 SakuyaTea.prototype.bodyCollisionWidth = function(){
-	return 200;
+	return 100;
 };
 SakuyaTea.prototype.bodyCollisionHeight = function(){
 	return 200;

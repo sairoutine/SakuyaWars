@@ -50,7 +50,7 @@ EnemyWhiteShort.prototype.attackCollisionHeight = function(){
 
 // 本体の当たり判定
 EnemyWhiteShort.prototype.bodyCollisionWidth = function(){
-	return 200;
+	return 100;
 };
 EnemyWhiteShort.prototype.bodyCollisionHeight = function(){
 	return 200;

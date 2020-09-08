@@ -42,7 +42,7 @@ EnemyRedLong.prototype.walkImage2 = function(){
 
 // 攻撃の当たり判定
 EnemyRedLong.prototype.attackCollisionWidth = function(){
-	return 400;
+	return 350;
 };
 EnemyRedLong.prototype.attackCollisionHeight = function(){
 	return 200;
@@ -50,7 +50,7 @@ EnemyRedLong.prototype.attackCollisionHeight = function(){
 
 // 本体の当たり判定
 EnemyRedLong.prototype.bodyCollisionWidth = function(){
-	return 200;
+	return 100;
 };
 EnemyRedLong.prototype.bodyCollisionHeight = function(){
 	return 200;

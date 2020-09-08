@@ -52,7 +52,7 @@ SakuyaMeisaku.prototype.deadSound = function(){
 
 // 攻撃の当たり判定
 SakuyaMeisaku.prototype.attackCollisionWidth = function(){
-	return 100;
+	return 200;
 };
 SakuyaMeisaku.prototype.attackCollisionHeight = function(){
 	return 200;
@@ -60,7 +60,7 @@ SakuyaMeisaku.prototype.attackCollisionHeight = function(){
 
 // 本体の当たり判定
 SakuyaMeisaku.prototype.bodyCollisionWidth = function(){
-	return 200;
+	return 100;
 };
 SakuyaMeisaku.prototype.bodyCollisionHeight = function(){
 	return 200;

@@ -58,7 +58,7 @@ SakuyaYoyomu.buttonImage = function(){
 
 // 攻撃の当たり判定
 SakuyaYoyomu.prototype.attackCollisionWidth = function(){
-	return 100;
+	return 200;
 };
 SakuyaYoyomu.prototype.attackCollisionHeight = function(){
 	return 200;
@@ -66,7 +66,7 @@ SakuyaYoyomu.prototype.attackCollisionHeight = function(){
 
 // 本体の当たり判定
 SakuyaYoyomu.prototype.bodyCollisionWidth = function(){
-	return 200;
+	return 150;
 };
 SakuyaYoyomu.prototype.bodyCollisionHeight = function(){
 	return 200;

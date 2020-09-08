@@ -57,7 +57,7 @@ SakuyaTupai.prototype.attackSound = function(){
 
 // 攻撃の当たり判定
 SakuyaTupai.prototype.attackCollisionWidth = function(){
-	return 300;
+	return 350;
 };
 SakuyaTupai.prototype.attackCollisionHeight = function(){
 	return 200;
@@ -65,7 +65,7 @@ SakuyaTupai.prototype.attackCollisionHeight = function(){
 
 // 本体の当たり判定
 SakuyaTupai.prototype.bodyCollisionWidth = function(){
-	return 200;
+	return 100;
 };
 SakuyaTupai.prototype.bodyCollisionHeight = function(){
 	return 200;

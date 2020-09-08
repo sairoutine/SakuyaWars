@@ -58,7 +58,7 @@ SakuyaNormal2.buttonImage = function(){
 
 // 攻撃の当たり判定
 SakuyaNormal2.prototype.attackCollisionWidth = function(){
-	return 400;
+	return 300;
 };
 SakuyaNormal2.prototype.attackCollisionHeight = function(){
 	return 200;
@@ -66,7 +66,7 @@ SakuyaNormal2.prototype.attackCollisionHeight = function(){
 
 // 本体の当たり判定
 SakuyaNormal2.prototype.bodyCollisionWidth = function(){
-	return 200;
+	return 100;
 };
 SakuyaNormal2.prototype.bodyCollisionHeight = function(){
 	return 200;

@@ -61,7 +61,7 @@ SakuyaMagician.prototype.deadSound = function(){
 
 // 攻撃の当たり判定
 SakuyaMagician.prototype.attackCollisionWidth = function(){
-	return 200;
+	return 150;
 };
 SakuyaMagician.prototype.attackCollisionHeight = function(){
 	return 200;
@@ -69,7 +69,7 @@ SakuyaMagician.prototype.attackCollisionHeight = function(){
 
 // 本体の当たり判定
 SakuyaMagician.prototype.bodyCollisionWidth = function(){
-	return 200;
+	return 100;
 };
 SakuyaMagician.prototype.bodyCollisionHeight = function(){
 	return 200;

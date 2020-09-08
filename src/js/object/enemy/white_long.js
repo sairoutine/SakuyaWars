@@ -50,7 +50,7 @@ EnemyWhiteLong.prototype.attackCollisionHeight = function(){
 
 // 本体の当たり判定
 EnemyWhiteLong.prototype.bodyCollisionWidth = function(){
-	return 200;
+	return 100;
 };
 EnemyWhiteLong.prototype.bodyCollisionHeight = function(){
 	return 200;

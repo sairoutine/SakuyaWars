@@ -70,7 +70,7 @@ SakuyaNormal1.prototype.attackCollisionHeight = function(){
 
 // 本体の当たり判定
 SakuyaNormal1.prototype.bodyCollisionWidth = function(){
-	return 200;
+	return 100;
 };
 SakuyaNormal1.prototype.bodyCollisionHeight = function(){
 	return 200;

@@ -55,7 +55,7 @@ SakuyaBazooka.prototype.attackCollisionHeight = function(){
 
 // 本体の当たり判定
 SakuyaBazooka.prototype.bodyCollisionWidth = function(){
-	return 200;
+	return 100;
 };
 SakuyaBazooka.prototype.bodyCollisionHeight = function(){
 	return 200;
