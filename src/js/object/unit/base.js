@@ -148,7 +148,7 @@ UnitBase.prototype._attackIfTargetIsNearby = function () {
 
 	// 近くに敵がいないか走査
 	this.scene.enemies.forEach(function(enemy) {
-		if(self.attackCollision().intersect(enemy)) {
+		if(self.attackCollision().intersect(enemy.bodyCollision())) {
 			target = enemy;
 		}
 	});
