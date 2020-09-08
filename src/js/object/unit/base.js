@@ -143,23 +143,21 @@ UnitBase.prototype._attackIfTargetIsNearby = function () {
 
 	// 近くに攻撃対象がいればダメージを与える
 	if (target) {
-		var damage = self.damage();
+		// 近くに攻撃対象がいれば攻撃モードへ変更
+		this._status = STATUS_ATTACKING;
+		this._remaining_attacking_frame = ATTACK_FRAME;
 
+		// ダメージを与える
+		var damage = self.damage();
 		target.reduceHP(damage);
 
 		// 攻撃対象が死亡していたらミッション管理へ通知
 		if (target.hp() <= 0) {
 			this.scene.mission_manager.notifyEnemyKilled(this, target);
 		}
-	}
 
-	// 近くに攻撃対象がいれば攻撃モードへ変更
-	if (target) {
-		this._status = STATUS_ATTACKING;
-
+		// 攻撃SE再生
 		this.core.audio_loader.playSound(this.attackSound());
-
-		this._remaining_attacking_frame = ATTACK_FRAME;
 	}
 
 	// 攻撃したかどうかを返す
@@ -288,6 +286,11 @@ UnitBase.prototype.walkImage1 = function(){
 // 歩くアニメの画像2(歩行しないタイプの場合は指定しないこと)
 UnitBase.prototype.walkImage2 = function(){
 	return "";
+};
+
+// 敵にダメージを与えたときのエフェクト
+UnitBase.prototype.attackEffect = function(){
+	return "effect_hit";
 };
 
 // ユニット生成 ボタン画像

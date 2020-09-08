@@ -136,20 +136,18 @@ EnemyBase.prototype._attackIfTargetIsNearby = function () {
 		}
 	});
 
-	// 近くに攻撃対象がいればダメージを与える
+	// 近くに攻撃対象がいれば
 	if (target) {
-		var damage = self.damage();
-
-		target.reduceHP(damage);
-	}
-
-	// 近くに攻撃対象がいれば攻撃モードへ変更
-	if (target) {
+		// 近くに攻撃対象がいれば攻撃モードへ変更
 		this._status = STATUS_ATTACKING;
-
-		this.core.audio_loader.playSound("enemy_attack");
-
 		this._remaining_attacking_frame = ATTACK_FRAME;
+
+		// ダメージを与える
+		var damage = self.damage();
+		target.reduceHP(damage);
+
+		// 攻撃SE再生
+		this.core.audio_loader.playSound("enemy_attack");
 	}
 
 	// 攻撃したかどうかを返す
