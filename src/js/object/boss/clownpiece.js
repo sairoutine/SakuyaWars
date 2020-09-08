@@ -21,7 +21,7 @@ ClownPiece.prototype.draw = function(){
 };
 
 ClownPiece.prototype.collisionWidth = function(){
-	return 180;
+	return 150;
 };
 ClownPiece.prototype.collisionHeight = function(){
 	return 180;

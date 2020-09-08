@@ -21,7 +21,7 @@ Lunachild.prototype.draw = function(){
 };
 
 Lunachild.prototype.collisionWidth = function(){
-	return 180;
+	return 150;
 };
 Lunachild.prototype.collisionHeight = function(){
 	return 180;

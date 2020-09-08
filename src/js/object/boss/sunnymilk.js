@@ -21,7 +21,7 @@ Sunnymilk.prototype.draw = function(){
 };
 
 Sunnymilk.prototype.collisionWidth = function(){
-	return 180;
+	return 150;
 };
 Sunnymilk.prototype.collisionHeight = function(){
 	return 180;

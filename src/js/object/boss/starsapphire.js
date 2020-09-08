@@ -21,7 +21,7 @@ Starsapphire.prototype.draw = function(){
 };
 
 Starsapphire.prototype.collisionWidth = function(){
-	return 180;
+	return 150;
 };
 Starsapphire.prototype.collisionHeight = function(){
 	return 180;
