@@ -101,7 +101,7 @@ SceneBattleResult.prototype.update = function(){
 				this.parent.changeNextStage();
 			}
 			else {
-				this.core.scene_manager.changeScene("scenario_end");
+				this.core.scene_manager.changeScene("scenario_end", this._score);
 			}
 		}
 	}

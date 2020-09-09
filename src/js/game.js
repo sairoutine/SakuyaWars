@@ -8,6 +8,7 @@ var SceneScenarioStart = require('./scene/scenario_start');
 var SceneBattle = require('./scene/battle');
 var SceneScenarioEnd = require('./scene/scenario_end');
 var SceneClear = require('./scene/clear');
+var SceneOmake = require('./scene/omake');
 var CONSTANT = require('./constant');
 
 var AssetsPreload = require('./assets');
@@ -21,6 +22,7 @@ var Game = function(canvas) {
 	this.scene_manager.addScene("battle", new SceneBattle(this));
 	this.scene_manager.addScene("scenario_end", new SceneScenarioEnd(this));
 	this.scene_manager.addScene("clear", new SceneClear(this));
+	this.scene_manager.addScene("omake", new SceneOmake(this));
 };
 Util.inherit(Game, Core);
 

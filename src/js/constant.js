@@ -2,8 +2,10 @@
 var CONSTANT = {
 	DEBUG: true,
 	DEBUG_MUTE: true,
-	DEBUG_SCENE: "battle",
-	DEBUG_STAGE_NO: 1,
+	DEBUG_SCENE: "omake",
+	DEBUG_STAGE_NO: 3,
+
+	SCORE_TO_SHOW_OMAKE: 20000000, // 二千万
 
 	// 時を止める時間
 	TIMESTOP_FRAME: 600,

@@ -21,6 +21,9 @@ AssetsConfig.images = {
 	"explosion": "./image/explosion.jpg",
 	"gameover": "./image/gameover.jpg",
 
+	"gameclear1": "./image/gameclear1.jpg",
+	"gameclear2": "./image/gameclear2.jpg",
+
 	"result_frame": "./image/UI_Battle_frm_result.png",
 
 	"button_white": "./image/button_white.png",

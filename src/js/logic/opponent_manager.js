@@ -23,6 +23,7 @@ OpponentManager.prototype.update = function(){
 		return;
 	}
 
+	/*
 	var interval = 0;
 	if (scene.stage_no === 0) {
 		interval = 60;
@@ -36,9 +37,10 @@ OpponentManager.prototype.update = function(){
 	else if (scene.stage_no === 3) {
 		interval = 30;
 	}
-
 	// とりあえず仮で時間経過でランダムに敵を生成する
 	if (this.frame_count % interval === 0) {
+	*/
+	if (this.frame_count === 10) {
 		var no = Util.getRandomInt(0,7);
 		scene.generateEnemy(no);
 	}
