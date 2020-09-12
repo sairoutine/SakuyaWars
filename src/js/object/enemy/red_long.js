@@ -58,17 +58,22 @@ EnemyRedLong.prototype.bodyCollisionHeight = function(){
 
 // 最大HP
 EnemyRedLong.prototype.maxHP = function(){
-	return 200;
+	return 100;
 };
 
 // ダメージ力
 EnemyRedLong.prototype.damage = function(){
-	return 2;
+	return 10;
 };
 
 // 歩くスピード
 EnemyRedLong.prototype.speed = function(){
-	return 0.25;
+	return 2.5;
+};
+
+// 出現しやすさ
+EnemyRedLong.emergeCoefficient = function(){
+	return 2;
 };
 
 module.exports = EnemyRedLong;

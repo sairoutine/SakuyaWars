@@ -58,17 +58,22 @@ EnemyWhiteShort.prototype.bodyCollisionHeight = function(){
 
 // 最大HP
 EnemyWhiteShort.prototype.maxHP = function(){
-	return 400;
+	return 200;
 };
 
 // ダメージ力
 EnemyWhiteShort.prototype.damage = function(){
-	return 1;
+	return 40;
 };
 
 // 歩くスピード
 EnemyWhiteShort.prototype.speed = function(){
-	return 0.5;
+	return 2.0;
+};
+
+// 出現しやすさ
+EnemyWhiteShort.emergeCoefficient = function(){
+	return 3;
 };
 
 module.exports = EnemyWhiteShort;

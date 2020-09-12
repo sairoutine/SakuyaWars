@@ -23,26 +23,23 @@ OpponentManager.prototype.update = function(){
 		return;
 	}
 
-	/*
 	var interval = 0;
 	if (scene.stage_no === 0) {
-		interval = 60;
+		interval = 420;
 	}
 	else if (scene.stage_no === 1) {
-		interval = 50;
+		interval = 360;
 	}
 	else if (scene.stage_no === 2) {
-		interval = 40;
+		interval = 300;
 	}
 	else if (scene.stage_no === 3) {
-		interval = 30;
+		interval = 240;
 	}
 	// とりあえず仮で時間経過でランダムに敵を生成する
-	if (this.frame_count % interval === 0) {
-	*/
-	if (this.frame_count === 10) {
+	if (this.frame_count === 1 || this.frame_count % interval === 0) {
 		var no = Util.getRandomInt(0,7);
-		scene.generateEnemy(no);
+		scene.generateEnemyGroup(no);
 	}
 };
 

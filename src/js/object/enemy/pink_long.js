@@ -58,17 +58,23 @@ EnemyPinkLong.prototype.bodyCollisionHeight = function(){
 
 // 最大HP
 EnemyPinkLong.prototype.maxHP = function(){
-	return 400;
+	return 500;
 };
 
 // ダメージ力
 EnemyPinkLong.prototype.damage = function(){
-	return 2;
+	return 20;
 };
 
 // 歩くスピード
 EnemyPinkLong.prototype.speed = function(){
-	return 0.25;
+	return 1.0;
 };
+
+// 出現しやすさ
+EnemyPinkLong.emergeCoefficient = function(){
+	return 3;
+};
+
 
 module.exports = EnemyPinkLong;

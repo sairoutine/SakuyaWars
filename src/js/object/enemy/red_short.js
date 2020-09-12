@@ -63,12 +63,17 @@ EnemyRedShort.prototype.maxHP = function(){
 
 // ダメージ力
 EnemyRedShort.prototype.damage = function(){
-	return 2;
+	return 40;
 };
 
 // 歩くスピード
 EnemyRedShort.prototype.speed = function(){
-	return 0.5;
+	return 1.5;
+};
+
+// 出現しやすさ
+EnemyRedShort.emergeCoefficient = function(){
+	return 1;
 };
 
 module.exports = EnemyRedShort;

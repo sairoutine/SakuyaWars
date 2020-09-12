@@ -13,6 +13,8 @@ SceneTitle.prototype.init = function(){
 	BaseScene.prototype.init.apply(this, arguments);
 	this.core.scene_manager.setFadeIn(60, "black");
 
+	// 合計スコアを初期化
+	this.core.initTotalScore();
 
 	this.core.audio_loader.playBGM("title");
 };

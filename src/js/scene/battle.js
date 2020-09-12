@@ -2,23 +2,12 @@
 /*
 
 ◆ TODO:
-GameClear 画像の組み込みと、スコア表示
-
-敵のパラメータ調整
-ステージごとに敵のAI調整
-味方のパラメータ調整
-ボスのパラメータ調整
-ミッション難易度調整
-スコア計算調整
-フレームごとのP回復数調整
-ゲームクリア画像の閾値調整
-→ 軽いコストの咲夜は画面に30体くらい出せるレベル
-→ 基本的に咲夜1体で妖精1体が勝つか負けるかの調整をする(相性によって勝てるし、勝てない)
+ビルド
+テストプレイ依頼
 
 oggのm4a化
 アツマールにアップ
-スマホでテストプレイ
-テストプレイ依頼
+スマホで動作確認
 */
 
 
@@ -314,7 +303,7 @@ SceneBattle.prototype.init = function(stage_no){
 	this.stage_no = stage_no || 0;
 
 	// デバッグ用 stage No
-	if (CONSTANT.DEBUG) {
+	if (CONSTANT.DEBUG && CONSTANT.DEBUG_SCENE === "battle") {
 		this.stage_no = CONSTANT.DEBUG_STAGE_NO;
 	}
 
@@ -443,6 +432,15 @@ SceneBattle.prototype._useSpellCard = function() {
 };
 
 // 敵生成
+SceneBattle.prototype.generateEnemyGroup = function(enemy_num){
+	var enemyClass = ENEMY_CLASSES[enemy_num];
+
+	var emerge_coefficient = enemyClass.emergeCoefficient();
+
+	for (var i = 0; i < emerge_coefficient; i++) {
+		this.generateEnemy(enemy_num);
+	}
+};
 SceneBattle.prototype.generateEnemy = function(enemy_num){
 	var enemy = new ENEMY_CLASSES[enemy_num](this);
 

@@ -58,17 +58,22 @@ EnemyBlueLong.prototype.bodyCollisionHeight = function(){
 
 // 最大HP
 EnemyBlueLong.prototype.maxHP = function(){
-	return 400;
+	return 200;
 };
 
 // ダメージ力
 EnemyBlueLong.prototype.damage = function(){
-	return 1;
+	return 20;
 };
 
 // 歩くスピード
 EnemyBlueLong.prototype.speed = function(){
-	return 0.25;
+	return 1.0;
+};
+
+// 出現しやすさ
+EnemyBlueLong.emergeCoefficient = function(){
+	return 2;
 };
 
 module.exports = EnemyBlueLong;

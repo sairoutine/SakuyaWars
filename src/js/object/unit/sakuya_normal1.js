@@ -88,13 +88,13 @@ SakuyaNormal1.consumedP = function(){
 
 // 最大HP
 SakuyaNormal1.prototype.maxHP = function(){
-	return 100;
+	return 150;
 };
 
 
 // ダメージ力
 SakuyaNormal1.prototype.damage = function(){
-	return 5;
+	return 10;
 };
 
 // 歩くスピード

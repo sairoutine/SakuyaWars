@@ -14,21 +14,15 @@ var SceneClear = function(core) {
 	// サブシーン
 	this.addSubScene("main", new SceneClearMain(core));
 	this.addSubScene("atsumaru_share_dialog", new SceneClearAtsumaruShareDialog(core));
-
-	// スコア
-	this._score = 0;
 };
 Util.inherit(SceneClear, BaseScene);
 
-SceneClear.prototype.init = function(score){
+SceneClear.prototype.init = function(){
 	BaseScene.prototype.init.apply(this, arguments);
 
 	this.core.scene_manager.setFadeIn(60, "black");
 
 	this.core.audio_loader.stopBGM();
-
-	// スコア
-	this._score = score || 0;
 
 	// サブシーン遷移
 	this.changeSubScene("main");
@@ -56,7 +50,7 @@ SceneClear.prototype.draw = function() {
 	ctx.textBaseline = "middle";
 
 	ctx.fillStyle = "white"; Util.hexToRGBString("#141e46");
-	ctx.fillText("スコア: " + this._score, this.width - 10, this.height - 30);
+	ctx.fillText("スコア: " + this.core.totalScore(), this.width - 10, this.height - 30);
 
 	ctx.restore();
 
@@ -70,7 +64,7 @@ SceneClear.prototype.draw = function() {
 SceneClear.prototype.exit = function(){
 	this.core.scene_manager.setFadeOut(60, "black");
 
-	if (this._score >= CONSTANT.SCORE_TO_SHOW_OMAKE) {
+	if (this.core.totalScore() >= CONSTANT.SCORE_TO_SHOW_OMAKE) {
 		this.core.scene_manager.changeScene("omake");
 	}
 	else {

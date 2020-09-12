@@ -59,17 +59,23 @@ EnemyBlueShort.prototype.bodyCollisionHeight = function(){
 
 // 最大HP
 EnemyBlueShort.prototype.maxHP = function(){
-	return 200;
+	return 100;
 };
 
 // ダメージ力
 EnemyBlueShort.prototype.damage = function(){
-	return 1;
+	return 10;
 };
 
 // 歩くスピード
 EnemyBlueShort.prototype.speed = function(){
 	return 0.5;
 };
+
+// 出現しやすさ
+EnemyBlueShort.emergeCoefficient = function(){
+	return 5;
+};
+
 
 module.exports = EnemyBlueShort;

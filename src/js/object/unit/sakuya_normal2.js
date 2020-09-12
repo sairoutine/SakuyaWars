@@ -79,7 +79,7 @@ SakuyaNormal2.prototype.type = function(){
 
 // ユニット生成に必要なPの数
 SakuyaNormal2.consumedP = function(){
-	return 20;
+	return 30;
 };
 
 // 最大HP
@@ -90,7 +90,7 @@ SakuyaNormal2.prototype.maxHP = function(){
 
 // ダメージ力
 SakuyaNormal2.prototype.damage = function(){
-	return 5;
+	return 10;
 };
 
 // 歩くスピード

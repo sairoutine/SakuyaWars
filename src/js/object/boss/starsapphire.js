@@ -29,7 +29,7 @@ Starsapphire.prototype.collisionHeight = function(){
 
 // 最大HP
 Starsapphire.prototype.maxHP = function(){
-	return 600;
+	return 900;
 };
 
 // 通常時の画像

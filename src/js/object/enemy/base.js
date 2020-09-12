@@ -290,4 +290,11 @@ EnemyBase.prototype.speed = function(){
 	throw new Error("speed method must be defined.");
 };
 
+// 出現しやすさ
+EnemyBase.emergeCoefficient = function(){
+	throw new Error("emergeCoefficient method must be defined.");
+};
+
+
+
 module.exports = EnemyBase;

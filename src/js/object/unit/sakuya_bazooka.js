@@ -68,18 +68,18 @@ SakuyaBazooka.prototype.type = function(){
 
 // ユニット生成に必要なPの数
 SakuyaBazooka.consumedP = function(){
-	return 20;
+	return 80;
 };
 
 // 最大HP
 SakuyaBazooka.prototype.maxHP = function(){
-	return 100;
+	return 10;
 };
 
 
 // ダメージ力
 SakuyaBazooka.prototype.damage = function(){
-	return 10;
+	return 300;
 };
 
 // 歩くスピード

@@ -97,11 +97,15 @@ SceneBattleResult.prototype.update = function(){
 	}
 	else if (this._status === STATUS_CAN_NEXT_STAGE) {
 		if (this.core.input_manager.isLeftClickPush()) {
+			// スコアを合計スコアに加算
+			this.core.addTotalScore(this._score);
+
+			// 次のステージ or エンディングへ
 			if (this.parent.hasNextStage()) {
 				this.parent.changeNextStage();
 			}
 			else {
-				this.core.scene_manager.changeScene("scenario_end", this._score);
+				this.core.scene_manager.changeScene("scenario_end");
 			}
 		}
 	}
@@ -165,7 +169,7 @@ SceneBattleResult.prototype.draw = function(){
 		// 合計スコアの表示
 		ctx.save();
 		ctx.font = "36px 'MyFont'";
-		drawWithLine(ctx, 85, 500, "合計スコア : " + this._score);
+		drawWithLine(ctx, 85, 500, "スコア : " + this._score);
 		ctx.restore();
 	}
 };

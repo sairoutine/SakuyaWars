@@ -16,6 +16,9 @@ var AssetsPreload = require('./assets');
 var Game = function(canvas) {
 	Core.apply(this, arguments);
 
+	// 合計スコア
+	this._total_score = 0;
+
 	this.scene_manager.addScene("loading", new SceneLoading(this));
 	this.scene_manager.addScene("scenario_start", new SceneScenarioStart(this));
 	this.scene_manager.addScene("title", new SceneTitle(this));
@@ -29,6 +32,9 @@ Util.inherit(Game, Core);
 Game.prototype.init = function () {
 	Core.prototype.init.apply(this, arguments);
 
+	// 合計スコア
+	this._total_score = 0;
+
 	// ローディング画面へ
 	if (CONSTANT.DEBUG) {
 		this.scene_manager.changeScene("loading", AssetsPreload, CONSTANT.DEBUG_SCENE);
@@ -36,6 +42,18 @@ Game.prototype.init = function () {
 	else {
 		this.scene_manager.changeScene("loading", AssetsPreload, "title");
 	}
+};
+
+Game.prototype.addTotalScore = function (score) {
+	this._total_score += score;
+};
+
+Game.prototype.totalScore = function () {
+	return this._total_score;
+};
+
+Game.prototype.initTotalScore = function () {
+	this._total_score = 0;
 };
 
 Game.prototype.setupDebug = function (dom) {

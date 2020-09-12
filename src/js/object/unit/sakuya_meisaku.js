@@ -73,18 +73,18 @@ SakuyaMeisaku.prototype.type = function(){
 
 // ユニット生成に必要なPの数
 SakuyaMeisaku.consumedP = function(){
-	return 20;
+	return 60;
 };
 
 // 最大HP
 SakuyaMeisaku.prototype.maxHP = function(){
-	return 300;
+	return 100;
 };
 
 
 // ダメージ力
 SakuyaMeisaku.prototype.damage = function(){
-	return 15;
+	return 300;
 };
 
 // 歩くスピード

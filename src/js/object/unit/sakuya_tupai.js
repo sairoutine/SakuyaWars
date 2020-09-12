@@ -78,23 +78,23 @@ SakuyaTupai.prototype.type = function(){
 
 // ユニット生成に必要なPの数
 SakuyaTupai.consumedP = function(){
-	return 20;
+	return 120;
 };
 
 // 最大HP
 SakuyaTupai.prototype.maxHP = function(){
-	return 150;
+	return 300;
 };
 
 
 // ダメージ力
 SakuyaTupai.prototype.damage = function(){
-	return 10;
+	return 60;
 };
 
 // 歩くスピード
 SakuyaTupai.prototype.speed = function(){
-	return 0.5;
+	return 0.75;
 };
 
 module.exports = SakuyaTupai;

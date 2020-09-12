@@ -29,7 +29,7 @@ Lunachild.prototype.collisionHeight = function(){
 
 // 最大HP
 Lunachild.prototype.maxHP = function(){
-	return 600;
+	return 900;
 };
 
 // 通常時の画像

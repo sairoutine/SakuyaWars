@@ -79,7 +79,7 @@ SakuyaYoyomu.prototype.type = function(){
 
 // ユニット生成に必要なPの数
 SakuyaYoyomu.consumedP = function(){
-	return 20;
+	return 60;
 };
 
 // 最大HP
@@ -90,12 +90,12 @@ SakuyaYoyomu.prototype.maxHP = function(){
 
 // ダメージ力
 SakuyaYoyomu.prototype.damage = function(){
-	return 3;
+	return 10;
 };
 
 // 歩くスピード
 SakuyaYoyomu.prototype.speed = function(){
-	return 1.0;
+	return 2.0;
 };
 
 module.exports = SakuyaYoyomu;

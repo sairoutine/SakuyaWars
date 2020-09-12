@@ -84,19 +84,19 @@ var MISSIONS = [
 		"name": "なんてこった！咲夜がピチュっちゃった！",
 		"category": MISSION_CATEGORY_DIE_UNIT,
 		"bonus": 3,
-		"parameters": [15],
+		"parameters": [10],
 	},
 	{
 		"name": "紅魔館は燃えているか",
 		"category": MISSION_CATEGORY_DIE_UNIT,
 		"bonus": 4,
-		"parameters": [10],
+		"parameters": [5],
 	},
 	{
 		"name": "私の屍を越えてゆけ",
 		"category": MISSION_CATEGORY_DIE_UNIT,
 		"bonus": 5,
-		"parameters": [5],
+		"parameters": [3],
 	},
 
 	{
@@ -259,19 +259,19 @@ var MISSIONS = [
 		"name": "原作のような安心感",
 		"category": MISSION_CATEGORY_USE_UNIT_TYPE,
 		"bonus": 3,
-		"parameters": [CONSTANT.UNIT_TYPE_NORMAL1, 5],
+		"parameters": [CONSTANT.UNIT_TYPE_NORMAL1, 10],
 	},
 	{
 		"name": "月面人説",
 		"category": MISSION_CATEGORY_USE_UNIT_TYPE,
 		"bonus": 4,
-		"parameters": [CONSTANT.UNIT_TYPE_NORMAL1, 10],
+		"parameters": [CONSTANT.UNIT_TYPE_NORMAL1, 20],
 	},
 	{
 		"name": "吸血鬼ハンター説",
 		"category": MISSION_CATEGORY_USE_UNIT_TYPE,
 		"bonus": 5,
-		"parameters": [CONSTANT.UNIT_TYPE_NORMAL1, 20],
+		"parameters": [CONSTANT.UNIT_TYPE_NORMAL1, 40],
 	},
 
 	{
@@ -284,19 +284,19 @@ var MISSIONS = [
 		"name": "射幸心を煽るメッセージを挿入",
 		"category": MISSION_CATEGORY_USE_UNIT_TYPE,
 		"bonus": 3,
-		"parameters": [CONSTANT.UNIT_TYPE_NORMAL2, 5],
+		"parameters": [CONSTANT.UNIT_TYPE_NORMAL2, 8],
 	},
 	{
 		"name": "なんか書いとけ",
 		"category": MISSION_CATEGORY_USE_UNIT_TYPE,
 		"bonus": 4,
-		"parameters": [CONSTANT.UNIT_TYPE_NORMAL2, 10],
+		"parameters": [CONSTANT.UNIT_TYPE_NORMAL2, 15],
 	},
 	{
 		"name": "sm7905073",
 		"category": MISSION_CATEGORY_USE_UNIT_TYPE,
 		"bonus": 5,
-		"parameters": [CONSTANT.UNIT_TYPE_NORMAL2, 20],
+		"parameters": [CONSTANT.UNIT_TYPE_NORMAL2, 30],
 	},
 
 	{
@@ -309,19 +309,19 @@ var MISSIONS = [
 		"name": "good apple",
 		"category": MISSION_CATEGORY_USE_UNIT_TYPE,
 		"bonus": 3,
-		"parameters": [CONSTANT.UNIT_TYPE_MMD, 5],
+		"parameters": [CONSTANT.UNIT_TYPE_MMD, 2],
 	},
 	{
 		"name": "細かすぎて伝わらない",
 		"category": MISSION_CATEGORY_USE_UNIT_TYPE,
 		"bonus": 4,
-		"parameters": [CONSTANT.UNIT_TYPE_MMD, 10],
+		"parameters": [CONSTANT.UNIT_TYPE_MMD, 3],
 	},
 	{
 		"name": "紳士の社交場",
 		"category": MISSION_CATEGORY_USE_UNIT_TYPE,
 		"bonus": 5,
-		"parameters": [CONSTANT.UNIT_TYPE_MMD, 20],
+		"parameters": [CONSTANT.UNIT_TYPE_MMD, 4],
 	},
 
 	{
@@ -440,25 +440,25 @@ var MISSIONS = [
 		"name": "あー忙しい忙しい！",
 		"category": MISSION_CATEGORY_ELAPSE_TIME,
 		"bonus": 2,
-		"parameters": [90],
+		"parameters": [60],
 	},
 	{
 		"name": "お掃除が終わらないじゃない",
 		"category": MISSION_CATEGORY_ELAPSE_TIME,
 		"bonus": 3,
-		"parameters": [60],
+		"parameters": [45],
 	},
 	{
 		"name": "幻想郷最速？",
 		"category": MISSION_CATEGORY_ELAPSE_TIME,
 		"bonus": 4,
-		"parameters": [45],
+		"parameters": [30],
 	},
 	{
 		"name": "光速より速く動ける",
 		"category": MISSION_CATEGORY_ELAPSE_TIME,
 		"bonus": 5,
-		"parameters": [30],
+		"parameters": [20],
 	},
 
 	{
@@ -472,13 +472,13 @@ var MISSIONS = [
 		"name": "妖精キラー",
 		"category": MISSION_CATEGORY_DESTROY_ENEMY,
 		"bonus": 2,
-		"parameters": [10],
+		"parameters": [15],
 	},
 	{
 		"name": "妖精バスター",
 		"category": MISSION_CATEGORY_DESTROY_ENEMY,
 		"bonus": 3,
-		"parameters": [20],
+		"parameters": [30],
 	},
 	{
 		"name": "世紀末覇者",
@@ -659,7 +659,7 @@ MissionManager.prototype.calcScore = function(time) {
 		bonus += accomplished_missions[i].num();
 	}
 
-	return (6000-time) * bonus;
+	return 1001 * (6000-time) * bonus;
 };
 
 

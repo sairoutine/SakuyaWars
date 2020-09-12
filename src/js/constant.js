@@ -2,10 +2,10 @@
 var CONSTANT = {
 	DEBUG: true,
 	DEBUG_MUTE: true,
-	DEBUG_SCENE: "omake",
-	DEBUG_STAGE_NO: 3,
+	DEBUG_SCENE: "title",
+	DEBUG_STAGE_NO: 0,
 
-	SCORE_TO_SHOW_OMAKE: 20000000, // 二千万
+	SCORE_TO_SHOW_OMAKE: 1000000000, // 10億
 
 	// 時を止める時間
 	TIMESTOP_FRAME: 600,
@@ -16,7 +16,7 @@ var CONSTANT = {
 	P_MAX: 600,
 
 	// 何フレームごとにPが回復するか
-	FRAME_TO_RECOVER_P: 5,
+	FRAME_TO_RECOVER_P: 6,
 
 	// ユニットの生成位置
 	UNIT_GENERATED_AREA_LEFT_X:  100,

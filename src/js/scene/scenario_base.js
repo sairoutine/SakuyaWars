@@ -19,17 +19,13 @@ var SceneScenarioBase = function(game) {
 	this.serif = new SerifManager(this.core, {
 		typography_speed: TYPOGRAPHY_SPEED,
 	});
-
-	this.argument = null;
 };
 
 Util.inherit(SceneScenarioBase, BaseScene);
 
-SceneScenarioBase.prototype.init = function(argument){
+SceneScenarioBase.prototype.init = function(){
 	BaseScene.prototype.init.apply(this, arguments);
 	this.serif.init(this.serifScript());
-
-	this.argument = argument;
 
 	// セリフ開始
 	this.serif.start();

@@ -82,18 +82,18 @@ SakuyaMagician.prototype.type = function(){
 
 // ユニット生成に必要なPの数
 SakuyaMagician.consumedP = function(){
-	return 20;
+	return 60;
 };
 
 // 最大HP
 SakuyaMagician.prototype.maxHP = function(){
-	return 300;
+	return 250;
 };
 
 
 // ダメージ力
 SakuyaMagician.prototype.damage = function(){
-	return 5;
+	return 30;
 };
 
 // 歩くスピード

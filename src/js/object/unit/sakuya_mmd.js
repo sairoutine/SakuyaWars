@@ -78,22 +78,22 @@ SakuyaMMD.prototype.type = function(){
 
 // ユニット生成に必要なPの数
 SakuyaMMD.consumedP = function(){
-	return 20;
+	return 600;
 };
 
 // 最大HP
 SakuyaMMD.prototype.maxHP = function(){
-	return 100;
+	return 5000;
 };
 
 // ダメージ力
 SakuyaMMD.prototype.damage = function(){
-	return 50;
+	return 100;
 };
 
 // 歩くスピード
 SakuyaMMD.prototype.speed = function(){
-	return 0.125;
+	return 0.1;
 };
 
 module.exports = SakuyaMMD;

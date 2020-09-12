@@ -68,12 +68,12 @@ SakuyaTea.prototype.type = function(){
 
 // ユニット生成に必要なPの数
 SakuyaTea.consumedP = function(){
-	return 20;
+	return 40;
 };
 
 // 最大HP
 SakuyaTea.prototype.maxHP = function(){
-	return 500;
+	return 1000;
 };
 
 

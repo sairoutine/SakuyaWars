@@ -83,23 +83,23 @@ SakuyaMandoragora.prototype.type = function(){
 
 // ユニット生成に必要なPの数
 SakuyaMandoragora.consumedP = function(){
-	return 20;
+	return 80;
 };
 
 // 最大HP
 SakuyaMandoragora.prototype.maxHP = function(){
-	return 100;
+	return 400;
 };
 
 
 // ダメージ力
 SakuyaMandoragora.prototype.damage = function(){
-	return 20;
+	return 50;
 };
 
 // 歩くスピード
 SakuyaMandoragora.prototype.speed = function(){
-	return 0.25;
+	return 0.5;
 };
 
 module.exports = SakuyaMandoragora;
