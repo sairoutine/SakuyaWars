@@ -22,7 +22,7 @@ SceneLoading.prototype._loadSounds = function(sounds) {
 		var conf2 = sounds[key2];
 
 		// デバッグ用ミュート
-		var volume2 = CONSTANT.DEBUG_MUTE ? 0 : conf2.volume;
+		var volume2 = CONSTANT.DEBUG && CONSTANT.DEBUG_MUTE ? 0 : conf2.volume;
 
 		this.core.audio_loader.loadSound(key2, conf2.path + ext, volume2);
 	}

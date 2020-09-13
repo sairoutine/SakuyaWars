@@ -1,18 +1,3 @@
-
-/*
-
-◆ TODO:
-ビルド
-テストプレイ依頼
-
-oggのm4a化
-アツマールにアップ
-スマホで動作確認
-*/
-
-
-
-
 'use strict';
 
 var BaseScene = require('../hakurei').Scene.Base;
