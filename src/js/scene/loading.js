@@ -35,7 +35,7 @@ SceneLoading.prototype._loadBGMs = function(bgms) {
 		var conf3 = bgms[key3];
 
 		// デバッグ用ミュート
-		var volume = CONSTANT.DEBUG_MUTE ? 0 : conf3.volume;
+		var volume = CONSTANT.DEBUG && CONSTANT.DEBUG_MUTE ? 0 : conf3.volume;
 
 		this.core.audio_loader.loadBGM(key3, conf3.path + ext, volume, conf3.loopStart, conf3.loopEnd);
 	}
