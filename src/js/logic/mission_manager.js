@@ -649,7 +649,7 @@ MissionManager.prototype.calcScore = function(time) {
 		bonus += accomplished_missions[i].num();
 	}
 
-	return 1001 * (6000-time) * bonus;
+	return 951 * (6000-time) * bonus;
 };
 
 
