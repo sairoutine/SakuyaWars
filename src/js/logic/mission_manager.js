@@ -305,25 +305,25 @@ var MISSIONS = [
 		"name": "モデリング：ゆたろう",
 		"category": MISSION_CATEGORY_USE_UNIT_TYPE,
 		"bonus": 2,
-		"parameters": [CONSTANT.UNIT_TYPE_MMD, 1],
+		"parameters": [CONSTANT.UNIT_TYPE_MMD, 10],
 	},
 	{
 		"name": "good apple",
 		"category": MISSION_CATEGORY_USE_UNIT_TYPE,
 		"bonus": 3,
-		"parameters": [CONSTANT.UNIT_TYPE_MMD, 2],
+		"parameters": [CONSTANT.UNIT_TYPE_MMD, 50],
 	},
 	{
 		"name": "細かすぎて伝わらない",
 		"category": MISSION_CATEGORY_USE_UNIT_TYPE,
 		"bonus": 4,
-		"parameters": [CONSTANT.UNIT_TYPE_MMD, 3],
+		"parameters": [CONSTANT.UNIT_TYPE_MMD, 80],
 	},
 	{
 		"name": "紳士の社交場",
 		"category": MISSION_CATEGORY_USE_UNIT_TYPE,
 		"bonus": 5,
-		"parameters": [CONSTANT.UNIT_TYPE_MMD, 4],
+		"parameters": [CONSTANT.UNIT_TYPE_MMD, 150],
 	},
 
 	{
