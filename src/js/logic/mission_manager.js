@@ -477,7 +477,7 @@ var MISSIONS = [
 	{
 		"name": "いったい何の恨みがあって……",
 		"category": MISSION_CATEGORY_DESTROY_ENEMY,
-		"bonus": 4,
+		"bonus": 5,
 		"parameters": [100],
 	},
 ];
