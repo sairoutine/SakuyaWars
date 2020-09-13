@@ -274,7 +274,7 @@ UnitBase.prototype.isDead = function() {
 };
 
 UnitBase.prototype.isCollision = function(obj) {
-	return !this.isDead();
+	return this.hp() > 0;
 };
 
 UnitBase.prototype.attackCollision = function(){

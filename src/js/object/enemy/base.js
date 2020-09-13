@@ -226,7 +226,7 @@ EnemyBase.prototype.isDead = function() {
 };
 
 EnemyBase.prototype.isCollision = function(obj) {
-	return !this.isDead();
+	return this.hp() > 0;
 };
 
 EnemyBase.prototype.attackCollision = function(){
