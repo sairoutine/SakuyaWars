@@ -84,13 +84,13 @@ SakuyaYoyomu.consumedP = function(){
 
 // 最大HP
 SakuyaYoyomu.prototype.maxHP = function(){
-	return 100;
+	return 150;
 };
 
 
 // ダメージ力
 SakuyaYoyomu.prototype.damage = function(){
-	return 10;
+	return 20;
 };
 
 // 歩くスピード
