@@ -381,18 +381,6 @@ var MISSIONS = [
 		"parameters": [CONSTANT.UNIT_TYPE_MAGICIAN],
 	},
 	{
-		"name": "これは8点ですね",
-		"category": MISSION_CATEGORY_RESTRICT_UNIT_TYPE,
-		"bonus": 5,
-		"parameters": [CONSTANT.UNIT_TYPE_MEISAKU],
-	},
-	{
-		"name": "いったい何が始まるんです？",
-		"category": MISSION_CATEGORY_RESTRICT_UNIT_TYPE,
-		"bonus": 5,
-		"parameters": [CONSTANT.UNIT_TYPE_BAZOOKA],
-	},
-	{
 		"name": "畑泥棒対策",
 		"category": MISSION_CATEGORY_RESTRICT_UNIT_TYPE,
 		"bonus": 5,
