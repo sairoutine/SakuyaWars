@@ -56,11 +56,13 @@ MISSION_CATEGORY_CRITERIA[MISSION_CATEGORY_RESTRICT_UNIT_TYPE] = function (missi
 
 	// 該当のユニット以外は使っていたらダメ
 	for (var unit_type in mission_manager.used_unit_num_per_unit_type) {
+		if (unit_type === String(parameters[0])) {
+			continue;
+		}
+
 		var used_unit_num2 = mission_manager.used_unit_num_per_unit_type[unit_type] || 0;
-		if (unit_type !== parameters[0]) {
-			if (used_unit_num2 > 0) {
-				return false;
-			}
+		if (used_unit_num2 > 0) {
+			return false;
 		}
 	}
 
