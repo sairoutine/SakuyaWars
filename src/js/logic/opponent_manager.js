@@ -25,10 +25,10 @@ OpponentManager.prototype.update = function(){
 
 	var interval = 0;
 	if (scene.stage_no === 0) {
-		interval = 500;
+		interval = 420;
 	}
 	else if (scene.stage_no === 1) {
-		interval = 400;
+		interval = 360;
 	}
 	else if (scene.stage_no === 2) {
 		interval = 300;
