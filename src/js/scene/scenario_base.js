@@ -33,8 +33,8 @@ SceneScenarioBase.prototype.init = function(){
 	this.notifySerifStart();
 };
 
-SceneScenarioBase.prototype.beforeDraw = function(){
-	BaseScene.prototype.beforeDraw.apply(this, arguments);
+SceneScenarioBase.prototype.update = function(){
+	BaseScene.prototype.update.apply(this, arguments);
 
 	// BGM 再生
 	if (this.frame_count === 60 && this.bgm()) {
