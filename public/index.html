@@ -2,16 +2,16 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>SakuyaWars</title>
+<title>サクヤ大戦</title>
 <style>
 body {
 	margin:0;
 	padding:0;
 	width:816px;
 	height:624px;
+	overflow: hidden;
 }
 #canvasdiv {
-	background: black;
 	position:relative;
 	width:816px;
 	height:624px;
@@ -19,17 +19,13 @@ body {
 #mainCanvas {
 	left: 0px;
 	top: 0px;
-	position: absolute;
 }
 #mainCanvas:-webkit-full-screen {
 	height: 100%;
-	position:relative;
-	top: 0px;
-	left: 0px;
 }
 </style>
 </head>
-<body bgcolor="black">
+<body>
 	<div id="debug"></div>
 	<div id="canvasdiv">
 		<canvas id="mainCanvas" width="816" height="624"></canvas>
