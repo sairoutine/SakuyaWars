@@ -1,16 +1,60 @@
 'use strict';
-
-var BaseScene = require('../hakurei').Scene.Base;
-
-var Util = require('../hakurei').Util;
+var Hakurei = require('../hakurei');
+var CONSTANT = require('../constant');
 
 var SceneTitle = function(core) {
-	BaseScene.apply(this, arguments);
+	Hakurei.Scene.Base.apply(this, arguments);
+
+	// スコアボード ボタン以外の領域
+	var scene_manager = this.core.scene_manager;
+	var area_without_button = new Hakurei.Object.UI.Group(this, {
+		x: this.width/2,
+		y: this.height/2 - 45,
+		width: this.width,
+		height: this.height - 45,
+	})
+		.on("click", function () {
+			// 次のシーンへ
+			scene_manager.changeScene("scenario_start");
+		});
+
+	this.addObject(area_without_button);
+
+
+	// RPGアツマール環境ならランキングボタンを表示する
+	if (this._isEnableToDisplayScoreBoardInAtsumaru()) {
+		// スコアボードを表示するボタン
+		var show_scoreboard_button = new Hakurei.Object.UI.Image(this, {
+			imageName: "button_white",
+			x: this.width - 80,
+			y: this.height - 40,
+			children: [
+				// ボタン内の文字列
+				new Hakurei.Object.UI.Text(this, {
+					text: "ランキング",
+					textColor: "black",
+					textSize:  "20px",
+					textAlign: "center",
+					textBaseline: "middle",
+					textFont:  "MyFont",
+					x: this.width - 80,
+					y: this.height - 40,
+				}),
+			],
+		})
+			.setMoveOnClick()
+			.on("click", function () {
+				// ランキングモーダルを開く
+				window.RPGAtsumaru.scoreboards.display(CONSTANT.BOARD_ID_IN_ATSUMARU);
+			});
+
+		this.addObject(show_scoreboard_button);
+	}
 };
-Util.inherit(SceneTitle, BaseScene);
+Hakurei.Util.inherit(SceneTitle, Hakurei.Scene.Base);
 
 SceneTitle.prototype.init = function(){
-	BaseScene.prototype.init.apply(this, arguments);
+	Hakurei.Scene.Base.prototype.init.apply(this, arguments);
 	this.core.scene_manager.setFadeIn(60, "black");
 
 	// 合計スコアを初期化
@@ -19,17 +63,16 @@ SceneTitle.prototype.init = function(){
 	this.core.audio_loader.playBGM("title");
 };
 
-SceneTitle.prototype.update = function(){
-	BaseScene.prototype.update.apply(this, arguments);
+// RPGアツマール環境でスコアボードを表示できるか否か
+SceneTitle.prototype._isEnableToDisplayScoreBoardInAtsumaru = function(){
+	return(window.RPGAtsumaru && window.RPGAtsumaru.scoreboards && window.RPGAtsumaru.scoreboards.display);
+};
 
-	if (this.core.input_manager.isLeftClickPush()) {
-		// 次のシーンへ
-		this.core.scene_manager.changeScene("scenario_start");
-	}
+SceneTitle.prototype.update = function(){
+	Hakurei.Scene.Base.prototype.update.apply(this, arguments);
 };
 
 SceneTitle.prototype.draw = function(){
-	BaseScene.prototype.draw.apply(this, arguments);
 	var ctx = this.core.ctx;
 
 	// 背景
@@ -67,6 +110,9 @@ SceneTitle.prototype.draw = function(){
 	ctx.translate(408, 312);
 	ctx.drawImage(logo, -logo.width/2, -logo.height/2);
 	ctx.restore();
+
+	// ボタン
+	Hakurei.Scene.Base.prototype.draw.apply(this, arguments);
 };
 
 module.exports = SceneTitle;

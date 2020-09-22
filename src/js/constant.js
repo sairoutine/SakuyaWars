@@ -5,6 +5,9 @@ var CONSTANT = {
 	DEBUG_SCENE: "title",
 	DEBUG_STAGE_NO: 0,
 
+	// RPGアツマールでのスコアボードID
+	BOARD_ID_IN_ATSUMARU: 1,
+
 	SCORE_TO_SHOW_OMAKE: 1000000000, // 10億
 
 	// 時を止める時間
