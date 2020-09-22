@@ -38,7 +38,7 @@ SceneClearMain.prototype.update = function() {
 
 // RPGアツマール環境でスクショを取るモーダルを表示できるか否か
 SceneClearMain.prototype._isEnableToScreenshotInAtsumaru = function(){
-	return(window.RPGAtsumaru && window.RPGAtsumaru.experimental.screenshot && window.RPGAtsumaru.experimental.screenshot.displayModal);
+	return(window.RPGAtsumaru && window.RPGAtsumaru.screenshot && window.RPGAtsumaru.screenshot.displayModal);
 };
 
 module.exports = SceneClearMain;

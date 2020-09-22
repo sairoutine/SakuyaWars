@@ -76,7 +76,7 @@ var SceneClearAtsumaruShareDialog = function(core) {
 			// atsumaru_share_dialog サブシーン自体は表示させたくないので、main に遷移するまで少し待つ
 			self.parent.core.time_manager.setTimeout(function () {
 				// シェアモーダルを開く
-				window.RPGAtsumaru.experimental.screenshot.displayModal();
+				window.RPGAtsumaru.screenshot.displayModal();
 			}, 5);
 		})
 
